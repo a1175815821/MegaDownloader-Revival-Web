@@ -2,7 +2,7 @@
 
 MegaDownloader Revival 的官网落地页。单文件、无构建，双击即看。
 
-🌐 线上地址：https://megadownloader-revival-web.a1175815821.workers.dev/（Cloudflare 托管，push 到 main 自动部署）
+🌐 线上地址：https://megadownloader-revival-web.a1175815821.workers.dev/（[Cloudflare](https://pages.cloudflare.com/) 托管，push 到 main 自动部署）
 
 > ⭐ 觉得项目不错请 Star 主仓库：**[a1175815821/MegaDownloader-Revival](https://github.com/a1175815821/MegaDownloader-Revival)** —— 下载、提 Issue 也都在那边，本仓只放站点。
 
