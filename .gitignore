@@ -1,0 +1,8 @@
+# Agent working data (session memory, pre-change backups) — not part of the site
+.workbuddy/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp

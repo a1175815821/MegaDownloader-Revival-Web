@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://megadownloader-revival-web.a1175815821.workers.dev/sitemap.xml

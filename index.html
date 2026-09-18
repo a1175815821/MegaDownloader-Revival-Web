@@ -5,6 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MegaDownloader Revival — 经典 MEGA 下载器，重获新生</title>
 <meta name="description" content="MegaDownloader Revival：轻量、稳定、多线程的 MEGA 下载管理器。支持新版 mega.nz 链接格式，Windows 便携/单文件双发行，开源免费。">
+
+<meta name="theme-color" content="#06080d">
+<link rel="canonical" href="https://megadownloader-revival-web.a1175815821.workers.dev/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff4655'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 7v12'/%3E%3Cpath d='M11 14l5 5 5-5'/%3E%3Cpath d='M9 25h14'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MegaDownloader Revival">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://megadownloader-revival-web.a1175815821.workers.dev/">
+<meta property="og:title" content="MegaDownloader Revival — 经典 MEGA 下载器，重获新生">
+<meta property="og:description" content="轻量、稳定、多线程的 MEGA 下载管理器。支持新版 mega.nz 链接格式，Windows 便携/单文件双发行，修复 200+ 处问题，MIT 开源免费。">
+<meta property="og:image" content="https://megadownloader-revival-web.a1175815821.workers.dev/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="MegaDownloader Revival — 经典 MEGA 下载器，重获新生">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MegaDownloader Revival — 经典 MEGA 下载器，重获新生">
+<meta name="twitter:description" content="轻量、稳定、多线程的 MEGA 下载管理器。支持新版 mega.nz 链接格式，Windows 便携/单文件双发行，修复 200+ 处问题，MIT 开源免费。">
+<meta name="twitter:image" content="https://megadownloader-revival-web.a1175815821.workers.dev/og.png">
+<script type="application/ld+json" id="ldjson">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MegaDownloader Revival","alternateName":"MegaDownloader","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 7 SP1 or later","softwareVersion":"2.5.3","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"downloadUrl":"https://github.com/a1175815821/MegaDownloader-Revival/releases/latest","codeRepository":"https://github.com/a1175815821/MegaDownloader-Revival","license":"https://opensource.org/licenses/MIT","inLanguage":["zh-CN","en"],"description":"轻量、稳定、多线程的 MEGA 下载管理器。支持新版 mega.nz 链接格式，Windows 便携/单文件双发行，修复 200+ 处问题，MIT 开源免费。"}
+</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -14,7 +36,7 @@
   --line:rgba(255,255,255,.09);
   --ink:#eef1f6;
   --dim:rgba(238,241,246,.62);
-  --faint:rgba(238,241,246,.38);
+  --faint:rgba(238,241,246,.50);
   --red:#ff4655;
   --red-deep:#c81e2e;
   --red-glow:rgba(255,70,85,.22);
@@ -237,11 +259,17 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
 .task-enter{animation:fadeUp .4s ease}
 #demoQueueNote{color:var(--green)}
 #langBtn{font-family:var(--mono);min-width:56px;justify-content:center}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+.reveal{opacity:1;transform:none}
+}
+a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 </style>
 </head>
 <body>
 
-<canvas id="stars"></canvas>
+<canvas id="stars" aria-hidden="true"></canvas>
 <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
 <div class="grain"></div>
 
@@ -249,10 +277,10 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
   <div class="nav-in">
     <a class="brand" href="#top">
       <span class="brand-mark">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+        <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
       </span>
       MegaDownloader <span style="font-weight:400;color:var(--dim)">Revival</span>
-      <small data-ver>v2.5.0</small>
+      <small data-ver>v2.5.3</small>
     </a>
     <div class="nav-links">
       <a href="#features" data-i18n="nav.features">功能</a>
@@ -262,10 +290,10 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
       <a href="#faq" data-i18n="nav.faq">常见问题</a>
     </div>
     <a class="btn btn-ghost btn-sm" href="https://github.com/a1175815821/MegaDownloader-Revival" target="_blank" rel="noopener">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+      <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
       GitHub <span id="starCount" style="font-family:var(--mono);color:var(--faint)">· ★--</span>
     </a>
-    <button class="btn btn-ghost btn-sm" id="langBtn" title="Switch language / 切换语言">EN</button>
+    <button class="btn btn-ghost btn-sm" id="langBtn" type="button" title="Switch language / 切换语言">EN</button>
   </div>
 </nav>
 
@@ -273,21 +301,21 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
   <div class="wrap hero-grid">
     <div>
       <div class="hero-badges reveal in">
-        <span class="badge"><span class="dot"></span> <span data-ver>v2.5.0</span> · <span data-vertype>正式版</span></span>
+        <span class="badge"><span class="dot"></span> <span data-ver>v2.5.3</span> · <span data-vertype>正式版</span></span>
         <span class="badge">Windows 7+ · .NET 4.8</span>
         <span class="badge" data-i18n="hero.badge_oss">MIT 开源</span>
       </div>
       <h1 class="hero-title" data-i18n="hero.title">经典 MEGA<br>下载器，<br><span class="grad">重获新生。</span></h1>
-      <p class="hero-sub" data-i18n="hero.sub">原版止步于 v1.8 之后，MEGA 换了链接格式，老版本彻底认不出新链接。Revival 从反编译源码重建，修复 <strong>60+ 处问题</strong>，让这个轻量、稳定、多线程的经典工具重新可用。</p>
+      <p class="hero-sub" data-i18n="hero.sub">原版止步于 v1.8 之后，MEGA 换了链接格式，老版本彻底认不出新链接。Revival 从反编译源码重建，修复 <strong>200+ 处问题</strong>，让这个轻量、稳定、多线程的经典工具重新可用。</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
           <span data-i18n="hero.cta_dl">免费下载 Windows 版</span>
         </a>
         <a class="btn btn-ghost" href="#how"><span data-i18n="hero.cta_how">三分钟上手 →</span></a>
       </div>
       <div class="hero-meta">
-        <span data-i18n="hero.meta_size">体积 <b>~6 MB</b></span>
+        <span><span data-i18n="hero.meta_size">体积</span> <b id="heroSize">~12 MB</b></span>
         <span data-i18n="hero.meta_install">安装 <b>免安装 / 便携</b></span>
         <span data-i18n="hero.meta_lang">语言 <b>10 种 · 含简中</b></span>
       </div>
@@ -299,7 +327,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
           <span class="win-dot" style="background:#ff5f57"></span>
           <span class="win-dot" style="background:#febc2e"></span>
           <span class="win-dot" style="background:#28c840"></span>
-          <span class="win-title">MegaDownloader Revival <span data-ver>v2.5.0</span> — <span data-i18n="mock.theme">深色主题</span></span>
+          <span class="win-title">MegaDownloader Revival <span data-ver>v2.5.3</span> — <span data-i18n="mock.theme">深色主题</span></span>
         </div>
         <div class="win-tools">
           <span class="tool primary" data-i18n="mock.add">＋ 添加链接</span>
@@ -336,9 +364,9 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
 </header>
 
 <div class="stats-band"><div class="wrap stats-grid">
-  <div class="stat reveal"><b id="stDl">982</b><span data-i18n="stats.dl">累计下载 · GITHUB</span></div>
-  <div class="stat reveal"><b id="stStars">33</b><span data-i18n="stats.stars">STARS · 实时同步</span></div>
-  <div class="stat reveal"><b>60<em>+</em></b><span data-i18n="stats.fixes">处修复已应用</span></div>
+  <div class="stat reveal"><b id="stDl">1057</b><span data-i18n="stats.dl">累计下载 · GITHUB</span></div>
+  <div class="stat reveal"><b id="stStars">34</b><span data-i18n="stats.stars">STARS · 实时同步</span></div>
+  <div class="stat reveal"><b>200<em>+</em></b><span data-i18n="stats.fixes">处修复已应用</span></div>
   <div class="stat reveal"><b>10</b><span data-i18n="stats.langs">界面语言</span></div>
 </div></div>
 
@@ -346,30 +374,30 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
   <div class="wrap">
     <div class="sec-kicker reveal">FEATURES</div>
     <h2 class="sec-title reveal" data-i18n="feat.title">小体积，大本事。</h2>
-    <p class="sec-desc reveal" data-i18n="feat.desc">单文件约 6 MB，没有浏览器插件，没有账号体系。只做一件事：把 MEGA 链接变成你硬盘上的文件，又快又稳。</p>
+    <p class="sec-desc reveal" data-i18n="feat.desc">单文件即用，没有浏览器插件，没有账号体系。只做一件事：把 MEGA 链接变成你硬盘上的文件，又快又稳。</p>
     <div class="feat-grid">
       <div class="feat reveal">
-        <div class="feat-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+        <div class="feat-ic"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
         <h3 data-i18n="feat.f1h">多线程下载</h3><p data-i18n="feat.f1p">单文件多连接并发，大带宽直接跑满。线程数、全局限速都可在设置里精细调节。</p>
       </div>
       <div class="feat reveal">
-        <div class="feat-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div>
+        <div class="feat-ic"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div>
         <h3 data-i18n="feat.f2h">断点续传与自愈<span class="tag-new">v2.5</span></h3><p data-i18n="feat.f2p">暂停、恢复、失败自动定时重试；彻底失败的任务会被隔离，不再拖慢队列。</p>
       </div>
       <div class="feat reveal">
-        <div class="feat-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a3 3 0 0 1 6 0"/><path d="M9 12h6M9 16h4"/></svg></div>
+        <div class="feat-ic"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a3 3 0 0 1 6 0"/><path d="M9 12h6M9 16h4"/></svg></div>
         <h3 data-i18n="feat.f3h">复制即捕获</h3><p data-i18n="feat.f3p">剪贴板监听自动识别 MEGA 链接，也可以手动粘贴、直接把链接拖进主窗口。</p>
       </div>
       <div class="feat reveal">
-        <div class="feat-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg></div>
+        <div class="feat-ic"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg></div>
         <h3 data-i18n="feat.f4h">整文件夹解析</h3><p data-i18n="feat.f4p">递归解析分享文件夹，可只勾选需要的子目录和文件下载，不浪费一字节流量。</p>
       </div>
       <div class="feat reveal">
-        <div class="feat-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="feat-ic"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3 data-i18n="feat.f5h">配额熔断<span class="tag-new">v2.5</span></h3><p data-i18n="feat.f5p">MEGA 配额耗尽时自动暂停并倒计时，恢复后继续——不用半夜爬起来点恢复。</p>
       </div>
       <div class="feat reveal">
-        <div class="feat-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5v-7z"/></svg></div>
+        <div class="feat-ic"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ff6a78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5v-7z"/></svg></div>
         <h3 data-i18n="feat.f6h">边下边播 · 自动解压</h3><p data-i18n="feat.f6p">集成 VLC 串流，未下完先睹为快；RAR / 7Z / ZIP 下完自动解压，一步到位。</p>
       </div>
     </div>
@@ -412,7 +440,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
   <div class="wrap">
     <div class="sec-kicker reveal">DOWNLOAD</div>
     <h2 class="sec-title reveal" data-i18n="dl.title">拿走，不谢。免费，开源。</h2>
-    <p class="sec-desc reveal"><span data-i18n="dl.desc1">两个版本，同一个程序，只是打包方式不同。</span><span data-i18n="dl.cur">当前版本</span> <strong data-ver>v2.5.0</strong> <span data-i18n="dl.is">为</span><span data-vertype>正式版</span><span data-i18n="dl.desc2">，欢迎试用反馈，下载量与版本信息每 6 小时自动同步一次。</span></p>
+    <p class="sec-desc reveal"><span data-i18n="dl.desc1">两个版本，同一个程序，只是打包方式不同。</span><span data-i18n="dl.cur">当前版本</span> <strong data-ver>v2.5.3</strong> <span data-i18n="dl.is">为</span><span data-vertype>正式版</span><span data-i18n="dl.desc2">，欢迎试用反馈，下载量与版本信息每 6 小时自动同步一次。</span></p>
     <div class="dl-grid">
       <div class="dl-card star reveal">
         <span class="rec" data-i18n="dl.rec">推荐</span>
@@ -461,28 +489,28 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
     <p class="sec-desc reveal" data-i18n="faq.desc">先看这里，没有答案就去仓库提 Issue。</p>
     <div class="faq reveal">
       <div class="faq-item">
-        <button class="faq-q"><span data-i18n="faq.q1">免费吗？会不会有广告或捆绑？</span><span class="plus">＋</span></button>
-        <div class="faq-a"><p data-i18n="faq.a1">完全免费，MIT 开源，无广告、无捆绑、无账号体系。代码全部公开在 GitHub，Release 构建由 Actions 流水线自动完成，任何人都可以审查和自行编译。</p></div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a1"><span data-i18n="faq.q1">免费吗？会不会有广告或捆绑？</span><span class="plus" aria-hidden="true">＋</span></button>
+        <div class="faq-a" id="faq-a1"><p data-i18n="faq.a1">完全免费，MIT 开源，无广告、无捆绑、无账号体系。代码全部公开在 GitHub，Release 构建由 Actions 流水线自动完成，任何人都可以审查和自行编译。</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span data-i18n="faq.q2">和原版 MegaDownloader 是什么关系？</span><span class="plus">＋</span></button>
-        <div class="faq-a"><p data-i18n="faq.a2">原版作者 Andres Soliño 在 v1.8 后停止维护，而 MEGA 更换了链接格式导致老版本无法识别新链接。本项目从 v1.8 反编译源码出发修复兼容性并持续改进（已应用 60+ 处修复），原版权归 Andres Soliño 所有，复活部分的修改遵循 MIT 协议开源。</p></div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a2"><span data-i18n="faq.q2">和原版 MegaDownloader 是什么关系？</span><span class="plus" aria-hidden="true">＋</span></button>
+        <div class="faq-a" id="faq-a2"><p data-i18n="faq.a2">原版作者 Andres Soliño 在 v1.8 后停止维护，而 MEGA 更换了链接格式导致老版本无法识别新链接。本项目从 v1.8 反编译源码出发修复兼容性并持续改进（已应用 200+ 处修复），原版权归 Andres Soliño 所有，复活部分的修改遵循 MIT 协议开源。</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span data-i18n="faq.q3">下载速度有限制吗？配额用完了怎么办？</span><span class="plus">＋</span></button>
-        <div class="faq-a"><p data-i18n="faq.a3">软件本身不限速，多线程可跑满你的带宽。MEGA 免费账号有配额限制，v2.5 新增的配额熔断会在配额耗尽时自动暂停并倒计时，恢复后自动继续下载。</p></div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a3"><span data-i18n="faq.q3">下载速度有限制吗？配额用完了怎么办？</span><span class="plus" aria-hidden="true">＋</span></button>
+        <div class="faq-a" id="faq-a3"><p data-i18n="faq.a3">软件本身不限速，多线程可跑满你的带宽。MEGA 免费账号有配额限制，v2.5 新增的配额熔断会在配额耗尽时自动暂停并倒计时，恢复后自动继续下载。</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span data-i18n="faq.q4">支持哪些链接？文件夹能下吗？</span><span class="plus">＋</span></button>
-        <div class="faq-a"><p data-i18n="faq.a4">支持新版 <span style="font-family:var(--mono)">mega.nz/file/</span>、<span style="font-family:var(--mono)">mega.nz/folder/</span>、旧版 <span style="font-family:var(--mono)">mega.nz/#!</span> 以及 enc / enc2 / elc 等加密链接。分享文件夹可递归解析，支持只勾选部分子目录和文件。</p></div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a4"><span data-i18n="faq.q4">支持哪些链接？文件夹能下吗？</span><span class="plus" aria-hidden="true">＋</span></button>
+        <div class="faq-a" id="faq-a4"><p data-i18n="faq.a4">支持新版 <span style="font-family:var(--mono)">mega.nz/file/</span>、<span style="font-family:var(--mono)">mega.nz/folder/</span>、旧版 <span style="font-family:var(--mono)">mega.nz/#!</span> 以及 enc / enc2 / elc 等加密链接。分享文件夹可递归解析，支持只勾选部分子目录和文件。</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span data-i18n="faq.q5">运行需要什么环境？杀毒软件报毒怎么办？</span><span class="plus">＋</span></button>
-        <div class="faq-a"><p data-i18n="faq.a5">需要 Windows 7 SP1 及以上 + .NET Framework 4.8（Win10/11 自带）。小众开源 exe 偶尔会被杀软误报：请认准 GitHub Releases 官方构建并核对 SHA256；介意的话可以直接用源码自行编译——这正是开源的意义。</p></div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a5"><span data-i18n="faq.q5">运行需要什么环境？杀毒软件报毒怎么办？</span><span class="plus" aria-hidden="true">＋</span></button>
+        <div class="faq-a" id="faq-a5"><p data-i18n="faq.a5">需要 Windows 7 SP1 及以上 + .NET Framework 4.8（Win10/11 自带）。小众开源 exe 偶尔会被杀软误报：请认准 GitHub Releases 官方构建并核对 SHA256；介意的话可以直接用源码自行编译——这正是开源的意义。</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span data-i18n="faq.q6">有中文吗？深色模式呢？</span><span class="plus">＋</span></button>
-        <div class="faq-a"><p data-i18n="faq.a6">内置 10 种语言（含简体中文），深色 / 浅色 / 跟随系统三种主题，切换即时生效。</p></div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a6"><span data-i18n="faq.q6">有中文吗？深色模式呢？</span><span class="plus" aria-hidden="true">＋</span></button>
+        <div class="faq-a" id="faq-a6"><p data-i18n="faq.a6">内置 10 种语言（含简体中文），深色 / 浅色 / 跟随系统三种主题，切换即时生效。</p></div>
       </div>
     </div>
   </div>
@@ -493,7 +521,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
     <div class="foot-grid">
       <div>
         <a class="brand" href="#top" style="margin-bottom:14px;display:inline-flex">
-          <span class="brand-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg></span>
+          <span class="brand-mark"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg></span>
           MegaDownloader <span style="font-weight:400;color:var(--dim)">Revival</span>
         </a>
         <p style="font-size:13.5px;color:var(--dim);max-width:340px" data-i18n="foot.desc">让经典的 MEGA 下载器重新可用。轻量、稳定、多线程，开源免费。</p>
@@ -521,7 +549,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:48px
   </div>
 </footer>
 
-<button id="toTop" title="回顶部" data-i18n-title="misc.top">↑</button>
+<button id="toTop" type="button" title="回顶部" data-i18n-title="misc.top" data-i18n-aria="misc.top" aria-label="回顶部">↑</button>
 
 <script>
 (function(){
@@ -534,14 +562,14 @@ zh:{
 "nav.features":"功能","nav.how":"使用","nav.download":"下载","nav.changelog":"更新日志","nav.faq":"常见问题",
 "hero.badge_oss":"MIT 开源",
 "hero.title":'经典 MEGA<br>下载器，<br><span class="grad">重获新生。</span>',
-"hero.sub":'原版止步于 v1.8 之后，MEGA 换了链接格式，老版本彻底认不出新链接。Revival 从反编译源码重建，修复 <strong>60+ 处问题</strong>，让这个轻量、稳定、多线程的经典工具重新可用。',
+"hero.sub":'原版止步于 v1.8 之后，MEGA 换了链接格式，老版本彻底认不出新链接。Revival 从反编译源码重建，修复 <strong>200+ 处问题</strong>，让这个轻量、稳定、多线程的经典工具重新可用。',
 "hero.cta_dl":"免费下载 Windows 版","hero.cta_how":"三分钟上手 →",
-"hero.meta_size":'体积 <b>~6 MB</b>',"hero.meta_install":'安装 <b>免安装 / 便携</b>',"hero.meta_lang":'语言 <b>10 种 · 含简中</b>',
+"hero.meta_size":"体积","hero.meta_install":'安装 <b>免安装 / 便携</b>',"hero.meta_lang":'语言 <b>10 种 · 含简中</b>',
 "mock.theme":"深色主题","mock.add":"＋ 添加链接","mock.start":"▶ 开始","mock.pause":"⏸ 暂停","mock.settings":"⚙ 设置",
 "mock.dling":"下载中","mock.t1":"纪录片合集.S01-S03.1080p.mkv","mock.t2":"设计素材包.part2.rar","mock.t3":"开源电子书.epub","mock.t4":"摄影原片备份.zip",
 "mock.done":"已完成","mock.verified":"校验通过 · 已自动解压","mock.quota":"配额等待 04:12","mock.circuit":"触发熔断 · 倒计时后自动恢复","mock.status":"● 配额正常 · 剪贴板监听中",
 "stats.dl":"累计下载 · GITHUB","stats.stars":"STARS · 实时同步","stats.fixes":"处修复已应用","stats.langs":"界面语言",
-"feat.title":"小体积，大本事。","feat.desc":"单文件约 6 MB，没有浏览器插件，没有账号体系。只做一件事：把 MEGA 链接变成你硬盘上的文件，又快又稳。",
+"feat.title":"小体积，大本事。","feat.desc":"单文件即用，没有浏览器插件，没有账号体系。只做一件事：把 MEGA 链接变成你硬盘上的文件，又快又稳。",
 "feat.f1h":"多线程下载","feat.f1p":"单文件多连接并发，大带宽直接跑满。线程数、全局限速都可在设置里精细调节。",
 "feat.f2h":'断点续传与自愈<span class="tag-new">v2.5</span>',"feat.f2p":"暂停、恢复、失败自动定时重试；彻底失败的任务会被隔离，不再拖慢队列。",
 "feat.f3h":"复制即捕获","feat.f3p":"剪贴板监听自动识别 MEGA 链接，也可以手动粘贴、直接把链接拖进主窗口。",
@@ -570,7 +598,7 @@ zh:{
 "cl.kicker":"CHANGELOG · 与 GITHUB 实时同步","cl.title":"每个版本，都算数。","cl.desc":"版本、日期与下载量全部来自 GitHub Releases。","cl.more":"全部版本与完整日志 →","cl.syncing":"同步中…",
 "faq.title":"你可能想问。","faq.desc":"先看这里，没有答案就去仓库提 Issue。",
 "faq.q1":"免费吗？会不会有广告或捆绑？","faq.a1":"完全免费，MIT 开源，无广告、无捆绑、无账号体系。代码全部公开在 GitHub，Release 构建由 Actions 流水线自动完成，任何人都可以审查和自行编译。",
-"faq.q2":"和原版 MegaDownloader 是什么关系？","faq.a2":"原版作者 Andres Soliño 在 v1.8 后停止维护，而 MEGA 更换了链接格式导致老版本无法识别新链接。本项目从 v1.8 反编译源码出发修复兼容性并持续改进（已应用 60+ 处修复），原版权归 Andres Soliño 所有，复活部分的修改遵循 MIT 协议开源。",
+"faq.q2":"和原版 MegaDownloader 是什么关系？","faq.a2":"原版作者 Andres Soliño 在 v1.8 后停止维护，而 MEGA 更换了链接格式导致老版本无法识别新链接。本项目从 v1.8 反编译源码出发修复兼容性并持续改进（已应用 200+ 处修复），原版权归 Andres Soliño 所有，复活部分的修改遵循 MIT 协议开源。",
 "faq.q3":"下载速度有限制吗？配额用完了怎么办？","faq.a3":"软件本身不限速，多线程可跑满你的带宽。MEGA 免费账号有配额限制，v2.5 新增的配额熔断会在配额耗尽时自动暂停并倒计时，恢复后自动继续下载。",
 "faq.q4":"支持哪些链接？文件夹能下吗？","faq.a4":'支持新版 <span style="font-family:var(--mono)">mega.nz/file/</span>、<span style="font-family:var(--mono)">mega.nz/folder/</span>、旧版 <span style="font-family:var(--mono)">mega.nz/#!</span> 以及 enc / enc2 / elc 等加密链接。分享文件夹可递归解析，支持只勾选部分子目录和文件。',
 "faq.q5":"运行需要什么环境？杀毒软件报毒怎么办？","faq.a5":"需要 Windows 7 SP1 及以上 + .NET Framework 4.8（Win10/11 自带）。小众开源 exe 偶尔会被杀软误报：请认准 GitHub Releases 官方构建并核对 SHA256；介意的话可以直接用源码自行编译——这正是开源的意义。",
@@ -589,8 +617,8 @@ zh:{
 "dyn.no_desc":"暂无说明，点完整日志查看。","dyn.offline":"离线快照：以下载页实时数据为准",
 "dyn.snapshot_dl":"快照 ↓","dyn.go_releases":"去 Releases 查看实时数据 →",
 "dyn.fallback_body":'没能连上 GitHub API（可能限流或离线），此处显示内置快照数据。<br><a href="https://github.com/a1175815821/MegaDownloader-Revival/releases" target="_blank" rel="noopener">去 Releases 查看实时数据 →</a>',
-"dyn.lbl_hint":"提示","dyn.lbl_result":"结论","dyn.lbl_desc":"说明","dyn.lbl_ex":"示例",
-"dyn.est_size":"预估体积","dyn.copy_hint":"· 复制到客户端即可开下",
+"dyn.lbl_hint":"提示","dyn.lbl_result":"结论","dyn.lbl_desc":"说明","dyn.lbl_detect":"识别到",
+"dyn.copy_hint":"· 仅本地正则识别，未发起任何网络请求",
 "dyn.unrec":"✕ 无法识别","dyn.unrec_desc":"不是 MEGA 链接。v2.0 已移除短链与第三方加密站支持。",
 "dyn.empty_hint":"先粘贴一条链接试试，上面输入框里有一条示例。",
 "dyn.type_file":"文件链接（新版格式）","dyn.tip_file":"v1.9+ 支持 · 可直接下载",
@@ -604,14 +632,14 @@ en:{
 "nav.features":"Features","nav.how":"Guide","nav.download":"Download","nav.changelog":"Changelog","nav.faq":"FAQ",
 "hero.badge_oss":"MIT Open Source",
 "hero.title":'Classic MEGA<br>downloader,<br><span class="grad">reborn.</span>',
-"hero.sub":'The original stopped at v1.8, then MEGA changed link formats and old builds cannot parse new links. Revival rebuilds from decompiled sources with <strong>60+ fixes</strong> to bring this lightweight, stable, multi-threaded classic back to life.',
+"hero.sub":'The original stopped at v1.8, then MEGA changed link formats and old builds cannot parse new links. Revival rebuilds from decompiled sources with <strong>200+ fixes</strong> to bring this lightweight, stable, multi-threaded classic back to life.',
 "hero.cta_dl":"Download for Windows — Free","hero.cta_how":"Get started in 3 min →",
-"hero.meta_size":'Size <b>~6 MB</b>',"hero.meta_install":'Install <b>portable / no setup</b>',"hero.meta_lang":'Languages <b>10 · incl. Chinese</b>',
+"hero.meta_size":"Size","hero.meta_install":'Install <b>portable / no setup</b>',"hero.meta_lang":'Languages <b>10 · incl. Chinese</b>',
 "mock.theme":"Dark theme","mock.add":"＋ Add links","mock.start":"▶ Start","mock.pause":"⏸ Pause","mock.settings":"⚙ Settings",
 "mock.dling":"Downloading","mock.t1":"Documentary.S01-S03.1080p.mkv","mock.t2":"DesignAssets.part2.rar","mock.t3":"OpenSource-ebook.epub","mock.t4":"PhotoRAW-backup.zip",
 "mock.done":"Done","mock.verified":"Verified · auto-extracted","mock.quota":"Quota wait 04:12","mock.circuit":"Breaker tripped · auto-resume after countdown","mock.status":"● Quota OK · clipboard watching",
 "stats.dl":"TOTAL DOWNLOADS · GITHUB","stats.stars":"STARS · LIVE SYNC","stats.fixes":"FIXES APPLIED","stats.langs":"UI LANGUAGES",
-"feat.title":"Tiny size, big muscle.","feat.desc":"A ~6 MB single file. No browser plugins, no accounts. One job only: turn MEGA links into files on your disk — fast and stable.",
+"feat.title":"Tiny size, big muscle.","feat.desc":"One single file, no install. No browser plugins, no accounts. One job only: turn MEGA links into files on your disk — fast and stable.",
 "feat.f1h":"Multi-threaded downloads","feat.f1p":"Multi-connection per file to saturate big pipes. Thread count and global limits are tunable in Settings.",
 "feat.f2h":'Resume & self-healing<span class="tag-new">v2.5</span>',"feat.f2p":"Pause, resume and auto-retry on failure; hopeless tasks are isolated so they never stall the queue.",
 "feat.f3h":"Copy to capture","feat.f3p":"Clipboard watcher auto-detects MEGA links; you can also paste manually or drag links into the window.",
@@ -640,7 +668,7 @@ en:{
 "cl.kicker":"CHANGELOG · LIVE SYNC WITH GITHUB","cl.title":"Every release counts.","cl.desc":"Versions, dates and download counts all come from GitHub Releases.","cl.more":"All releases & full changelog →","cl.syncing":"Syncing…",
 "faq.title":"You might ask.","faq.desc":"Check here first — if there is no answer, open an Issue.",
 "faq.q1":"Is it free? Any ads or bundles?","faq.a1":"Completely free, MIT open source, no ads, no bundles, no accounts. All code is public on GitHub and Releases are built by Actions — anyone can audit and build from source.",
-"faq.q2":"How is it related to the original MegaDownloader?","faq.a2":"Original author Andres Soliño stopped at v1.8, and MEGA changed link formats so old builds cannot parse new links. This project rebuilds from v1.8 decompiled sources (60+ fixes applied). Original copyright belongs to Andres Soliño; revival changes are MIT open source.",
+"faq.q2":"How is it related to the original MegaDownloader?","faq.a2":"Original author Andres Soliño stopped at v1.8, and MEGA changed link formats so old builds cannot parse new links. This project rebuilds from v1.8 decompiled sources (200+ fixes applied). Original copyright belongs to Andres Soliño; revival changes are MIT open source.",
 "faq.q3":"Any speed limits? What if quota runs out?","faq.a3":"The app never throttles — multi-threading saturates your bandwidth. MEGA free accounts have quotas; the v2.5 quota breaker auto-pauses, counts down, then resumes.",
 "faq.q4":"Which links are supported? Can folders download?","faq.a4":'Supports new <span style="font-family:var(--mono)">mega.nz/file/</span>, <span style="font-family:var(--mono)">mega.nz/folder/</span>, legacy <span style="font-family:var(--mono)">mega.nz/#!</span> and enc / enc2 / elc encrypted links. Shared folders parse recursively — tick only what you need.',
 "faq.q5":"System requirements? Antivirus false positives?","faq.a5":"Requires Windows 7 SP1+ and .NET Framework 4.8 (built into Win10/11). Niche open-source exes sometimes trigger false positives: only use official GitHub Releases builds and verify SHA256; or build from source — that is the point of open source.",
@@ -659,8 +687,8 @@ en:{
 "dyn.no_desc":"No notes — see full changelog.","dyn.offline":"Offline snapshot — see Releases for live data",
 "dyn.snapshot_dl":"Snapshot ↓","dyn.go_releases":"See live data on Releases →",
 "dyn.fallback_body":'Could not reach the GitHub API (rate-limited or offline), showing built-in snapshot.<br><a href="https://github.com/a1175815821/MegaDownloader-Revival/releases" target="_blank" rel="noopener">See live data on Releases →</a>',
-"dyn.lbl_hint":"Hint","dyn.lbl_result":"Result","dyn.lbl_desc":"Details","dyn.lbl_ex":"Example",
-"dyn.est_size":"Est. size","dyn.copy_hint":"· Paste into the app to download",
+"dyn.lbl_hint":"Hint","dyn.lbl_result":"Result","dyn.lbl_desc":"Details","dyn.lbl_detect":"Detected",
+"dyn.copy_hint":"· matched locally by regex, no network request",
 "dyn.unrec":"✕ Unrecognized","dyn.unrec_desc":"Not a MEGA link. Short links and third-party lockers were removed in v2.0.",
 "dyn.empty_hint":"Paste a link first — try the sample in the input above.",
 "dyn.type_file":"File link (new format)","dyn.tip_file":"Supported since v1.9 · ready to download",
@@ -700,7 +728,10 @@ function applyLang(next,save){
   });
   $$('[data-i18n-ph]').forEach(el=>{el.setAttribute('placeholder',t(el.getAttribute('data-i18n-ph')));});
   $$('[data-i18n-title]').forEach(el=>{el.setAttribute('title',t(el.getAttribute('data-i18n-title')));});
-  const lb=$('#langBtn');if(lb)lb.textContent=langNow==='zh'?'EN':'中文';
+  $$('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',t(el.getAttribute('data-i18n-aria')));});
+  const lb=$('#langBtn');
+  if(lb){lb.textContent=langNow==='zh'?'EN':'中文';
+    lb.setAttribute('aria-label',langNow==='zh'?'Switch to English / 切换到英文':'Switch to Chinese / 切换到中文');}
   renderVertype();renderQuota();renderTotal();
   $$('#taskList .spd[data-q]').forEach(el=>{el.textContent=t('dyn.queued');});
   const qn=$('#demoQueueNote');if(qn&&qn.textContent)qn.textContent=t('dyn.queue_added');
@@ -709,12 +740,6 @@ function applyLang(next,save){
   else if(fallbackShown){const box=$('#timeline');if(box)delete box.dataset.done;renderFallback();}
   $$('.faq-item.open .faq-a').forEach(a=>{a.style.maxHeight=a.scrollHeight+'px';});
 }
-function renderFallbackLangOnly(){
-  ['dlPortableInfo','dlSingleInfo'].forEach(id=>{
-    const e=document.getElementById(id);
-    if(e&&/正在同步|Syncing/.test(e.textContent||''))e.textContent=t('dl.syncing');
-  });
-}
 
 /* nav + toTop */
 const nav=$('#nav'), toTop=$('#toTop');
@@ -722,7 +747,7 @@ addEventListener('scroll',()=>{
   nav.classList.toggle('scrolled',scrollY>30);
   toTop.classList.toggle('show',scrollY>700);
 },{passive:true});
-toTop.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+toTop.onclick=()=>scrollTo({top:0,behavior:RM?'auto':'smooth'});
 
 /* subtle starfield */
 const cv=$('#stars'),ctx=cv.getContext('2d');
@@ -733,26 +758,35 @@ function size(){W=innerWidth;H=innerHeight;cv.width=W;cv.height=H;
   stars=[];for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,
     r:Math.random()*1.3+0.3,tw:Math.random()*6.28,sp:Math.random()*0.12+0.03,
     c:Math.random()<0.75?'255,255,255':Math.random()<0.5?'255,120,130':'159,216,255'});}
-size();addEventListener('resize',size);
-let mx=0.5,my=0.5;
-addEventListener('mousemove',e=>{mx=e.clientX/W;my=e.clientY/H;},{passive:true});
-(function loop(t){
-  requestAnimationFrame(loop);
-  if(document.hidden)return;
+function paintStars(tt,advance){
   ctx.clearRect(0,0,W,H);
-  const tt=(t||0)*0.001;
   for(let i=0;i<stars.length;i++){const s=stars[i];
-    s.y+=s.sp;if(s.y>H+2){s.y=-2;s.x=Math.random()*W;}
-    const a=0.25+0.45*(0.5+0.5*Math.sin(tt*1.5+s.tw));
+    if(advance){s.y+=s.sp;if(s.y>H+2){s.y=-2;s.x=Math.random()*W;}}
+    const a=advance?0.25+0.45*(0.5+0.5*Math.sin(tt*1.5+s.tw)):0.42;
     const px=s.x+(mx-0.5)*14*s.r, py=s.y+(my-0.5)*14*s.r;
     ctx.fillStyle='rgba('+s.c+','+a.toFixed(3)+')';
     ctx.beginPath();ctx.arc(px,py,s.r,0,7);ctx.fill();}
-})();
+}
+let mx=0.5,my=0.5;
+size();
+addEventListener('resize',()=>{size();if(RM)paintStars(0,false);});
+if(RM){paintStars(0,false);}
+else{
+  addEventListener('mousemove',e=>{mx=e.clientX/W;my=e.clientY/H;},{passive:true});
+  (function loop(t){
+    requestAnimationFrame(loop);
+    if(document.hidden)return;
+    paintStars((t||0)*0.001,true);
+  })();
+}
 
-/* reveals */
-const io=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:0.12});
-$$('.reveal').forEach(el=>io.observe(el));
+/* reveals (skipped when the user prefers reduced motion) */
+if(RM){$$('.reveal').forEach(el=>el.classList.add('in'));}
+else{
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:0.12});
+  $$('.reveal').forEach(el=>io.observe(el));
+}
 
 /* mockup progress simulation */
 const tasks=Array.from(document.querySelectorAll('#taskList .task[data-speed]')).map(el=>({
@@ -788,8 +822,12 @@ const patterns=[
 ];
 function patType(k){return t('dyn.type_'+k);}
 function patTip(k){return t('dyn.tip_'+k);}
-function fakeSize(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;
-  const mb=120+(h%8400);return mb>1024?(mb/1024).toFixed(2)+' GB':mb+' MB';}
+/* extracts only the PUBLIC handle (never the key after '#') purely locally */
+function linkHandle(v){
+  const s=String(v||'');
+  const m=s.match(/(?:^|\/)(?:file|folder)\/([A-Za-z0-9_-]{4,})/)||s.match(/#(?:F!)?([A-Za-z0-9_-]{4,})/);
+  return m?m[1]:'';
+}
 function renderParseOut(v,key,noQueue){
   const out=$('#parseOut');if(!out)return;
   out.classList.add('show');
@@ -802,7 +840,7 @@ function renderParseOut(v,key,noQueue){
     lastParse={v:v,key:h.key};
     out.innerHTML='<div class="row"><span class="k">'+t('dyn.lbl_result')+'</span><span style="color:'+h.color+';font-weight:700">✓ '+patType(h.key)+'</span></div>'
       +'<div class="row"><span class="k">'+t('dyn.lbl_desc')+'</span><span>'+patTip(h.key)+'</span></div>'
-      +'<div class="row"><span class="k">'+t('dyn.lbl_ex')+'</span><span style="font-family:var(--mono);font-size:12px;color:var(--dim)">'+t('dyn.est_size')+' '+fakeSize(v)+' '+t('dyn.copy_hint')+'</span></div>';
+      +'<div class="row"><span class="k">'+t('dyn.lbl_detect')+'</span><span style="font-family:var(--mono);font-size:12px;color:var(--dim)">'+(linkHandle(v)||'—')+' '+t('dyn.copy_hint')+'</span></div>';
   }else{
     lastParse={v:v,key:'__unrec'};
     out.innerHTML='<div class="row"><span class="k">'+t('dyn.lbl_result')+'</span><span style="color:var(--red);font-weight:700">'+t('dyn.unrec')+'</span></div>'
@@ -828,19 +866,32 @@ $$('.faq-item').forEach(item=>{
   const q=item.querySelector('.faq-q'), a=item.querySelector('.faq-a');
   q.onclick=()=>{
     const open=item.classList.contains('open');
-    $$('.faq-item.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight='0';});
-    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+    $$('.faq-item.open').forEach(o=>{
+      o.classList.remove('open');
+      o.querySelector('.faq-a').style.maxHeight='0';
+      const oq=o.querySelector('.faq-q');if(oq)oq.setAttribute('aria-expanded','false');
+    });
+    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';q.setAttribute('aria-expanded','true');}
   };
 });
 
 /* ---------- live GitHub sync (cached 6h, graceful offline) ---------- */
 const REPO_API='https://api.github.com/repos/a1175815821/MegaDownloader-Revival';
 const CACHE_KEY='mdr-site-cache-v1', CACHE_TTL=6*3600*1000;
+/* offline snapshot - single source of truth, refresh when a new release ships */
+const SNAP={ver:'v2.5.3',stars:34,totalDl:1057,exe:12160000};
+/* bound every network call so the page can never hang on "syncing" */
+const TMO=8000;
+function tmo(){try{return AbortSignal.timeout(TMO);}catch(e){return undefined;}}
 function readCache(){try{const c=JSON.parse(localStorage.getItem(CACHE_KEY));if(c&&c.ts&&c.data)return c;}catch(e){}return null;}
 function saveCache(data){try{localStorage.setItem(CACHE_KEY,JSON.stringify({ts:Date.now(),data:data}));}catch(e){}}
 const fmtN=n=>Number(n||0).toLocaleString('en-US');
 const fmtMB=b=>b?(b/1048576).toFixed(1)+' MB':'—';
+const setHeroSize=b=>{const el=document.getElementById('heroSize');
+  if(el&&b)el.textContent='~'+Math.max(1,Math.round(b/1048576))+' MB';};
+const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 function countUp(el,to,dur){
+  if(RM){el.textContent=fmtN(to);return;}
   dur=dur||1400;const t0=performance.now();
   (function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
     el.textContent=fmtN(Math.round(to*e));
@@ -879,19 +930,19 @@ function renderTimeline(rels){
   box.innerHTML=rels.slice(0,6).map((r,i)=>{
     const dl=(r.assets||[]).reduce((a,x)=>a+(x.downloads||0),0);
     return '<div class="tl-item'+(i===0?' latest':'')+'"><div class="tl-card">'
-      +'<div class="tl-head"><span class="tl-tag">'+r.tag+'</span>'
+      +'<div class="tl-head"><span class="tl-tag">'+esc(r.tag)+'</span>'
       +'<span class="tl-date">'+(r.date?r.date.slice(0,10):'')+'</span>'
       +(i===0?'<span class="tl-badge new">'+t('dyn.latest')+'</span>':'')
       +(r.pre?'<span class="tl-badge pre">'+t('dyn.pre')+'</span>':'')
       +'<span class="tl-badge dl">⬇ '+fmtN(dl)+'</span></div>'
-      +'<div class="tl-body">'+md2html(r.notes)+'<br><a href="'+r.url+'" target="_blank" rel="noopener">'+t('dyn.full_log')+'</a></div>'
+      +'<div class="tl-body">'+md2html(r.notes)+'<br><a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+t('dyn.full_log')+'</a></div>'
       +'</div></div>';
   }).join('');
 }
 let liveStars=null, liveDl=null;
 function dlInfoHTML(a){
-  if(langNow==='zh')return '<b>'+a.name+'</b> · '+fmtMB(a.size)+' · 已下载 '+fmtN(a.downloads)+' 次';
-  return '<b>'+a.name+'</b> · '+fmtMB(a.size)+' · '+fmtN(a.downloads)+' downloads';
+  if(langNow==='zh')return '<b>'+esc(a.name)+'</b> · '+fmtMB(a.size)+' · 已下载 '+fmtN(a.downloads)+' 次';
+  return '<b>'+esc(a.name)+'</b> · '+fmtMB(a.size)+' · '+fmtN(a.downloads)+' downloads';
 }
 function renderLive(d){
   if(!d)return;
@@ -915,6 +966,9 @@ function renderLive(d){
       const info=$('#dlSingleInfo');
       if(info){info.removeAttribute('data-i18n');info.innerHTML=dlInfoHTML(exe);}
     }
+    const sf=exe||zip;if(sf)setHeroSize(sf.size);
+    const ld=document.getElementById('ldjson');
+    if(ld){try{const o=JSON.parse(ld.textContent);o.softwareVersion=String(rel.tag).replace(/^v/,'');ld.textContent=JSON.stringify(o);}catch(e){}}
   }
   if(d.stars!=null){
     const sc=$('#starCount');if(sc)sc.textContent='· ★'+d.stars;
@@ -929,12 +983,13 @@ function renderFallback(){
   const box=$('#timeline');
   if(box&&!box.dataset.done){box.dataset.done='1';
     box.innerHTML='<div class="tl-item latest"><div class="tl-card">'
-      +'<div class="tl-head"><span class="tl-tag">v2.5.0</span>'
+      +'<div class="tl-head"><span class="tl-tag">'+SNAP.ver+'</span>'
       +'<span class="tl-badge new">'+t('dyn.latest')+'</span>'
       +'<span class="tl-badge dl">'+t('dyn.snapshot_dl')+'</span></div>'
       +'<div class="tl-body">'+t('dyn.fallback_body')+'</div>'
       +'</div></div>';}
   fallbackShown=true;
+  setHeroSize(SNAP.exe);
   const sc0=$('#starCount');
   if(sc0&&/--/.test(sc0.textContent||'')){
     const sEl=document.getElementById('stStars');
@@ -958,10 +1013,10 @@ function renderFallback(){
 async function refreshLive(){
   try{
     const [repo,rels]=await Promise.all([
-      fetch(REPO_API).then(r=>r.ok?r.json():null),
+      fetch(REPO_API,{signal:tmo()}).then(r=>r.ok?r.json():null),
       (async()=>{const out=[];
         for(let p=1;p<=3;p++){
-          const r=await fetch(REPO_API+'/releases?per_page=100&page='+p);
+          const r=await fetch(REPO_API+'/releases?per_page=100&page='+p,{signal:tmo()});
           if(!r.ok)break;const arr=await r.json();
           if(!arr.length)break;out.push(...arr);if(arr.length<100)break;}
         return out;})()
@@ -985,7 +1040,7 @@ async function shieldsNum(kind){
     const url=kind==='stars'
       ?'https://img.shields.io/github/stars/a1175815821/MegaDownloader-Revival?style=flat'
       :'https://img.shields.io/github/downloads/a1175815821/MegaDownloader-Revival/total?style=flat';
-    const txt=await (await fetch(url)).text();
+    const txt=await (await fetch(url,{signal:tmo()})).text();
     const m=[...txt.matchAll(/>([\d.,]+[kKmM]?)<\/text>/g)].map(x=>x[1]).filter(v=>/\d/.test(v));
     const raw=m.pop();
     if(!raw)return null;
@@ -1021,7 +1076,7 @@ async function gapFill(){
 $$('.fmt[data-sample]').forEach(ch=>ch.onclick=()=>{
   const inp=$('#linkInput');inp.value=ch.dataset.sample;
   parseLink();
-  document.querySelector('#how .demo').scrollIntoView({behavior:'smooth',block:'center'});
+  document.querySelector('#how .demo').scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});
 });
 
 /* ---------- parse result → mockup queue (signature linkage, bilingual) ---------- */
@@ -1036,7 +1091,8 @@ function mockNameFor(key){
 function addMockTask(key){
   const list=$('#taskList');if(!list)return;
   while(list.children.length>=5){
-    const last=list.lastChild;
+    const last=list.lastElementChild;
+    if(!last)break;
     list.removeChild(last);
     const idx=tasks.findIndex(task=>task.el===last);
     if(idx>=0)tasks.splice(idx,1);
