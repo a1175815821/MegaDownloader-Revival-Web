@@ -364,8 +364,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 </header>
 
 <div class="stats-band"><div class="wrap stats-grid">
-  <div class="stat reveal"><b id="stDl">1057</b><span data-i18n="stats.dl">累计下载 · GITHUB</span></div>
-  <div class="stat reveal"><b id="stStars">34</b><span data-i18n="stats.stars">STARS · 实时同步</span></div>
+  <div class="stat reveal"><b id="stDl">1,100</b><span id="stDlLbl" data-i18n="stats.dl_snap">累计下载 · 快照</span></div>
+  <div class="stat reveal"><b id="stStars">36</b><span id="stStarsLbl" data-i18n="stats.stars_snap">STARS · 快照</span></div>
   <div class="stat reveal"><b>200<em>+</em></b><span data-i18n="stats.fixes">处修复已应用</span></div>
   <div class="stat reveal"><b>10</b><span data-i18n="stats.langs">界面语言</span></div>
 </div></div>
@@ -568,7 +568,7 @@ zh:{
 "mock.theme":"深色主题","mock.add":"＋ 添加链接","mock.start":"▶ 开始","mock.pause":"⏸ 暂停","mock.settings":"⚙ 设置",
 "mock.dling":"下载中","mock.t1":"纪录片合集.S01-S03.1080p.mkv","mock.t2":"设计素材包.part2.rar","mock.t3":"开源电子书.epub","mock.t4":"摄影原片备份.zip",
 "mock.done":"已完成","mock.verified":"校验通过 · 已自动解压","mock.quota":"配额等待 04:12","mock.circuit":"触发熔断 · 倒计时后自动恢复","mock.status":"● 配额正常 · 剪贴板监听中",
-"stats.dl":"累计下载 · GITHUB","stats.stars":"STARS · 实时同步","stats.fixes":"处修复已应用","stats.langs":"界面语言",
+"stats.dl":"累计下载 · GITHUB","stats.dl_snap":"累计下载 · 快照","stats.stars":"STARS · 实时同步","stats.stars_snap":"STARS · 快照","stats.fixes":"处修复已应用","stats.langs":"界面语言",
 "feat.title":"小体积，大本事。","feat.desc":"单文件即用，没有浏览器插件，没有账号体系。只做一件事：把 MEGA 链接变成你硬盘上的文件，又快又稳。",
 "feat.f1h":"多线程下载","feat.f1p":"单文件多连接并发，大带宽直接跑满。线程数、全局限速都可在设置里精细调节。",
 "feat.f2h":'断点续传与自愈<span class="tag-new">v2.5</span>',"feat.f2p":"暂停、恢复、失败自动定时重试；彻底失败的任务会被隔离，不再拖慢队列。",
@@ -638,7 +638,7 @@ en:{
 "mock.theme":"Dark theme","mock.add":"＋ Add links","mock.start":"▶ Start","mock.pause":"⏸ Pause","mock.settings":"⚙ Settings",
 "mock.dling":"Downloading","mock.t1":"Documentary.S01-S03.1080p.mkv","mock.t2":"DesignAssets.part2.rar","mock.t3":"OpenSource-ebook.epub","mock.t4":"PhotoRAW-backup.zip",
 "mock.done":"Done","mock.verified":"Verified · auto-extracted","mock.quota":"Quota wait 04:12","mock.circuit":"Breaker tripped · auto-resume after countdown","mock.status":"● Quota OK · clipboard watching",
-"stats.dl":"TOTAL DOWNLOADS · GITHUB","stats.stars":"STARS · LIVE SYNC","stats.fixes":"FIXES APPLIED","stats.langs":"UI LANGUAGES",
+"stats.dl":"TOTAL DOWNLOADS · GITHUB","stats.dl_snap":"TOTAL DOWNLOADS · SNAPSHOT","stats.stars":"STARS · LIVE SYNC","stats.stars_snap":"STARS · SNAPSHOT","stats.fixes":"FIXES APPLIED","stats.langs":"UI LANGUAGES",
 "feat.title":"Tiny size, big muscle.","feat.desc":"One single file, no install. No browser plugins, no accounts. One job only: turn MEGA links into files on your disk — fast and stable.",
 "feat.f1h":"Multi-threaded downloads","feat.f1p":"Multi-connection per file to saturate big pipes. Thread count and global limits are tunable in Settings.",
 "feat.f2h":'Resume & self-healing<span class="tag-new">v2.5</span>',"feat.f2p":"Pause, resume and auto-retry on failure; hopeless tasks are isolated so they never stall the queue.",
@@ -879,9 +879,9 @@ $$('.faq-item').forEach(item=>{
 const REPO_API='https://api.github.com/repos/a1175815821/MegaDownloader-Revival';
 const CACHE_KEY='mdr-site-cache-v1', CACHE_TTL=6*3600*1000;
 /* offline snapshot - single source of truth, refresh when a new release ships */
-const SNAP={ver:'v2.5.3',stars:34,totalDl:1057,exe:12160000};
+const SNAP={ver:'v2.5.3',stars:36,totalDl:1100,exe:12160000};
 /* bound every network call so the page can never hang on "syncing" */
-const TMO=8000;
+const TMO=12000;
 function tmo(){try{return AbortSignal.timeout(TMO);}catch(e){return undefined;}}
 function readCache(){try{const c=JSON.parse(localStorage.getItem(CACHE_KEY));if(c&&c.ts&&c.data)return c;}catch(e){}return null;}
 function saveCache(data){try{localStorage.setItem(CACHE_KEY,JSON.stringify({ts:Date.now(),data:data}));}catch(e){}}
@@ -892,18 +892,26 @@ const setHeroSize=b=>{const el=document.getElementById('heroSize');
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 function countUp(el,to,dur){
   if(RM){el.textContent=fmtN(to);return;}
+  /* two sources can write these counters (shields.io and the GitHub API). A value
+     arriving mid-animation must win, so stamp a token and let stale frames bail out. */
+  const token=(el.__ct=(el.__ct||0)+1);
   dur=dur||1400;const t0=performance.now();
-  (function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+  (function step(t){
+    if(el.__ct!==token)return;
+    const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
     el.textContent=fmtN(Math.round(to*e));
     if(p<1)requestAnimationFrame(step);})(t0);
 }
 const counted={};
 function setCount(id,to){
   const el=document.getElementById(id);if(!el||to==null)return;
+  /* claim a token first: a newer value must invalidate both a running animation
+     AND an observer callback that has not fired yet */
+  const token=(el.__ct=(el.__ct||0)+1);
   if(counted[id]){el.textContent=fmtN(to);return;}
   counted[id]=1;
   const cio=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){cio.disconnect();countUp(el,to);}}),{threshold:0.4});
+    if(e.isIntersecting){cio.disconnect();if(el.__ct===token)countUp(el,to);}}),{threshold:0.4});
   cio.observe(el);
 }
 function md2html(src){
@@ -939,7 +947,17 @@ function renderTimeline(rels){
       +'</div></div>';
   }).join('');
 }
-let liveStars=null, liveDl=null;
+let liveStars=null, liveDl=null, statsLive=false;
+/* tells the truth about whether the two counters are fresh or a frozen snapshot */
+function setStatsLive(ok){
+  if(statsLive===ok)return;statsLive=ok;
+  const dl=document.getElementById('stDlLbl'), st=document.getElementById('stStarsLbl');
+  if(dl){dl.setAttribute('data-i18n',ok?'stats.dl':'stats.dl_snap');dl.textContent=t(ok?'stats.dl':'stats.dl_snap');}
+  if(st){st.setAttribute('data-i18n',ok?'stats.stars':'stats.stars_snap');st.textContent=t(ok?'stats.stars':'stats.stars_snap');}
+}
+function setStars(v){if(v==null||!isFinite(v))return;setCount('stStars',v);
+  const sc=$('#starCount');if(sc)sc.textContent='· ★'+fmtN(v);}
+function setDl(v){if(v==null||!isFinite(v))return;setCount('stDl',v);}
 function dlInfoHTML(a){
   if(langNow==='zh')return '<b>'+esc(a.name)+'</b> · '+fmtMB(a.size)+' · 已下载 '+fmtN(a.downloads)+' 次';
   return '<b>'+esc(a.name)+'</b> · '+fmtMB(a.size)+' · '+fmtN(a.downloads)+' downloads';
@@ -970,11 +988,8 @@ function renderLive(d){
     const ld=document.getElementById('ldjson');
     if(ld){try{const o=JSON.parse(ld.textContent);o.softwareVersion=String(rel.tag).replace(/^v/,'');ld.textContent=JSON.stringify(o);}catch(e){}}
   }
-  if(d.stars!=null){
-    const sc=$('#starCount');if(sc)sc.textContent='· ★'+d.stars;
-    setCount('stStars',d.stars);
-  }
-  if(d.totalDl!=null)setCount('stDl',d.totalDl);
+  if(d.stars!=null){setStars(d.stars);setStatsLive(true);}
+  if(d.totalDl!=null){setDl(d.totalDl);setStatsLive(true);}
   if(d.rels&&d.rels.length)renderTimeline(d.rels);
   const sn=$('#syncNote');
   if(sn&&d.ts){try{sn.textContent=t('dyn.synced_at')+new Date(d.ts).toLocaleString(langNow==='zh'?'zh-CN':'en-US',{hour12:false});}catch(e){sn.textContent=t('dyn.synced_at')+new Date(d.ts).toLocaleString();}}
@@ -990,22 +1005,11 @@ function renderFallback(){
       +'</div></div>';}
   fallbackShown=true;
   setHeroSize(SNAP.exe);
+  /* deliberately NOT writing the snapshot numbers anywhere: shields.io may have
+     answered already, and racing it here was silently overwriting fresh values.
+     The labels stay on their snapshot wording until a fresh value actually lands. */
   const sc0=$('#starCount');
-  if(sc0&&/--/.test(sc0.textContent||'')){
-    const sEl=document.getElementById('stStars');
-    const snap=sEl?(sEl.textContent||'').replace(/,/g,''): '';
-    if(snap&&/\d/.test(snap))sc0.textContent='· ★'+snap;
-  }
-  if(liveStars==null){
-    const sEl=document.getElementById('stStars');
-    const n=sEl?parseInt((sEl.textContent||'').replace(/[^0-9]/g,''),10):NaN;
-    if(isFinite(n))setCount('stStars',n);
-  }
-  if(liveDl==null){
-    const dEl=document.getElementById('stDl');
-    const n=dEl?parseInt((dEl.textContent||'').replace(/[^0-9]/g,''),10):NaN;
-    if(isFinite(n))setCount('stDl',n);
-  }
+  if(sc0&&/--/.test(sc0.textContent||''))sc0.textContent='· ★'+fmtN(SNAP.stars);
   ['dlPortableInfo','dlSingleInfo'].forEach(id=>{const e=document.getElementById(id);
     if(e&&(e.hasAttribute('data-i18n')||/正在同步|Syncing/.test(e.textContent||'')))e.textContent=t('dyn.offline');});
   const sn=$('#syncNote');if(sn&&!sn.textContent)sn.textContent='';
@@ -1051,25 +1055,18 @@ async function shieldsNum(kind){
     return Math.round(v);
   }catch(e){return null;}
 }
+/* shields.io is NOT bound by the unauthenticated api.github.com quota
+   (60 requests/hour per IP), so the two counters refresh on every page load. */
 async function gapFill(){
-  try{
-    const s=await shieldsNum('stars');
-    if(s!=null&&liveStars==null){
-      setCount('stStars',s);
-      const sc=$('#starCount');if(sc&&/--/.test(sc.textContent))sc.textContent='· ★'+s;
-    }
-  }catch(e){}
-  try{
-    const d=await shieldsNum('dl');
-    if(d!=null&&liveDl==null)setCount('stDl',d);
-  }catch(e){}
+  try{const s=await shieldsNum('stars');if(s!=null){setStars(s);setStatsLive(true);}}catch(e){}
+  try{const d=await shieldsNum('dl');if(d!=null){setDl(d);setStatsLive(true);}}catch(e){}
 }
 (function initLive(){
   const c=readCache();
   if(c&&c.data){renderLive(c.data);
-    if(!c.data.rels||!c.data.rels.length)renderFallback();
-    if(Date.now()-c.ts<CACHE_TTL)return;}
-  refreshLive();gapFill();
+    if(!c.data.rels||!c.data.rels.length)renderFallback();}
+  gapFill();                                            /* always: cheap and uncapped */
+  if(!c||!(Date.now()-c.ts<CACHE_TTL))refreshLive();    /* quota-guarded */
 })();
 
 /* ---------- format chips → demo ---------- */
