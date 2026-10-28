@@ -10,3 +10,4 @@ desktop.ini
 # Browser regression tests
 node_modules/
 test-results/
+.wrangler/

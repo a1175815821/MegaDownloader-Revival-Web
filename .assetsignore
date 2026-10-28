@@ -1,0 +1,11 @@
+# Publish only the website and its ownership-verification files.
+*
+!index.html
+!assets/
+!assets/**
+!og.png
+!robots.txt
+!sitemap.xml
+!_headers
+!google7daa5cd79db808cc.html
+!1374819a22e0f6aee408a901d1393efc.txt

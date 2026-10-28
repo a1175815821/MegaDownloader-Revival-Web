@@ -6,6 +6,8 @@
 
 The official landing page for MegaDownloader Revival — full visual redesign (V2). Static files, no build step.
 
+Cloudflare deployment is configured in `wrangler.jsonc`. `.assetsignore` lists the public website files, excluding development dependencies, tests, and local working data from uploads.
+
 🌐 Live site: https://megadownloader-revival-web.a1175815821.workers.dev/ (hosted on [Cloudflare Workers](https://workers.cloudflare.com/), auto-deploys on push to main)
 
 > ⭐ Like the project? Please Star the main repo: **[a1175815821/MegaDownloader-Revival](https://github.com/a1175815821/MegaDownloader-Revival)** — downloads and issues live there too; this repo hosts the site only.
@@ -64,6 +66,8 @@ To use an installed Chrome instead, set `PLAYWRIGHT_CHANNEL=chrome` before runni
 ## 中文
 
 MegaDownloader Revival 的官网落地页 —— V2 全面视觉重制版。纯静态文件，无构建步骤。
+
+Cloudflare 部署配置见 `wrangler.jsonc`。`.assetsignore` 指定公开站点文件，开发依赖、测试和本地工作数据不会上传。
 
 🌐 线上地址：https://megadownloader-revival-web.a1175815821.workers.dev/（[Cloudflare Workers](https://workers.cloudflare.com/) 托管，push 到 main 自动部署）
 
