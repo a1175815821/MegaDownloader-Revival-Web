@@ -37,31 +37,33 @@ function syncMockTheme(){
 function setTheme(t,persist){
   document.documentElement.setAttribute('data-theme',t);
   themeBtn.innerHTML=(t==='dark')?SUN:MOON;
-  if(persist!==false){try{localStorage.setItem('mdr-theme',t)}catch(e){}}
+  if(persist!==false){savedTheme=t;try{localStorage.setItem('mdr-theme',t)}catch(e){}}
   var m=$('meta[name="theme-color"]'); if(m) m.setAttribute('content',t==='dark'?'#05060b':'#f4f5fa');
   syncMockTheme();
 }
 var savedTheme=null; try{savedTheme=localStorage.getItem('mdr-theme')}catch(e){}
-setTheme(savedTheme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
+if(savedTheme!=='light'&&savedTheme!=='dark')savedTheme=null;
+setTheme(savedTheme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'),false);
 themeBtn.addEventListener('click',function(){
   setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
 });
 /* 跟随系统实时切换(未手动指定过主题时) */
 var mqLight=matchMedia('(prefers-color-scheme: light)');
-if(!savedTheme&&mqLight.addEventListener){
-  mqLight.addEventListener('change',function(e){setTheme(e.matches?'light':'dark',false)});
+if(mqLight.addEventListener){
+  mqLight.addEventListener('change',function(e){if(!savedTheme)setTheme(e.matches?'light':'dark',false)});
 }
 
 /* ========== 双语 ========== */
 var I18N={
 en:{
  'nav.story':'The Revival','nav.features':'Capabilities','nav.vs':'vs v1.8','nav.download':'Download','nav.changelog':'Changelog','nav.faq':'FAQ','nav.star':'Star',
- 'hero.badge':'v2.5.8 stable · 2026-10-22 · actively maintained',
+ 'hero.badge':'Stable releases on GitHub · actively maintained',
  'hero.h1a':'The classic MEGA downloader,','hero.h1b':'back at full power.',
  'hero.sub':'Built for the <b>new mega.nz links</b> — multi-threaded speed, resume, automatic quota recovery. A <b>single portable executable</b> that runs on Windows 7 SP1+. MIT open source.',
  'hero.cta1':'Free download','hero.cta2':'GitHub Star',
  'hero.note':'✓ Free &amp; open source&nbsp;&nbsp;✓ No admin rights&nbsp;&nbsp;✓ <em>No ads, no bundleware, no tracking</em>',
  'stats.stars':'GitHub Stars','stats.dls':'Total downloads','stats.fixes':'fixes & hardening','stats.langs':'UI languages',
+ 'mobile.note':'Win 7 SP1+ · portable · MIT',
  'mock.theme':'dark theme','mock.speed':'total throughput',
  'mock.tab1':'All','mock.tab2':'Active','mock.tab3':'Done','mock.running':'running',
  'quota.wait':'quota recovery in','quota.done':'recovered · resuming',
@@ -93,13 +95,13 @@ en:{
  'vs.r4':'UI themes','vs.no4':'system grey only','vs.y4':'dark / light, follows system',
  'vs.r5':'Stability','vs.y5':'200+ crash / data-loss / security fixes',
  'vs.r6':'Maintenance','vs.no6':'✕ abandoned','vs.y6':'active, Issues answered',
- 'dl.kicker':'Download','dl.title':'Two packages,<span class="grad-text">one program</span>.','dl.desc':'Current release <b>v2.5.8</b> (2026-10-22). Version &amp; download counts sync every 6 hours.',
- 'dl.a1':'Portable <small>.ZIP · ≈ 10.6 MB</small>','dl.a2':'Extract anywhere and run. No installer, no admin rights — also the pick if your antivirus flags the single-file build.',
+ 'dl.kicker':'Download','dl.title':'Two packages,<span class="grad-text">one program</span>.','dl.desc':'Get the latest stable release from GitHub. Download counts are checked every 5 minutes.',
+ 'dl.a1':'Portable <small data-asset-size="zip">.ZIP</small>','dl.a2':'Extract anywhere and run. No installer, no admin rights — also the pick if your antivirus flags the single-file build.',
  'dl.avsafe':'AV-false-positive safe','dl.noadmin':'no admin needed','dl.btn':'Download portable',
- 'dl.b1':'Single file <small>.EXE · ≈ 12.3 MB</small>','dl.b2':'Download and double-click — all 15 dependency DLLs are embedded. The effortless option.',
+ 'dl.b1':'Single file <small data-asset-size="exe">.EXE</small>','dl.b2':'Download and double-click — dependencies are embedded. The effortless option.',
  'dl.onedrop':'single-file launch','dl.noinstall':'no install','dl.btn2':'Download single-file',
  'dl.cfg':'Settings &amp; queue live in <b>%LOCALAPPDATA%\\MegaDownloader\\</b> — upgrading is just replacing the exe','dl.req':'Windows 7 SP1+ · .NET Framework 4.8 (built into Win10 1903+)',
- 'cl.kicker':'Changelog','cl.title':'Every release counts.',
+ 'cl.kicker':'Release highlights','cl.title':'Every release counts.',
  'cl.a1':'Slow downloads no longer killed by the “stall watchdog” — if progress moves, it never aborts','cl.a2':'RAR multi-volume fixed: legacy .r00/.r01 naming + password-protected volumes','cl.a3':'Dark-mode menu bar reskinned; silent config-loss cured at the root',
  'cl.b1':'Stability sweep: 36 audited fixes (crashes / silent data loss / deadlocks)','cl.b2':'Friendly errors for shared-folder network failures (Issue #6)','cl.b3':'Folder packages show their real MEGA names',
  'cl.c1':'Quota breakthrough mode returns: no breaker, hard retry on the self-heal cycle','cl.c2':'Loose multi-file links auto-group into a “New package” folder','cl.c3':'True-name write-back, empty-dir cleanup on delete',
@@ -136,6 +138,8 @@ function applyLang(l){
   langNow=l; document.documentElement.lang=l==='en'?'en':'zh-CN';
   try{localStorage.setItem('mdr-lang',l)}catch(e){}
   langBtn.textContent=(l==='en')?'中':'EN';
+  langBtn.setAttribute('aria-label',l==='en'?'切换到中文':'Switch to English');
+  themeBtn.setAttribute('aria-label',l==='en'?'Toggle theme':'切换主题');
   $$('[data-i18n],[data-i18n-html]').forEach(function(el){
     if(l==='zh'){el.innerHTML=el.getAttribute('data-orig');return}
     var k=el.getAttribute('data-i18n')||el.getAttribute('data-i18n-html');
@@ -147,6 +151,7 @@ function applyLang(l){
   scramble($('.hero h1 .grad-text'));
   syncMockTheme();
   syncQuotaLabel();
+  renderLive();
 }
 langBtn.addEventListener('click',function(){applyLang(langNow==='en'?'zh':'en')});
 
@@ -218,11 +223,14 @@ try{
 
 /* ========== 数字滚动 ========== */
 var fmt=function(n){return n>=1000?n.toLocaleString('en-US'):String(n)};
-function countUp(el,val){
+function countUp(el,val,animate){
+  if(!el)return;
+  var token=(el._countToken||0)+1;el._countToken=token;
   var suffix=el.getAttribute('data-suffix')||'';
-  if(reduceMotion){el.textContent=fmt(val)+suffix;return}
+  if(reduceMotion||animate===false){el.textContent=fmt(val)+suffix;return}
   var t0=null,dur=1300;
   function step(ts){
+    if(el._countToken!==token)return;
     if(!t0)t0=ts;
     var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);
     el.textContent=fmt(Math.round(val*e))+suffix;
@@ -230,58 +238,166 @@ function countUp(el,val){
   }
   requestAnimationFrame(step);
 }
-/* 兜底快照(2026-10-25 实测:53 Stars / 25 个 Release 合计 2,172 次下载),API 可达时会被实时值覆盖 */
-var LIVE={stars:53,dls:2172};
+/* 未取得数据时保留 --，不把写死的快照冒充实时统计。 */
+var LIVE={stars:null,dls:null,release:null},updated={stars:0,dls:0,release:0};
 var counted=false;
-var cio=new IntersectionObserver(function(es){
-  es.forEach(function(e){
-    if(!e.isIntersecting||counted)return;counted=true;cio.disconnect();
-    countUp($('[data-count="stars"]'),LIVE.stars);
-    countUp($('[data-count="dls"]'),LIVE.dls);
-    var f=$('[data-count="fixes"]');if(f)countUp(f,200);
-    var g=$('[data-count="langs"]');if(g)countUp(g,10);
-  });
-},{threshold:.4});
-var statsEl=$('.stats'); if(statsEl)cio.observe(statsEl);
+function showCounts(){
+  if(counted)return;counted=true;
+  ['stars','dls'].forEach(function(k){if(validCount(LIVE[k]))countUp($('[data-count="'+k+'"]'),LIVE[k])});
+  countUp($('[data-count="fixes"]'),200);
+  countUp($('[data-count="langs"]'),10);
+}
+var statsEl=$('.stats');
+if(statsEl&&typeof IntersectionObserver==='function'){
+  var cio=new IntersectionObserver(function(es){
+    if(es.some(function(e){return e.isIntersecting})){cio.disconnect();showCounts()}
+  },{threshold:.4});
+  cio.observe(statsEl);
+}else{showCounts()}
 function paintStars(n){
   var s='★ '+(n>=1000?(n/1000).toFixed(1)+'k':n);
   ['#ghStars','#ghStars2','#ghStars3'].forEach(function(id){var el=$(id);if(el)el.textContent=s});
 }
-paintStars(LIVE.stars);
 
-/* ========== GitHub 实时同步(6h 缓存 + 降级) ========== */
-var CACHE_KEY='mdr2-cache-v1',TTL=6*3600*1000;
-function tmout(){var c=new AbortController();setTimeout(function(){c.abort()},7000);return c.signal}
-function render(d){
-  if(d.stars){LIVE.stars=d.stars;paintStars(d.stars);var a=$('[data-count="stars"]');if(a&&counted)a.textContent=fmt(d.stars)}
-  if(d.dls){LIVE.dls=d.dls;var b=$('[data-count="dls"]');if(b&&counted)b.textContent=fmt(d.dls)+'+'}
-  if(d.tag){
-    $$('[data-ver]').forEach(function(el){el.textContent=d.tag});
-    document.documentElement.style.setProperty('--lbl-new',String(d.tag)+' · ');
+/* ========== GitHub 同步：统计 5 分钟、稳定版元数据 6 小时；失败保留成功缓存 ========== */
+var CACHE_KEY='mdr2-cache-v2',STATS_TTL=5*60*1000,RELEASE_TTL=6*3600*1000;
+var API_ROOT='https://api.github.com/repos/'+REPO;
+var syncing=false,syncFailed=false,lastAttempt=0,syncTimer=null;
+function validCount(n){return typeof n==='number'&&Number.isSafeInteger(n)&&n>=0}
+function validTime(n){return typeof n==='number'&&n>0&&n<=Date.now()}
+function validRelease(r){
+  return r&&typeof r.tag==='string'&&r.tag.length>0&&r.tag.length<=100&&
+    typeof r.publishedAt==='string'&&Number.isFinite(Date.parse(r.publishedAt))&&Array.isArray(r.assets);
+}
+function dateLabel(value){
+  var d=new Date(value);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function renderLive(){
+  if(!LIVE)return;
+  ['stars','dls'].forEach(function(k){
+    if(!validCount(LIVE[k]))return;
+    if(k==='stars')paintStars(LIVE[k]);
+    if(counted)countUp($('[data-count="'+k+'"]'),LIVE[k],false);
+  });
+  var r=LIVE.release;
+  if(validRelease(r)){
+    var date=dateLabel(r.publishedAt),en=langNow==='en';
+    $$('[data-ver]').forEach(function(el){el.textContent=r.tag});
+    var badge=$('[data-i18n="hero.badge"]');
+    if(badge)badge.textContent=r.tag+(en?' stable · ':' 正式版 · ')+date+(en?' · actively maintained':' · 活跃维护中');
+    var desc=$('[data-i18n-html="dl.desc"]');
+    if(desc)desc.textContent=en?'Current stable release '+r.tag+' ('+date+'). Download counts are checked every 5 minutes.':'当前稳定版本 '+r.tag+'（'+date+'）。下载量每 5 分钟检查更新。';
+    document.documentElement.style.setProperty('--lbl-new',JSON.stringify(r.tag+' · '));
+    ['zip','exe'].forEach(function(kind){
+      var asset=r.assets.find(function(a){
+        return a&&typeof a.name==='string'&&a.name.toLowerCase().endsWith('.'+kind)&&
+          validCount(a.size)&&typeof a.url==='string'&&a.url.indexOf('https://github.com/'+REPO+'/releases/download/')===0;
+      });
+      var size=$('[data-asset-size="'+kind+'"]'),link=$('[data-download="'+kind+'"]');
+      if(size)size.textContent='.'+kind.toUpperCase()+(asset?' · ≈ '+(asset.size/1000000).toFixed(1)+' MB':'');
+      if(link)link.href=asset?asset.url:'https://github.com/'+REPO+'/releases/latest';
+    });
     var ld=$('script[type="application/ld+json"]');
-    if(ld){try{var j=JSON.parse(ld.textContent);j.softwareVersion=String(d.tag).replace(/^v/,'');ld.textContent=JSON.stringify(j)}catch(e){}}
+    if(ld){try{var j=JSON.parse(ld.textContent);j.softwareVersion=r.tag.replace(/^v/,'');ld.textContent=JSON.stringify(j)}catch(e){}}
+  }
+  var status=$('#syncStatus');
+  if(status){
+    var hasStats=validCount(LIVE.stars)&&validCount(LIVE.dls),at=Math.min(updated.stars,updated.dls);
+    status.textContent=langNow==='en'?
+      (syncFailed?'GitHub update unavailable; '+(hasStats?'showing saved counts.':'counts unavailable.')+' Retrying every 5 minutes.':
+        hasStats?'GitHub · updated '+new Date(at).toLocaleString('en-US')+' · checked every 5 minutes':'Fetching GitHub data…'):
+      (syncFailed?'GitHub 更新暂不可用；'+(hasStats?'显示上次成功数据。':'暂无法获取统计。')+'每 5 分钟重试。':
+        hasStats?'GitHub · 更新于 '+new Date(at).toLocaleString('zh-CN')+' · 每 5 分钟检查':'正在获取 GitHub 数据…');
+    status.setAttribute('aria-busy',String(syncing));
   }
 }
-function sync(){
-  var c=null;try{c=JSON.parse(localStorage.getItem(CACHE_KEY))}catch(e){}
-  if(c&&Date.now()-c.ts<TTL){render(c.data);return}
-  Promise.all([
-    fetch('https://api.github.com/repos/'+REPO,{signal:tmout()}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
-    fetch('https://api.github.com/repos/'+REPO+'/releases?per_page=100',{signal:tmout()}).then(function(r){return r.ok?r.json():[]}).catch(function(){return []})
-  ]).then(function(res){
-    var repo=res[0],rels=res[1]||[];
-    if(!repo&&!rels.length)return;
-    var dls=0;rels.forEach(function(r){(r.assets||[]).forEach(function(a){dls+=a.download_count||0})});
-    var data={ts:Date.now(),stars:repo?repo.stargazers_count:null,dls:dls||null,
-      tag:rels.length?rels[0].tag_name:null};
-    try{localStorage.setItem(CACHE_KEY,JSON.stringify(data))}catch(e){}
-    render(data);
-  });
+function readCache(){
+  try{
+    var c=JSON.parse(localStorage.getItem(CACHE_KEY));
+    if(!c||c.version!==2||!c.data||!c.updated)return;
+    ['stars','dls','release'].forEach(function(k){
+      if(validTime(c.updated[k])&&(k==='release'?validRelease(c.data[k]):validCount(c.data[k]))){
+        LIVE[k]=c.data[k];updated[k]=c.updated[k];
+      }
+    });
+  }catch(e){}
 }
-sync();
+function saveCache(){
+  try{localStorage.setItem(CACHE_KEY,JSON.stringify({version:2,data:LIVE,updated:updated}))}catch(e){}
+}
+async function github(path){
+  var controller=new AbortController(),timer=setTimeout(function(){controller.abort()},12000);
+  try{
+    var response=await fetch(API_ROOT+path,{signal:controller.signal,cache:'no-cache',headers:{Accept:'application/vnd.github+json'}});
+    if(!response.ok)throw new Error('GitHub HTTP '+response.status);
+    return {data:await response.json(),next:/<[^>]+>;\s*rel="next"/.test(response.headers.get('Link')||'')};
+  }finally{clearTimeout(timer)}
+}
+async function totalDownloads(){
+  var total=0,page=1,result;
+  do{
+    result=await github('/releases?per_page=100&page='+page++);
+    if(!Array.isArray(result.data))throw new Error('Invalid releases');
+    result.data.forEach(function(r){
+      if(r.draft)return;
+      if(!Array.isArray(r.assets))throw new Error('Invalid release assets');
+      r.assets.forEach(function(a){
+        if(!validCount(a.download_count))throw new Error('Invalid download count');
+        total+=a.download_count;
+      });
+    });
+  }while(result.next);
+  if(!validCount(total))throw new Error('Invalid download total');
+  return total;
+}
+async function latestRelease(){
+  var r=(await github('/releases/latest')).data;
+  if(r.draft||r.prerelease)throw new Error('Not a stable release');
+  var release={tag:r.tag_name,publishedAt:r.published_at,assets:(r.assets||[]).map(function(a){
+    return {name:a.name,size:a.size,url:a.browser_download_url};
+  })};
+  if(!validRelease(release))throw new Error('Invalid release metadata');
+  return release;
+}
+function scheduleSync(delay){
+  clearTimeout(syncTimer);syncTimer=setTimeout(sync,delay||STATS_TTL);
+}
+async function sync(){
+  if(syncing)return;
+  if(document.hidden){scheduleSync();return}
+  if(Date.now()-lastAttempt<60000){scheduleSync(60000-(Date.now()-lastAttempt));return}
+  var now=Date.now(),jobs=[];
+  function refresh(key,ttl,fetchValue){
+    if(updated[key]&&now-updated[key]<ttl)return;
+    jobs.push(Promise.resolve().then(fetchValue).then(function(value){
+      LIVE[key]=value;updated[key]=Date.now();saveCache();renderLive();
+    }));
+  }
+  refresh('stars',STATS_TTL,async function(){
+    var n=(await github('')).data.stargazers_count;
+    if(!validCount(n))throw new Error('Invalid star count');
+    return n;
+  });
+  refresh('dls',STATS_TTL,totalDownloads);
+  refresh('release',RELEASE_TTL,latestRelease);
+  if(!jobs.length){
+    var due=Math.min(updated.stars+STATS_TTL,updated.dls+STATS_TTL,updated.release+RELEASE_TTL);
+    scheduleSync(Math.max(1000,due-now));return;
+  }
+  syncing=true;lastAttempt=now;renderLive();
+  var results=await Promise.allSettled(jobs);
+  syncFailed=results.some(function(r){return r.status==='rejected'});
+  syncing=false;renderLive();scheduleSync();
+}
+readCache();renderLive();sync();
+addEventListener('focus',sync);
+addEventListener('online',sync);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)sync()});
 
 /* ========== 粒子网络 + 下载光束 ========== */
-var cv=$('#net'),ctx=cv.getContext('2d');
+var cv=$('#net'),ctx=cv?cv.getContext('2d'):null;
+if(ctx){
 var DPR=Math.min(devicePixelRatio||1,2),W=0,H=0,pts=[],beams=[],mouse={x:-9e3,y:-9e3};
 function sizeNet(){
   W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cv.style.width=W+'px';cv.style.height=H+'px';
@@ -345,6 +461,7 @@ addEventListener('pointerleave',function(){mouse.x=-9e3;mouse.y=-9e3});
 if(reduceMotion){drawNet()}else{
   (function loop(){if(!document.hidden)drawNet();requestAnimationFrame(loop)})();
 }
+}
 
 /* ========== 光标光晕(与粒子网络同一 rAF 节奏) ========== */
 var glowEl=$('#glow'),gx=innerWidth/2,gy=innerHeight/2,gtx=gx,gty=gy,glowOn=false;
@@ -371,7 +488,7 @@ function fitSpark(){
 var S=[3,4,3.6,5,4.2,6,5.5,7,6.4,8,7.2,9,8.4,10,9.1,11,10,12,11,13,12.2,14,13,15,14,16,15,17,16,18];
 var rows=$$('.row').map(function(r){return{el:r,bar:$('[data-bar]',r),pct:$('[data-pct]',r),spd:$('[data-spd]',r),rate:parseFloat(r.getAttribute('data-rate')),base:parseFloat(r.getAttribute('data-base')),p:Math.random()*60}});
 var quota=$('#quotaChip'),qTime=$('#quotaTime'),qIco=$('#quotaIco'),qLabelEl=$('#quotaLabel');
-var qSec=287,qMode='wait',qLast=0;
+var qSec=287,qMode='wait';
 function fmtQ(s){var m=Math.floor(s/60),ss=Math.floor(s%60);return (m<10?'0':'')+m+':'+(ss<10?'0':'')+ss}
 function syncQuotaLabel(){
   if(!qLabelEl)return;
@@ -401,7 +518,7 @@ function drawSpark(){
   sctx.beginPath();sctx.arc(w-2,ly,3,0,6.2832);sctx.fillStyle='#ffc53d';sctx.fill();
 }
 function miniGraph(){
-  var c=$('#miniGraph');if(!c)return;var g2=c.getContext('2d');
+  var c=$('#miniGraph');if(!c)return;var g2=c.getContext('2d');if(!g2)return;
   var w=0,h=72,phase=0;
   function fit(){
     var dpr=Math.min(devicePixelRatio||1,2);
@@ -426,6 +543,7 @@ function miniGraph(){
   if(reduceMotion){draw()}else{
     var visible=false,raf=null;
     function loop(){if(!visible){raf=null;return}draw();raf=requestAnimationFrame(loop)}
+    if(typeof IntersectionObserver!=='function'){draw();return}
     var vio=new IntersectionObserver(function(es){
       es.forEach(function(e){
         visible=e.isIntersecting;
@@ -436,6 +554,7 @@ function miniGraph(){
   }
 }
 function tick(ts){
+  if(document.hidden){tick.last=ts;requestAnimationFrame(tick);return}
   var dt=Math.min((ts-(tick.last||ts))/1000,.05);tick.last=ts;
   var total=0;
   rows.forEach(function(r){
@@ -459,16 +578,14 @@ function tick(ts){
       if(spark.t>.09){spark.t=0;S.push(Math.max(2,Math.min(19,total/2.1)));S.shift();drawSpark()}
     }
   }
-  if(quota&&ts-qLast>140){
-    qLast=ts;
+  if(quota){
+    qSec-=dt;
     if(qMode==='wait'){
-      qSec-=1.4;
       if(qSec<=0){qMode='resume';quota.classList.add('resume');qIco.textContent='🚀';qSec=4;syncQuotaLabel();}
-      if(qTime)qTime.textContent=fmtQ(Math.max(qSec,0));
     }else{
-      qSec-=1;
       if(qSec<=0){qMode='wait';quota.classList.remove('resume');qIco.textContent='⏳';qSec=287;syncQuotaLabel();}
     }
+    if(qTime)qTime.textContent=qMode==='wait'?fmtQ(Math.max(qSec,0)):'';
   }
   requestAnimationFrame(tick);
 }

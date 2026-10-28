@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MegaDownloader Revival","alternateName":"MegaDownloader","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 7 SP1 or later","softwareVersion":"2.5.8","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"downloadUrl":"https://github.com/a1175815821/MegaDownloader-Revival/releases/latest","codeRepository":"https://github.com/a1175815821/MegaDownloader-Revival","license":"https://opensource.org/licenses/MIT","inLanguage":["zh-CN","en"],"description":"经典 MEGA 下载器复活版：适配新版 mega.nz 链接，多线程满速、断点续传、配额自动恢复，单文件免安装，MIT 开源。"}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MegaDownloader Revival","alternateName":"MegaDownloader","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 7 SP1 or later","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"downloadUrl":"https://github.com/a1175815821/MegaDownloader-Revival/releases/latest","codeRepository":"https://github.com/a1175815821/MegaDownloader-Revival","license":"https://opensource.org/licenses/MIT","inLanguage":["zh-CN","en"],"description":"经典 MEGA 下载器复活版：适配新版 mega.nz 链接，多线程满速、断点续传、配额自动恢复，单文件免安装，MIT 开源。"}
 </script>
 <script src="assets/js/main.js" defer></script>
 </head>
@@ -54,7 +54,7 @@
       <span class="logo-badge">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10"/><path d="m7 10 5 5 5-5"/><path d="M5 19h14"/></svg>
       </span>
-      <span>MegaDownloader<small>REVIVAL · <span data-ver>v2.5.8</span></small></span>
+      <span>MegaDownloader<small>REVIVAL <span data-ver></span></small></span>
     </a>
     <div class="nav-links">
       <a href="#story" data-i18n="nav.story">复活记</a>
@@ -87,7 +87,7 @@
   </div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <div class="hero-badge" data-reveal><span class="pulse"></span><span data-i18n="hero.badge">v2.5.8 正式版 · 2026-10-22 · 活跃维护中</span></div>
+      <div class="hero-badge" data-reveal><span class="pulse"></span><span data-i18n="hero.badge">GitHub 稳定版本 · 活跃维护中</span></div>
       <h1 data-reveal style="--d:.08s">
         <span class="h1-top" data-i18n-html="hero.h1a">经典 MEGA 下载器</span>
         <span class="h1-accent grad-text" data-i18n-html="hero.h1b">今天，满血复活。</span>
@@ -109,10 +109,11 @@
       <p class="hero-note" data-reveal style="--d:.3s"><span data-i18n-html="hero.note">✓ 免费开源&nbsp;&nbsp;✓ 无需管理员权限&nbsp;&nbsp;✓ <em>无广告、无捆绑、无追踪</em></span></p>
       <div class="stats" data-reveal style="--d:.38s">
         <div class="stat"><b data-count="stars" data-suffix="">--</b><span data-i18n="stats.stars">GitHub Stars</span></div>
-        <div class="stat"><b data-count="dls" data-suffix="+">--</b><span data-i18n="stats.dls">累计下载</span></div>
+        <div class="stat"><b data-count="dls">--</b><span data-i18n="stats.dls">累计下载</span></div>
         <div class="stat"><b data-count="fixes" data-suffix="+">200</b><span data-i18n="stats.fixes">项修复加固</span></div>
         <div class="stat"><b data-count="langs" data-suffix="">10</b><span data-i18n="stats.langs">界面语言</span></div>
       </div>
+      <p class="stats-status" id="syncStatus" role="status" aria-live="polite">正在获取 GitHub 数据…</p>
     </div>
 
     <!-- 仿真下载窗口 -->
@@ -120,7 +121,7 @@
       <div class="mock">
         <div class="mock-bar">
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="mock-title">MegaDownloader Revival <span data-ver>v2.5.8</span> — <span id="mockTheme">深色主题</span></span>
+          <span class="mock-title">MegaDownloader Revival <span data-ver></span> — <span id="mockTheme">深色主题</span></span>
           <span class="mock-live"><i></i>LIVE DEMO</span>
         </div>
         <div class="mock-shell">
@@ -327,7 +328,7 @@
         <tr>
           <th class="col-label"></th>
           <th data-i18n="vs.old">原版 v1.8（2018 停更）</th>
-          <th class="new-col">MegaDownloader Revival <span style="font-family:var(--font-m)" data-ver>v2.5.8</span></th>
+          <th class="new-col">MegaDownloader Revival <span style="font-family:var(--font-m)" data-ver></span></th>
         </tr>
       </thead>
       <tbody>
@@ -350,22 +351,22 @@
     <div class="sec-head" data-reveal>
       <span class="kicker"><i class="idx">04</i><span data-i18n="dl.kicker">Download · 获取</span></span>
       <h2 class="sec-title" data-i18n-html="dl.title">两个包，<span class="grad-text">同一个程序</span>。</h2>
-      <p class="sec-desc" data-i18n-html="dl.desc">当前版本 <b>v2.5.8</b>（2026-10-22）。下载量与版本信息每 6 小时自动同步一次。</p>
+      <p class="sec-desc" data-i18n-html="dl.desc">前往 GitHub 获取最新稳定版。下载量每 5 分钟检查更新。</p>
     </div>
     <div class="dl-grid">
       <div class="dl-card" data-reveal>
         <div class="dl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h.01M11 8h.01M7 12h.01M11 12h.01M7 16h.01M11 16h.01M15 16h2v-4h-2z"/></svg></div>
-        <h3 data-i18n="dl.a1">便携版 <small>.ZIP · ≈ 10.6 MB</small></h3>
+        <h3 data-i18n-html="dl.a1">便携版 <small data-asset-size="zip">.ZIP</small></h3>
         <p data-i18n="dl.a2">解压到任意目录即用。免安装、免管理员权限；如果杀毒软件对单文件版误报，选这个。</p>
         <div class="dl-meta"><span class="chip">🛡️ <span data-i18n="dl.avsafe">误报友好</span></span><span class="chip" data-i18n="dl.noadmin">无需管理员</span><span class="chip">x86</span></div>
-        <a class="btn btn-primary" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener"><span data-i18n="dl.btn">下载便携版</span> →</a>
+        <a class="btn btn-primary" data-download="zip" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener"><span data-i18n="dl.btn">下载便携版</span> →</a>
       </div>
       <div class="dl-card reco" data-reveal style="--d:.1s">
         <div class="dl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5z"/></svg></div>
-        <h3 data-i18n="dl.b1">单文件版 <small>.EXE · ≈ 12.3 MB</small></h3>
-        <p data-i18n="dl.b2">下载后直接双击 —— 15 个依赖 DLL 已内嵌，最省事的选择。</p>
+        <h3 data-i18n-html="dl.b1">单文件版 <small data-asset-size="exe">.EXE</small></h3>
+        <p data-i18n="dl.b2">下载后直接双击 —— 所需依赖已内嵌，最省事的选择。</p>
         <div class="dl-meta"><span class="chip">⚡ <span data-i18n="dl.onedrop">单文件直开</span></span><span class="chip" data-i18n="dl.noinstall">免安装</span><span class="chip">Win 7 SP1+</span></div>
-        <a class="btn btn-ghost" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener"><span data-i18n="dl.btn2">下载单文件版</span> →</a>
+        <a class="btn btn-ghost" data-download="exe" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener"><span data-i18n="dl.btn2">下载单文件版</span> →</a>
       </div>
     </div>
     <div class="dl-note" data-reveal>
@@ -379,7 +380,7 @@
 <section id="changelog">
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <span class="kicker"><i class="idx">05</i><span data-i18n="cl.kicker">Changelog · 最近更新</span></span>
+      <span class="kicker"><i class="idx">05</i><span data-i18n="cl.kicker">Changelog · 精选更新</span></span>
       <h2 class="sec-title" data-i18n="cl.title">每个版本，都算数。</h2>
     </div>
     <div class="cl-grid">
@@ -478,7 +479,7 @@
       <div class="foot-brand">
         <a class="logo" href="#top">
           <span class="logo-badge"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10"/><path d="m7 10 5 5 5-5"/><path d="M5 19h14"/></svg></span>
-          <span>MegaDownloader<small>REVIVAL · <span data-ver>v2.5.8</span></small></span>
+          <span>MegaDownloader<small>REVIVAL <span data-ver></span></small></span>
         </a>
         <p data-i18n="foot.tag">让经典 MEGA 下载器在今天满血复活。免安装、多线程、持续修复 —— 由社区驱动，为社区而生。</p>
       </div>
@@ -504,7 +505,7 @@
 
 <!-- 移动端常驻下载条 -->
 <div class="m-bar">
-  <div class="m-bar-txt"><b data-ver>v2.5.8</b><span>Win 7 SP1+ · 免安装 · MIT</span></div>
+  <div class="m-bar-txt"><b data-ver>MegaDownloader</b><span data-i18n="mobile.note">Win 7 SP1+ · 免安装 · MIT</span></div>
   <a class="btn btn-primary" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m6.5 10.5 5.5 5.5 5.5-5.5"/><path d="M5 20h14"/></svg>
     <span data-i18n="hero.cta1">免费下载</span>

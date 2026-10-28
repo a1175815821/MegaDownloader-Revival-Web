@@ -196,7 +196,7 @@ nav.scrolled{background:color-mix(in srgb,var(--bg0) 72%,transparent);backdrop-f
   font-size:clamp(120px,17vw,250px);line-height:.78;letter-spacing:-.05em;white-space:nowrap;
   color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.085);user-select:none;transform:rotate(-4deg)}
 html[data-theme="light"] .stage-word{-webkit-text-stroke-color:rgba(12,14,26,.10)}
-.hero-copy{position:relative;z-index:2}
+.hero-copy{position:relative;z-index:2;min-width:0}
 .hero-grid{display:grid;grid-template-columns:1.14fr .86fr;gap:52px;align-items:center}
 .hero-badge{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;border:1px solid rgba(255,70,85,.35);background:linear-gradient(100deg,rgba(255,70,85,.12),rgba(139,92,255,.10));font-family:var(--font-m);font-size:12px;letter-spacing:.05em;color:var(--text)}
 .hero-badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:pulse 2s infinite}
@@ -218,7 +218,7 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(40px,5.2vw,72px);li
 .stat span{font-size:12px;color:var(--faint);letter-spacing:.05em}
 
 /* ---------- 仿真下载窗口 ---------- */
-.mock-col{position:relative;perspective:1400px;z-index:2}
+.mock-col{position:relative;perspective:1400px;z-index:2;min-width:0}
 .mock-pool{position:absolute;left:4%;right:4%;bottom:-30px;height:80px;z-index:-1;pointer-events:none;
   background:radial-gradient(ellipse at center,rgba(255,70,85,.32),rgba(139,92,255,.16) 46%,transparent 72%);
   filter:blur(28px);opacity:.8}
@@ -394,6 +394,8 @@ td.new-col{background:linear-gradient(180deg,rgba(255,70,85,.055),rgba(255,138,6
 .dl-card:hover{transform:translateY(-5px);border-color:rgba(255,70,85,.5);box-shadow:0 30px 70px -20px rgba(255,70,85,.25)}
 .dl-card.reco{border-color:rgba(255,70,85,.45);box-shadow:0 30px 80px -44px rgba(255,70,85,.55)}
 .dl-card.reco::after{content:"RECOMMENDED";position:absolute;top:0;right:0;padding:6px 13px;border-radius:0 var(--r-lg) 0 13px;background:var(--grad);color:#fff;font-family:var(--font-m);font-size:8.5px;font-weight:700;letter-spacing:.14em}
+html[lang="zh-CN"] .dl-card.reco::after{content:"推荐"}
+.stats-status{margin-top:12px;font-size:11px;color:var(--muted);line-height:1.6;overflow-wrap:anywhere}
 .dl-ico{width:52px;height:52px;border-radius:15px;background:var(--grad);display:grid;place-items:center;margin-bottom:20px;box-shadow:0 12px 30px -8px rgba(255,70,85,.55)}
 .dl-card h3{font-family:var(--font-d);font-size:23px;letter-spacing:-.3px}
 .dl-card h3 small{font-family:var(--font-m);font-size:12px;color:var(--faint);font-weight:400;margin-left:8px}
@@ -477,7 +479,7 @@ html.js [data-reveal].in{opacity:1;transform:none}
 
 /* ---------- 响应式 ---------- */
 @media (max-width:1020px){
-  .hero-grid{grid-template-columns:1fr;gap:46px}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:46px}
   .hero-stage{opacity:.55}
   .stage-word{display:none}
   .mock-col{width:100%;max-width:600px;margin:0 auto}
@@ -517,7 +519,7 @@ html.js [data-reveal].in{opacity:1;transform:none}
   html[data-theme="light"] .vs-table td:first-child{background:rgba(12,14,26,.045)}
   .vs-table td:nth-child(2){border-right:1px solid var(--line)}
   .vs-table td:nth-child(2)::before{content:var(--lbl-old,"v1.8 · ");font-family:var(--font-m);font-size:10px;color:var(--faint)}
-  .vs-table td:nth-child(3)::before{content:var(--lbl-new,"v2.5.8 · ");font-family:var(--font-m);font-size:10px;color:var(--accent)}
+  .vs-table td:nth-child(3)::before{content:var(--lbl-new,"Revival · ");font-family:var(--font-m);font-size:10px;color:var(--accent)}
   .vs-table tbody tr:hover td{background:transparent}
   .mock-state{display:none}
   .megaband{padding:16px 0 20px}
@@ -526,7 +528,12 @@ html.js [data-reveal].in{opacity:1;transform:none}
 @media (max-width:540px){
   .gh-btn span:not(.stars){display:none}
   .gh-btn{padding:8px 11px;gap:6px}
-  .nav-in{gap:12px}
+  .nav-in{gap:10px;padding:0 16px}
+  .nav-in>.logo{min-width:0;flex:1;gap:7px;font-size:13px}
+  .nav-in>.logo>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nav-in .logo-badge{width:28px;height:28px}
+  .nav-cta{flex-shrink:0;gap:6px}
+  .icon-btn{width:32px;height:32px;flex-shrink:0}
   .m-bar-txt span{display:none}
   .m-bar .btn{flex:1;justify-content:center}
 }
