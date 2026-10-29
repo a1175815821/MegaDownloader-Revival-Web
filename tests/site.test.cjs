@@ -65,6 +65,15 @@ async function setup(options = {}) {
   });
   await context.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
   await context.route('https://fonts.gstatic.com/**', route => route.abort());
+  if (options.shots) {
+    const png = await fs.readFile(path.join(ROOT, 'og.png'));
+    await context.route('**/assets/img/*.png', route => {
+      const name = new URL(route.request().url()).pathname.split('/').pop();
+      return options.shots.includes(name)
+        ? route.fulfill({ contentType: 'image/png', body: png })
+        : route.fulfill({ status: 404, body: '' });
+    });
+  }
   const calls = [];
   await context.route(API + '**', async route => {
     const url = new URL(route.request().url());
@@ -294,6 +303,79 @@ test('the demo countdown advances in seconds', async () => {
     await page.clock.runFor(2100);
     const elapsed = start - seconds(await page.locator('#quotaTime').textContent());
     assert.ok(elapsed >= 1 && elapsed <= 3, `elapsed ${elapsed} seconds`);
+  } finally { await context.close(); }
+});
+
+test('the 2.6 workbench demo switches modes and keeps selection maths consistent', async () => {
+  const { context, page } = await setup();
+  try {
+    await synced(page);
+    assert.equal(await page.locator('.wb-view[data-view="add"]').isVisible(), true);
+    assert.equal(await page.locator('[data-shots]').isHidden(), true, 'Screenshot strip stays hidden without real captures');
+
+    await page.locator('[data-wb-mode="tree"]').click();
+    assert.equal(await page.locator('.wb-view[data-view="pick"]').isVisible(), true);
+    assert.equal(await page.locator('[data-pick-count]').textContent(), '3');
+    assert.equal(await page.locator('[data-pick-size]').textContent(), '4.8 GB');
+
+    const files = page.locator('.wb-tree .tr.file');
+    await files.nth(3).click();
+    assert.deepEqual(
+      [await page.locator('[data-pick-count]').textContent(), await page.locator('[data-pick-size]').textContent()],
+      ['4', '5.8 GB'], 'Ticking pack-02 adds one file and 1.0 GB');
+    await files.nth(0).click();
+    assert.deepEqual(
+      [await page.locator('[data-pick-count]').textContent(), await page.locator('[data-pick-size]').textContent()],
+      ['3', '4.2 GB'], 'Unticking 01.Opening removes 1.6 GB');
+
+    await page.locator('[data-wb-mode="search"]').click();
+    await page.locator('#wbSearch').fill('iso');
+    assert.equal(await page.locator('.wb-row:not(.hide)').count(), 2);
+    await page.locator('#wbSearch').press('Escape');
+    assert.equal(await page.locator('.wb-row:not(.hide)').count(), 5);
+
+    await page.locator('[data-wb-mode="schedule"]').click();
+    assert.equal(await page.locator('.wb-view[data-view="sched"]').isVisible(), true);
+
+    await page.locator('#wbPanelClose').click();
+    assert.equal(await page.locator('#wbPanel').isHidden(), true);
+    await page.locator('[data-wb-mode="flow"]').click();
+    assert.equal(await page.locator('.wb-view[data-view="add"]').isVisible(), true);
+  } finally { await context.close(); }
+});
+
+test('file tree supports keyboard selection, mixed state and full-path filtering', async () => {
+  const { context, page } = await setup();
+  try {
+    await page.locator('[data-wb-mode="tree"]').click();
+    const folder = page.getByRole('checkbox', { name: 'Design.Assets' });
+    const file = page.getByRole('checkbox', { name: 'pack-02.7z' });
+    assert.equal(await folder.evaluate(el => el.indeterminate), true);
+    await file.focus();
+    await page.keyboard.press('Space');
+    assert.equal(await file.isChecked(), true);
+    assert.equal(await folder.isChecked(), true);
+    await folder.focus();
+    await page.keyboard.press('Space');
+    assert.equal(await file.isChecked(), false);
+    assert.equal(await folder.evaluate(el => el.indeterminate), false);
+    await page.locator('#wbTreeSearch').fill('Design.Assets/pack-01.7z');
+    assert.equal(await page.locator('.wb-tree .tr.file:not(.hide)').count(), 1);
+    assert.equal(await page.locator('.wb-tree .tr.file:not(.hide) .tx').textContent(), 'pack-01.7z');
+  } finally { await context.close(); }
+});
+
+test('screenshots follow the site theme and fall back when one image is missing', async () => {
+  const { context, page } = await setup({ shots: ['workbench-dark.png', 'workbench-light.png', 'addlink-dark.png'] });
+  try {
+    await page.waitForFunction(() => document.querySelectorAll('.shot:not([hidden])').length === 2);
+    const images = page.locator('.shot:not([hidden]) img');
+    await page.waitForFunction(() => [...document.querySelectorAll('.shot:not([hidden]) img')].every(img => img.complete && img.naturalWidth > 0));
+    assert.match(await images.nth(0).getAttribute('src'), /workbench-dark\.png$/);
+    await page.locator('#themeBtn').click();
+    await page.waitForFunction(() => document.querySelector('.shot img').getAttribute('src').endsWith('workbench-light.png'));
+    assert.match(await images.nth(1).getAttribute('src'), /addlink-dark\.png$/);
+    assert.equal(await page.locator('.shot[hidden]').count(), 1);
   } finally { await context.close(); }
 });
 

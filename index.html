@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>MegaDownloader Revival — 经典 MEGA 下载器，满血复活</title>
-<meta name="description" content="经典 MEGA 下载器复活版：适配新版 mega.nz/file 与 /folder 链接，多线程满速、断点续传、配额自动恢复、边下边播、Web 远程管理。单文件免安装，Windows 7 SP1+ 直接运行，MIT 开源。">
+<title>MegaDownloader Revival 2.6 — 经典 MEGA 下载器，重造工作台</title>
+<meta name="description" content="MegaDownloader Revival 2.6：复活以来最大一次界面重写 —— 全新工作台、两步批量添加、文件树勾选、Ctrl+F 任务搜索、定时下载。多线程满速、断点续传、配额自动恢复、边下边播、Web 远程管理，单文件免安装，Windows 7 SP1+，MIT 开源。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MegaDownloader Revival">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://megadownloader-revival-web.a1175815821.workers.dev/">
-<meta property="og:title" content="MegaDownloader Revival — 经典 MEGA 下载器，满血复活">
-<meta property="og:description" content="适配新版 mega.nz 链接，多线程满速、断点续传、配额自动恢复。单文件免安装，200+ 项修复，MIT 开源。">
+<meta property="og:title" content="MegaDownloader Revival 2.6 — 重造工作台，经典 MEGA 下载器满血复活">
+<meta property="og:description" content="v2.6 界面整层重写：两步批量添加、文件树勾选、Ctrl+F 搜索、定时下载。多线程满速、断点续传、配额熔断，单文件免安装，200+ 项修复，MIT 开源。">
 <meta property="og:image" content="https://megadownloader-revival-web.a1175815821.workers.dev/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MegaDownloader Revival — The classic MEGA downloader, revived">
-<meta name="twitter:description" content="New mega.nz links, multi-threaded speed, resume, quota auto-recovery. Portable single exe, 200+ fixes, MIT.">
+<meta name="twitter:title" content="MegaDownloader Revival 2.6 — a rebuilt workbench for the classic MEGA downloader">
+<meta name="twitter:description" content="The biggest UI rewrite since the revival: two-step batch add, file-tree selection, Ctrl+F search, scheduled downloads. Portable single exe, 200+ fixes, MIT.">
 <meta name="theme-color" content="#05060b">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff4655'/%3E%3Cstop offset='1' stop-color='%23ff8a3d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 7v11'/%3E%3Cpath d='M10.5 13.5 16 19l5.5-5.5'/%3E%3Cpath d='M9 24.5h14'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MegaDownloader Revival","alternateName":"MegaDownloader","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 7 SP1 or later","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"downloadUrl":"https://github.com/a1175815821/MegaDownloader-Revival/releases/latest","codeRepository":"https://github.com/a1175815821/MegaDownloader-Revival","license":"https://opensource.org/licenses/MIT","inLanguage":["zh-CN","en"],"description":"经典 MEGA 下载器复活版：适配新版 mega.nz 链接，多线程满速、断点续传、配额自动恢复，单文件免安装，MIT 开源。"}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MegaDownloader Revival","alternateName":"MegaDownloader","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 7 SP1 or later","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"downloadUrl":"https://github.com/a1175815821/MegaDownloader-Revival/releases/latest","codeRepository":"https://github.com/a1175815821/MegaDownloader-Revival","license":"https://opensource.org/licenses/MIT","inLanguage":["zh-CN","en"],"description":"经典 MEGA 下载器复活版 2.6：适配新版 mega.nz 链接，全新工作台、两步批量添加、文件树勾选、Ctrl+F 搜索、定时下载；多线程满速、断点续传、配额自动恢复，单文件免安装，MIT 开源。"}
 </script>
 <script src="assets/js/main.js" defer></script>
 </head>
@@ -33,7 +33,7 @@
 <div id="intro" hidden aria-hidden="true">
   <div class="intro-box">
     <span class="logo-badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10"/><path d="m7 10 5 5 5-5"/><path d="M5 19h14"/></svg></span>
-    <span class="intro-word">MEGADOWNLOADER · REVIVAL</span>
+    <span class="intro-word">MEGADOWNLOADER · REVIVAL 2.6</span>
   </div>
 </div>
 
@@ -58,10 +58,11 @@
     </a>
     <div class="nav-links">
       <a href="#story" data-i18n="nav.story">复活记</a>
-      <a href="#features" data-i18n="nav.features">能力矩阵</a>
+      <a href="#workbench" class="nav-new"><span data-i18n="nav.workbench">工作台</span><i>2.6</i></a>
+      <a href="#features" data-i18n="nav.features">能力</a>
       <a href="#vs" data-i18n="nav.vs">对比</a>
       <a href="#download" data-i18n="nav.download">下载</a>
-      <a href="#changelog" data-i18n="nav.changelog">更新日志</a>
+      <a href="#changelog" data-i18n="nav.changelog">更新</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </div>
     <div class="nav-cta">
@@ -84,16 +85,20 @@
     <div class="stage-ring r2"></div>
     <div class="stage-beam"></div>
     <div class="stage-word">REVIVAL</div>
+    <div class="stage-num">2.6</div>
   </div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <div class="hero-badge" data-reveal><span class="pulse"></span><span data-i18n="hero.badge">GitHub 稳定版本 · 活跃维护中</span></div>
+      <div class="hero-flags" data-reveal>
+        <div class="hero-badge"><span class="pulse"></span><span data-i18n="hero.badge">GitHub 稳定版本 · 活跃维护中</span></div>
+        <div class="hero-flag"><span data-i18n="hero.flag">2.6 工作台重制</span></div>
+      </div>
       <h1 data-reveal style="--d:.08s">
         <span class="h1-top" data-i18n-html="hero.h1a">经典 MEGA 下载器</span>
-        <span class="h1-accent grad-text" data-i18n-html="hero.h1b">今天，满血复活。</span>
+        <span class="h1-accent grad-text" data-i18n-html="hero.h1b">2.6，重造工作台。</span>
       </h1>
       <p class="hero-sub" data-reveal style="--d:.16s">
-        <span data-i18n-html="hero.sub">适配<b>新版 mega.nz 链接</b>，多线程满速、断点续传、配额自动恢复 —— <b>单文件免安装</b>，Windows 7 SP1 起直接运行，MIT 开源。</span>
+        <span data-i18n-html="hero.sub">不是打补丁 —— 界面整层推翻：<b>两步批量添加</b>、文件树勾选、<b>Ctrl+F 任务搜索</b>、定时下载。多线程满速、断点续传、配额熔断一个不少，仍是<b>单文件免安装</b>。</span>
       </p>
       <div class="hero-ctas" data-reveal style="--d:.24s">
         <a class="btn btn-primary" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener">
@@ -110,6 +115,7 @@
       <div class="stats" data-reveal style="--d:.38s">
         <div class="stat"><b data-count="stars" data-suffix="">--</b><span data-i18n="stats.stars">GitHub Stars</span></div>
         <div class="stat"><b data-count="dls">--</b><span data-i18n="stats.dls">累计下载</span></div>
+        <div class="stat boot-stat"><b data-count="boot" data-decimals="1" data-suffix="s">0.2</b><span data-i18n="stats.boot">冷启动</span></div>
         <div class="stat"><b data-count="fixes" data-suffix="+">200</b><span data-i18n="stats.fixes">项修复加固</span></div>
         <div class="stat"><b data-count="langs" data-suffix="">10</b><span data-i18n="stats.langs">界面语言</span></div>
       </div>
@@ -124,15 +130,22 @@
           <span class="mock-title">MegaDownloader Revival <span data-ver></span> — <span id="mockTheme">深色主题</span></span>
           <span class="mock-live"><i></i>LIVE DEMO</span>
         </div>
+        <div class="mock-tools">
+          <span class="mt primary">+ <span data-i18n="wb.toolAdd">添加链接</span></span>
+          <span class="mt"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4 4"/></svg><span data-i18n="wb.toolSearch">搜索</span><kbd>Ctrl F</kbd></span>
+          <span class="mt"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2"/></svg><span data-i18n="wb.toolSched">定时</span></span>
+          <span class="mt ghost" aria-hidden="true">⚙</span>
+        </div>
         <div class="mock-shell">
           <div class="mock-rail" aria-hidden="true">
             <span class="rail-i on">↓</span><span class="rail-i">≡</span><span class="rail-i">◷</span><span class="rail-i">⚙</span>
           </div>
           <div class="mock-body">
             <div class="mock-tabs">
-              <span class="tab on"><span data-i18n="mock.tab1">全部</span><b>4</b></span>
+              <span class="tab on"><span data-i18n="mock.tab1">全部</span><b>18</b></span>
               <span class="tab"><span data-i18n="mock.tab2">下载中</span><b>4</b></span>
               <span class="tab"><span data-i18n="mock.tab3">已完成</span><b>12</b></span>
+              <span class="tab"><span data-i18n="mock.tab4">失败</span><b>2</b></span>
               <span class="mock-threads"><i></i>8 THREADS</span>
             </div>
             <div class="row" data-rate="1.5" data-base="8.2">
@@ -182,6 +195,7 @@
           <span class="mock-state"><i></i><span data-i18n="mock.running">运行中</span></span>
         </div>
       </div>
+      <div class="sticker" aria-hidden="true"><b>2.6</b><span>MAJOR<br>UPDATE</span></div>
       <div class="mock-pool" aria-hidden="true"></div>
     </div>
   </div>
@@ -217,10 +231,15 @@
         <h3 data-i18n="story.t3h">失效</h3>
         <p data-i18n-html="story.t3p">MEGA 更换链接格式（<b>mega.nz/file、/folder</b>），旧版认不出新链接，核心功能失效。全网的用户开始寻找替代品。</p>
       </div>
-      <div class="tl-item hot" data-reveal>
-        <span class="tl-year">2026 — NOW</span>
+      <div class="tl-item" data-reveal>
+        <span class="tl-year">2026 — v2.5</span>
         <h3 data-i18n="story.t4h">复活</h3>
-        <p data-i18n-html="story.t4p">反编译 v1.8 拿回源码，持续修复重构：<b>200+ 项修复与加固</b>，语义化版本持续发布，每个 Issue 都有回应。就是你现在看到的这颗 Star 背后的项目。</p>
+        <p data-i18n-html="story.t4p">反编译 v1.8 拿回源码，持续修复重构：<b>200+ 项修复与加固</b>，语义化版本持续发布，每个 Issue 都有回应。</p>
+      </div>
+      <div class="tl-item hot" data-reveal>
+        <span class="tl-year">2026 — v2.6</span>
+        <h3 data-i18n="story.t5h">重造</h3>
+        <p data-i18n-html="story.t5p">界面整层推翻重写：<b>全新工作台、两步批量添加、文件树勾选、任务搜索、定时下载</b>。引擎没换，外壳重造 —— 这是复活以来最大的一次更新。</p>
       </div>
     </div>
   </div>
@@ -229,16 +248,302 @@
 <!-- ================= 巨字动能带 ================= -->
 <div class="megaband" aria-hidden="true">
   <div class="mb-track">
-    <span>200<em>+</em> FIXES</span><i>✳</i><span class="out">SINCE 2018</span><i>✳</i><span>MIT OPEN SOURCE</span><i>✳</i><span class="out">REBUILT LINE BY LINE</span><i>✳</i><span>200<em>+</em> FIXES</span><i>✳</i><span class="out">SINCE 2018</span><i>✳</i><span>MIT OPEN SOURCE</span><i>✳</i><span class="out">REBUILT LINE BY LINE</span><i>✳</i>
+    <span>WORKBENCH <em>2.6</em></span><i>✳</i><span class="out">TWO-STEP ADD</span><i>✳</i><span>FILE TREE SELECT</span><i>✳</i><span class="out">CTRL+F SEARCH</span><i>✳</i><span>SCHEDULED DOWNLOADS</span><i>✳</i><span class="out">200<em>+</em> FIXES</span><i>✳</i>
+    <span>WORKBENCH <em>2.6</em></span><i>✳</i><span class="out">TWO-STEP ADD</span><i>✳</i><span>FILE TREE SELECT</span><i>✳</i><span class="out">CTRL+F SEARCH</span><i>✳</i><span>SCHEDULED DOWNLOADS</span><i>✳</i><span class="out">200<em>+</em> FIXES</span><i>✳</i>
   </div>
 </div>
+
+<!-- ================= 工作台 2.6 ================= -->
+<section id="workbench">
+  <div class="watermark left" aria-hidden="true">2.6</div>
+  <div class="wb-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="kicker"><i class="idx">02</i><span data-i18n="wb.kicker">Workbench · 工作台 2.6</span></span>
+      <h2 class="sec-title" data-i18n-html="wb.title">不是换皮。<br>是<span class="grad-text">重新造了一张工作台</span>。</h2>
+      <p class="sec-desc" data-i18n="wb.desc">2018 年的 Win7 灰界面撑不起 2026 年的队列。2.6 把界面整层推翻重写 —— 配色、字号、间距、图标、列表、详情栏全部重做，仍然是原生 WinForms，不换框架、不加壳。</p>
+    </div>
+
+    <div class="wb" data-reveal>
+      <div class="wb-tour" role="tablist" aria-label="Workbench 2.6 demo">
+        <button class="wb-tab is-on" type="button" role="tab" aria-selected="true" data-wb-mode="flow">
+          <span class="n">01</span>
+          <span class="tt" data-i18n="wb.t1t">一个窗口，两步完成</span>
+          <span class="dd" data-i18n="wb.t1d">粘贴链接 → 勾选文件。不再「输入框 → 预检窗 → 确认框」三层叠加。</span>
+          <span class="bar"><i></i></span>
+        </button>
+        <button class="wb-tab" type="button" role="tab" aria-selected="false" data-wb-mode="tree">
+          <span class="n">02</span>
+          <span class="tt" data-i18n="wb.t2t">文件树 · 三态勾选</span>
+          <span class="dd" data-i18n="wb.t2d">按共享目录层级展开，整目录勾选、半选、筛选反选，重复与失效项自动跳过。</span>
+          <span class="bar"><i></i></span>
+        </button>
+        <button class="wb-tab" type="button" role="tab" aria-selected="false" data-wb-mode="search">
+          <span class="n">03</span>
+          <span class="tt" data-i18n="wb.t3t">Ctrl+F 任务搜索</span>
+          <span class="dd" data-i18n="wb.t3d">包名、文件名、相对路径一起搜；后台检索，Esc 一键清空。</span>
+          <span class="bar"><i></i></span>
+        </button>
+        <button class="wb-tab" type="button" role="tab" aria-selected="false" data-wb-mode="schedule">
+          <span class="n">04</span>
+          <span class="tt" data-i18n="wb.t4t">定时下载</span>
+          <span class="dd" data-i18n="wb.t4d">每日时段或一次性预约，跨午夜、到点暂停、重启沿用。</span>
+          <span class="bar"><i></i></span>
+        </button>
+        <p class="wb-hint" data-i18n="wb.hint">↑ 点一条，右边是真能点的仿真界面</p>
+      </div>
+
+      <div class="wb-stage">
+        <div class="wb-win" data-mode="flow" data-step="1">
+          <div class="wb-top">
+            <span class="wb-dots"><i></i><i></i><i></i></span>
+            <span class="wb-title">MegaDownloader Revival <b data-ver></b> · <span data-i18n="wb.winTitle">工作台</span></span>
+            <span class="wb-live"><i></i>LIVE DEMO</span>
+          </div>
+          <div class="wb-tools">
+            <span class="tb primary">+ <span data-i18n="wb.toolAdd">添加链接</span></span>
+            <span class="tb search">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4 4"/></svg>
+              <input id="wbSearch" type="search" autocomplete="off" spellcheck="false" placeholder="搜索任务 / 文件名 / 路径" data-i18n-ph="wb.searchPh" aria-label="Search tasks">
+              <kbd>Ctrl F</kbd>
+            </span>
+            <span class="tb" data-i18n="wb.toolSched">定时</span>
+            <span class="tb ghost" aria-hidden="true">⚙</span>
+          </div>
+
+          <div class="wb-body">
+            <div class="wb-side">
+              <div class="wb-group on"><span data-i18n="wb.g1">全部任务</span><b>18</b></div>
+              <div class="wb-group"><span data-i18n="wb.g2">下载中</span><b>4</b></div>
+              <div class="wb-group"><span data-i18n="wb.g3">已完成</span><b>12</b></div>
+              <div class="wb-group fail"><span data-i18n="wb.g4">失败</span><b>2</b></div>
+              <div class="wb-side-foot"><span data-i18n="wb.disk">磁盘剩余</span><b>284 GB</b></div>
+            </div>
+            <div class="wb-list" id="wbList">
+              <div class="wb-row is-sel" data-name="Concert Live 2026 1080p Concert.Live.2026">
+                <span class="f-ico mkv">MKV</span>
+                <span class="wb-nm"><b>Concert.Live.2026.1080p</b><em>3 files · 4.2 GB</em></span>
+                <span class="wb-pct">62%</span>
+                <span class="wb-bar"><i style="width:62%"></i></span>
+              </div>
+              <div class="wb-row" data-name="Design Assets Pack 7z Design.Assets">
+                <span class="f-ico zip">7Z</span>
+                <span class="wb-nm"><b>Design.Assets.Pack</b><em>12 files · 2.1 GB</em></span>
+                <span class="wb-pct">38%</span>
+                <span class="wb-bar"><i style="width:38%"></i></span>
+              </div>
+              <div class="wb-row" data-name="Photos Backup 2026 iso Photos_Backup_2026">
+                <span class="f-ico iso">ISO</span>
+                <span class="wb-nm"><b>Photos_Backup_2026.iso</b><em>1 file · 8.6 GB</em></span>
+                <span class="wb-pct">91%</span>
+                <span class="wb-bar"><i style="width:91%"></i></span>
+              </div>
+              <div class="wb-row" data-name="Archive 2026 Collection rar part4">
+                <span class="f-ico rar">RAR</span>
+                <span class="wb-nm"><b>Archive_2026_Collection</b><em>4 files · 12.4 GB</em></span>
+                <span class="wb-pct">17%</span>
+                <span class="wb-bar"><i style="width:17%"></i></span>
+              </div>
+              <div class="wb-row" data-name="Ubuntu 26.04 iso">
+                <span class="f-ico iso">ISO</span>
+                <span class="wb-nm"><b>ubuntu-26.04-desktop.iso</b><em>1 file · 5.4 GB</em></span>
+                <span class="wb-pct">100%</span>
+                <span class="wb-bar done"><i style="width:100%"></i></span>
+              </div>
+              <p class="wb-empty" data-i18n="wb.empty">没有匹配的任务。Esc 清空搜索。</p>
+            </div>
+            <div class="wb-detail">
+              <div class="wb-dh"><span data-i18n="wb.details">任务详情</span><i>×</i></div>
+              <div class="wb-dl"><span data-i18n="wb.dName">名称</span><b>Concert.Live.2026.1080p</b></div>
+              <div class="wb-dl"><span data-i18n="wb.dSize">大小</span><b>4.2 GB</b></div>
+              <div class="wb-dl"><span data-i18n="wb.dThreads">线程</span><b>8</b></div>
+              <div class="wb-dl"><span data-i18n="wb.dSpeed">速度</span><b class="hl">11.6 MB/s</b></div>
+              <div class="wb-dl"><span data-i18n="wb.dState">状态</span><b class="ok">下载中</b></div>
+            </div>
+          </div>
+
+          <!-- 覆盖层:添加流程 / 选择文件 / 定时 -->
+          <div class="wb-panel" id="wbPanel">
+            <div class="wb-ph">
+              <span class="wb-steps"><i class="on">1</i><em></em><i>2</i></span>
+              <span class="wb-pt" id="wbPanelTitle" data-i18n="wb.s1t">粘贴 MEGA 链接</span>
+              <span class="wb-pc" id="wbPanelClose" role="button" tabindex="0" aria-label="Close demo panel">×</span>
+            </div>
+
+            <!-- 步骤 1 -->
+            <div class="wb-view" data-view="add">
+              <div class="wb-linkbox">
+                <span class="mono">https://mega.nz/folder/xKq9vBzL#8s_2fQe1</span>
+                <span class="mono">https://mega.nz/file/pR4mNcT7#Qb1xW_9d</span>
+                <span class="wb-caret"></span>
+              </div>
+              <p class="wb-sub" data-i18n="wb.s1d">一次可粘多条 —— file / folder / 旧版 #! / mega:// / ELC 都认。</p>
+              <div class="wb-chips"><span>FILE</span><span>FOLDER</span><span>#!</span><span>mega://</span><span>ELC</span></div>
+              <div class="wb-recent">
+                <div class="wb-rh"><span data-i18n="wb.recent">最近使用</span><span>2</span></div>
+                <div class="wb-r"><span>Concert.Live.2026</span><span class="sz">4.2 GB</span><i>+</i></div>
+                <div class="wb-r"><span>Design.Assets.Pack</span><span class="sz">2.1 GB</span><i>+</i></div>
+              </div>
+              <div class="wb-actions">
+                <span class="wb-note" data-i18n="wb.s1note">解析在后台跑，可随时停止</span>
+                <button class="wb-btn" type="button" id="wbNext" data-i18n="wb.s1btn">解析并选择文件 →</button>
+              </div>
+            </div>
+
+            <!-- 步骤 2 -->
+            <div class="wb-view" data-view="pick">
+              <div class="wb-pick-head">
+                <span class="wb-sub" data-i18n="wb.s2d">3 个目录 · 214 个文件 · 共 6.8 GB</span>
+                <span class="wb-mini-search"><input id="wbTreeSearch" type="search" autocomplete="off" placeholder="搜索文件名或路径" data-i18n-ph="wb.treeSearchPh" aria-label="Filter files"></span>
+              </div>
+              <div class="wb-tree" id="wbTree">
+                <div class="tr dir" data-dir>
+                  <input class="cb on" type="checkbox" aria-label="Concert.Live.2026" checked>
+                  <span class="ico"><i class="car">▾</i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h5L11 7h8.5A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/></svg></span>
+                  <span class="tx">Concert.Live.2026</span><span class="sz">4.2 GB</span>
+                </div>
+                <div class="tr file lv2" data-size="1.6">
+                  <input class="cb on" type="checkbox" aria-label="01.Opening.mkv" checked>
+                  <span class="ico"><i class="ftype vid">MKV</i></span>
+                  <span class="tx">01.Opening.mkv</span><span class="sz">1.6 GB</span>
+                </div>
+                <div class="tr file lv2" data-size="2.1">
+                  <input class="cb on" type="checkbox" aria-label="02.Main.mkv" checked>
+                  <span class="ico"><i class="ftype vid">MKV</i></span>
+                  <span class="tx">02.Main.mkv</span><span class="sz">2.1 GB</span>
+                </div>
+                <div class="tr dir" data-dir>
+                  <input class="cb part" type="checkbox" aria-label="Design.Assets">
+                  <span class="ico"><i class="car">▾</i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h5L11 7h8.5A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/></svg></span>
+                  <span class="tx">Design.Assets</span><span class="sz">2.1 GB</span>
+                </div>
+                <div class="tr file lv2" data-size="1.1">
+                  <input class="cb on" type="checkbox" aria-label="pack-01.7z" checked>
+                  <span class="ico"><i class="ftype arc">7Z</i></span>
+                  <span class="tx">pack-01.7z</span><span class="sz">1.1 GB</span>
+                </div>
+                <div class="tr file lv2" data-size="1.0">
+                  <input class="cb" type="checkbox" aria-label="pack-02.7z">
+                  <span class="ico"><i class="ftype arc">7Z</i></span>
+                  <span class="tx">pack-02.7z</span><span class="sz">1.0 GB</span>
+                </div>
+                <div class="tr dir" data-dir>
+                  <input class="cb" type="checkbox" aria-label="demos">
+                  <span class="ico"><i class="car">▸</i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h5L11 7h8.5A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/></svg></span>
+                  <span class="tx">demos</span><span class="sz">0.5 GB</span>
+                </div>
+                <div class="tr file lv2" data-size="0.5">
+                  <input class="cb" type="checkbox" aria-label="teaser.mp4">
+                  <span class="ico"><i class="ftype vid">MP4</i></span>
+                  <span class="tx">teaser.mp4</span><span class="sz">0.5 GB</span>
+                </div>
+                <p class="wb-empty" data-i18n="wb.treeEmpty">没有匹配的文件。</p>
+              </div>
+              <div class="wb-pick-foot">
+                <span class="wb-sum"><b data-pick-count>3</b> <span data-i18n="wb.selUnit">个文件</span> · <b data-pick-size>4.8 GB</b></span>
+                <span class="wb-free"><span data-i18n="wb.freePrefix">目标磁盘剩余</span> <b>284 GB</b></span>
+                <button class="wb-btn" type="button" id="wbConfirm" data-i18n="wb.s2btn">加入下载队列</button>
+              </div>
+            </div>
+
+            <!-- 定时下载 -->
+            <div class="wb-view" data-view="sched">
+              <div class="wb-sched">
+                <div class="wb-srow"><span data-i18n="wb.schMode">启动模式</span>
+                  <span class="wb-seg"><i class="on" data-i18n="wb.daily">每日</i><i data-i18n="wb.once">一次性</i></span>
+                </div>
+                <div class="wb-srow"><span data-i18n="wb.schWin">下载时段</span>
+                  <span class="wb-range"><b>02:00</b><em>→</em><b>07:00</b></span>
+                </div>
+                <div class="wb-timeline" aria-hidden="true">
+                  <div class="wb-tl-bar"><i style="left:8.3%;width:20.8%"></i></div>
+                  <div class="wb-tl-lbl"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+                </div>
+                <div class="wb-toggles">
+                  <span class="wb-tg on"><i></i><span data-i18n="wb.pauseAtEnd">时段结束自动暂停</span></span>
+                  <span class="wb-tg on"><i></i><span data-i18n="wb.midnight">支持跨午夜</span></span>
+                  <span class="wb-tg on"><i></i><span data-i18n="wb.persist">保存后重启沿用</span></span>
+                </div>
+                <div class="wb-next"><span data-i18n="wb.nextRun">下次启动</span><b><span data-i18n="wb.today">今天</span> 02:00</b><em>11h 02m</em></div>
+                <p class="wb-sub" data-i18n="wb.schNote">程序需保持运行；配额等待不会被定时恢复绕过，手动暂停的任务也不会被偷偷唤醒。</p>
+              </div>
+            </div>
+
+            <div class="wb-toast" id="wbToast" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 真机截图:文件存在才显示,缺图自动隐藏 -->
+    <div class="wb-shots" data-shots hidden>
+      <figure class="shot" data-shot="assets/img/workbench-dark.png,assets/img/workbench-light.png" hidden>
+        <img alt="MegaDownloader Revival 2.6 工作台主界面" loading="lazy" width="1280" height="800">
+        <figcaption><b>2.6</b> <span data-i18n="wb.shot1">工作台主界面</span></figcaption>
+      </figure>
+      <figure class="shot" data-shot="assets/img/addlink-dark.png,assets/img/addlink-light.png" hidden>
+        <img alt="两步添加链接与文件树勾选" loading="lazy" width="1280" height="800">
+        <figcaption><b>2.6</b> <span data-i18n="wb.shot2">两步添加 · 文件树勾选</span></figcaption>
+      </figure>
+      <figure class="shot" data-shot="assets/img/settings-dark.png,assets/img/settings-light.png" hidden>
+        <img alt="设置与定时下载" loading="lazy" width="1280" height="800">
+        <figcaption><b>2.6</b> <span data-i18n="wb.shot3">设置 · 定时下载</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- 冷启动对照 -->
+    <div class="boot" data-reveal>
+      <div class="boot-copy">
+        <span class="boot-k"><i></i>BOOT · <span data-i18n="boot.k">冷启动</span></span>
+        <h3 data-i18n-html="boot.h">从 5–7 秒，<br>到 <span class="grad-text">0.15–0.2 秒</span>。</h3>
+        <p data-i18n="boot.p">2.6 把首屏同步采集的性能计数器与 WMI 移到窗口显示之后，启动路径上不再等系统回应。双击到窗口可用，基本是瞬开。</p>
+        <div class="boot-chips"><span data-i18n="boot.c1">本机实测</span><span data-i18n="boot.c2">无需预热</span><span data-i18n="boot.c3">首帧后后台采样</span></div>
+      </div>
+      <div class="boot-vis" aria-hidden="true">
+        <div class="bb">
+          <span class="lb">2.6</span>
+          <div class="track"><i style="width:5.5%"></i></div>
+          <b>0.15–0.2 s</b>
+        </div>
+        <div class="bb old">
+          <span class="lb">2.5</span>
+          <div class="track"><i style="width:100%"></i></div>
+          <b>5–7 s</b>
+        </div>
+        <div class="boot-mult"><span data-i18n="boot.faster">约</span><b>30<i>×</i></b></div>
+      </div>
+    </div>
+
+    <!-- 2.5 → 2.6 升级对照 -->
+    <div class="delta">
+      <article class="d-card" data-reveal>
+        <div class="d-top"><span class="d-old-v">2.5</span><span class="d-arrow">→</span><span class="d-new-v">2.6</span></div>
+        <h3 data-i18n="d.1h">添加链接</h3>
+        <p class="d-old"><span data-i18n="d.1o">输入框 → 预检弹窗 → 确认弹窗；返回就丢勾选</span></p>
+        <p class="d-new"><span data-i18n="d.1n">同一个窗口两步走；返回还在，链接没变就复用预检</span></p>
+      </article>
+      <article class="d-card" data-reveal style="--d:.08s">
+        <div class="d-top"><span class="d-old-v">2.5</span><span class="d-arrow">→</span><span class="d-new-v">2.6</span></div>
+        <h3 data-i18n="d.2h">一次导入 500 个文件</h3>
+        <p class="d-old"><span data-i18n="d.2o">逐行创建控件，勾选一次扫全表，界面发白</span></p>
+        <p class="d-new"><span data-i18n="d.2n">虚拟列表 + 增量统计 + 后台构建，还能中途取消</span></p>
+      </article>
+      <article class="d-card" data-reveal style="--d:.16s">
+        <div class="d-top"><span class="d-old-v">2.5</span><span class="d-arrow">→</span><span class="d-new-v">2.6</span></div>
+        <h3 data-i18n="d.3h">日常操作</h3>
+        <p class="d-old"><span data-i18n="d.3o">找任务靠肉眼翻列表；想夜里下载只能手动守着</span></p>
+        <p class="d-new"><span data-i18n="d.3n">Ctrl+F 直接定位；定时时段到点自己开始</span></p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <!-- ================= 能力矩阵 ================= -->
 <section id="features">
   <div class="watermark left" aria-hidden="true">POWER</div>
   <div class="wrap">
     <div class="sec-head center" data-reveal>
-      <span class="kicker"><i class="idx">02</i><span data-i18n="feat.kicker">Capability Matrix · 能力矩阵</span></span>
+      <span class="kicker"><i class="idx">03</i><span data-i18n="feat.kicker">Capability Matrix · 能力矩阵</span></span>
       <h2 class="sec-title" data-i18n-html="feat.title">不只是一个下载器。<br>是一整套<span class="grad-text">下载体验</span>。</h2>
     </div>
     <div class="bento">
@@ -258,21 +563,54 @@
           <span class="chip" data-i18n="feat.f2chip">509 / -17 全自动处理</span>
         </div>
       </div>
-      <div class="cell c4" data-reveal>
-        <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-        <h3 data-i18n="feat.f3h">整包文件夹下载</h3>
-        <p data-i18n="feat.f3p">递归解析整个分享目录，像资源管理器一样勾选你要的部分。</p>
+      <div class="cell c4 hot-cell" data-reveal>
+        <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff4655" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M9 12h11M4 18h11"/><circle cx="6.5" cy="12" r="1.6" fill="#ff4655" stroke="none"/><circle cx="18" cy="18" r="1.6" fill="#ff4655" stroke="none"/></svg></div>
+        <span class="tag new">v2.6</span>
+        <h3 data-i18n="feat.f3h">两步批量添加</h3>
+        <p data-i18n="feat.f3p">粘贴一批链接，先解析、再勾选，一个窗口走完。取消不添加，返回不丢选择。</p>
+        <div class="mini-visual steps">
+          <span class="st on"><i>1</i><span data-i18n="feat.f3a">粘贴链接</span></span>
+          <span class="ln"></span>
+          <span class="st on"><i>2</i><span data-i18n="feat.f3b">勾选文件</span></span>
+          <span class="ln"></span>
+          <span class="st"><i>3</i><span data-i18n="feat.f3c">入队</span></span>
+        </div>
+      </div>
+      <div class="cell c4 hot-cell" data-reveal style="--d:.08s">
+        <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m8.5 14 2 2 4.5-4.5"/></svg></div>
+        <span class="tag new">v2.6</span>
+        <h3 data-i18n="feat.f4h">文件树 · 三态勾选</h3>
+        <p data-i18n="feat.f4p">按共享目录层级展开，整目录勾选、半选、按类型反选，重复与失效项自动跳过。</p>
         <div class="mini-visual tree">
           <div class="dir">▾ 📦 Game.Collection.2026</div>
           <div>&nbsp;&nbsp;<span class="ok">☑</span> /data/ … 214 files</div>
-          <div>&nbsp;&nbsp;<span class="ok">☑</span> /patches/ … 12 files</div>
-          <div>&nbsp;&nbsp;☐ /demos/ <span style="opacity:.6" data-i18n="feat.f3skip">已跳过</span></div>
+          <div>&nbsp;&nbsp;<span class="half">◪</span> /patches/ … 12 files</div>
+          <div>&nbsp;&nbsp;☐ /demos/ <span style="opacity:.6" data-i18n="feat.f4skip">已跳过</span></div>
+        </div>
+      </div>
+      <div class="cell c4 hot-cell" data-reveal style="--d:.16s">
+        <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#56e1ff" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/><path d="M8 10.5h5"/></svg></div>
+        <span class="tag new">v2.6</span>
+        <h3 data-i18n="feat.f5h">Ctrl+F 任务搜索</h3>
+        <p data-i18n="feat.f5p">包名、文件名、相对路径一起命中；防抖检索在后台跑，Esc 一键清空。</p>
+        <div class="mini-visual sbar">
+          <span class="sic">⌕</span><span class="sq">iso</span><span class="scaret"></span><span class="sres">2 <span data-i18n="feat.f5a">个命中</span></span>
+        </div>
+      </div>
+      <div class="cell c4 hot-cell" data-reveal>
+        <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/><path d="M3.5 12h2M18.5 12h2"/></svg></div>
+        <span class="tag new">v2.6</span>
+        <h3 data-i18n="feat.f6h">定时下载</h3>
+        <p data-i18n="feat.f6p">每日时段或一次性预约，支持跨午夜、到点暂停、重启沿用；配额等待不被绕过。</p>
+        <div class="mini-visual sched">
+          <div class="sched-bar"><i></i></div>
+          <div class="sched-lbl"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         </div>
       </div>
       <div class="cell c4" data-reveal style="--d:.08s">
         <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5c8aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9.5 5 2.5-5 2.5z" fill="#5c8aff" stroke="none"/></svg></div>
-        <h3 data-i18n="feat.f4h">边下边播</h3>
-        <p data-i18n="feat.f4p">集成 VLC 流式播放，视频还没下完就能开始看。</p>
+        <h3 data-i18n="feat.f7h">边下边播</h3>
+        <p data-i18n="feat.f7p">集成 VLC 流式播放，视频还没下完就能开始看。</p>
         <div class="mini-visual playbar">
           <span class="pbtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
           <div class="bar" style="flex:1;margin:0"><i style="width:62%"></i></div>
@@ -281,34 +619,34 @@
       </div>
       <div class="cell c4" data-reveal style="--d:.16s">
         <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
-        <h3 data-i18n="feat.f5h">Web 远程管理</h3>
-        <p data-i18n="feat.f5p">内置 HTTP 服务，手机浏览器推送任务、盯进度，支持局域网。</p>
+        <h3 data-i18n="feat.f8h">Web 远程管理</h3>
+        <p data-i18n="feat.f8p">内置 HTTP 服务，手机浏览器推送任务、盯进度，支持局域网。</p>
         <div class="mini-visual" style="display:flex;gap:8px;flex-wrap:wrap">
-          <span class="chip">📱 → 🖥️</span><span class="chip" data-i18n="feat.f5chip">CSRF + PBKDF2 加固</span>
+          <span class="chip">📱 → 🖥️</span><span class="chip" data-i18n="feat.f8chip">CSRF + PBKDF2 加固</span>
         </div>
       </div>
       <div class="cell c4" data-reveal>
         <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff4655" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div>
-        <h3 data-i18n="feat.f6h">断点续传 · 自愈</h3>
-        <p data-i18n="feat.f6p">暂停、恢复、重启接着下。失败任务定时自动重试，永久失败自动排除。</p>
+        <h3 data-i18n="feat.f9h">断点续传 · 自愈</h3>
+        <p data-i18n="feat.f9p">暂停、恢复、重启接着下。失败任务定时自动重试，永久失败自动排除。</p>
         <div class="mini-visual" style="font-family:var(--font-m);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between">
-          <span data-i18n="feat.f6a">断点持久化</span><span style="color:var(--ok)">● ON</span>
+          <span data-i18n="feat.f9a">断点持久化</span><span style="color:var(--ok)">● ON</span>
         </div>
       </div>
       <div class="cell c4" data-reveal style="--d:.08s">
         <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffc53d" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg></div>
-        <h3 data-i18n="feat.f7h">深 / 浅色主题</h3>
-        <p data-i18n-html="feat.f7p">跟随系统实时切换，也能手动指定。<b>点本站右上角的 🌙 试试</b> —— 应用里的效果一模一样。</p>
+        <h3 data-i18n="feat.f10h">深 / 浅色主题</h3>
+        <p data-i18n-html="feat.f10p">跟随系统实时切换，也能手动指定。<b>点本站右上角的 🌙 试试</b> —— 应用里的效果一模一样。</p>
         <div class="mini-visual theme-demo">
           <div class="sw dark"></div><div class="sw light"></div>
         </div>
       </div>
       <div class="cell c4" data-reveal style="--d:.16s">
         <div class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div>
-        <h3 data-i18n="feat.f8h">还有一整箱</h3>
-        <p data-i18n="feat.f8p">隐写工具、ELC 容器、自动解压 —— 每一样都做到能用为止。</p>
+        <h3 data-i18n="feat.f11h">还有一整箱</h3>
+        <p data-i18n="feat.f11p">隐写工具、ELC 容器、自动解压 —— 每一样都做到能用为止。</p>
         <div class="chips-row">
-          <span class="chip" data-i18n="feat.f8a">🖼️ 图片/视频隐写</span><span class="chip" data-i18n="feat.f8b">🔐 ELC 容器</span><span class="chip" data-i18n="feat.f8c">🗜️ RAR/7Z/ZIP 自动解压</span><span class="chip" data-i18n="feat.f8d">🌐 10 种界面语言</span>
+          <span class="chip" data-i18n="feat.f11a">🖼️ 图片/视频隐写</span><span class="chip" data-i18n="feat.f11b">🔐 ELC 容器</span><span class="chip" data-i18n="feat.f11c">🗜️ RAR/7Z/ZIP 自动解压</span><span class="chip" data-i18n="feat.f11d">🌐 10 种界面语言</span>
         </div>
       </div>
     </div>
@@ -319,7 +657,7 @@
 <section id="vs">
   <div class="wrap">
     <div class="sec-head center" data-reveal>
-      <span class="kicker"><i class="idx">03</i><span data-i18n="vs.kicker">2018 → 2026 · 对比</span></span>
+      <span class="kicker"><i class="idx">04</i><span data-i18n="vs.kicker">2018 → 2026 · 对比</span></span>
       <h2 class="sec-title" data-i18n-html="vs.title">和当年比，<span class="grad-text">它更强了</span>。</h2>
     </div>
     <div class="table-scroll" data-reveal>
@@ -333,11 +671,14 @@
       </thead>
       <tbody>
         <tr><td data-i18n="vs.r1">新版 mega.nz/file · /folder 链接</td><td class="no" data-i18n="vs.no1">✕ 无法识别</td><td class="new-col yes">✓ <span data-i18n="vs.y1">完整支持</span></td></tr>
-        <tr><td data-i18n="vs.r2">MEGA 配额耗尽时</td><td class="no" data-i18n="vs.no2">✕ 卡死、报错</td><td class="new-col yes">✓ <span data-i18n="vs.y2">自动熔断，倒计时恢复</span></td></tr>
-        <tr><td data-i18n="vs.r3">失败任务</td><td class="no" data-i18n="vs.no3">✕ 只能手动重试</td><td class="new-col yes">✓ <span data-i18n="vs.y3">定时自愈</span></td></tr>
-        <tr><td data-i18n="vs.r4">界面主题</td><td class="dim" data-i18n="vs.no4">仅系统灰</td><td class="new-col yes">✓ <span data-i18n="vs.y4">深 / 浅色，跟随系统</span></td></tr>
-        <tr><td data-i18n="vs.r5">稳定性</td><td class="dim">—</td><td class="new-col yes">✓ <span data-i18n="vs.y5">200+ 项崩溃 / 丢数据 / 安全修复</span></td></tr>
-        <tr><td data-i18n="vs.r6">维护状态</td><td class="no" data-i18n="vs.no6">✕ 已停更</td><td class="new-col yes">✓ <span data-i18n="vs.y6">活跃维护，Issue 有回应</span></td></tr>
+        <tr><td data-i18n="vs.r2">添加链接</td><td class="no" data-i18n="vs.no2">✕ 单条输入，弹窗层层叠加</td><td class="new-col yes">✓ <span data-i18n="vs.y2">一个窗口两步，批量 + 文件树</span></td></tr>
+        <tr><td data-i18n="vs.r3">任务搜索</td><td class="no" data-i18n="vs.no3">✕ 没有搜索</td><td class="new-col yes">✓ <span data-i18n="vs.y3">Ctrl+F 包名 / 文件名 / 路径</span></td></tr>
+        <tr><td data-i18n="vs.r4">定时下载</td><td class="no" data-i18n="vs.no4">✕ 只能手动守着</td><td class="new-col yes">✓ <span data-i18n="vs.y4">每日时段 / 一次性预约</span></td></tr>
+        <tr><td data-i18n="vs.r5">大批量导入</td><td class="no" data-i18n="vs.no5">✕ 逐条确认，界面发白</td><td class="new-col yes">✓ <span data-i18n="vs.y5">虚拟列表 + 后台构建，可取消</span></td></tr>
+        <tr><td data-i18n="vs.rb">启动速度</td><td class="no" data-i18n="vs.nob">✕ 5–7 秒才出窗口</td><td class="new-col yes">✓ <span data-i18n="vs.yb">0.15–0.2 秒，几乎瞬开</span></td></tr>
+        <tr><td data-i18n="vs.r6">MEGA 配额耗尽时</td><td class="no" data-i18n="vs.no6">✕ 卡死、报错</td><td class="new-col yes">✓ <span data-i18n="vs.y6">自动熔断，倒计时恢复</span></td></tr>
+        <tr><td data-i18n="vs.r7">界面主题</td><td class="dim" data-i18n="vs.no7">仅系统灰</td><td class="new-col yes">✓ <span data-i18n="vs.y7">2.6 工作台，深 / 浅色跟随系统</span></td></tr>
+        <tr><td data-i18n="vs.r8">维护状态</td><td class="no" data-i18n="vs.no8">✕ 已停更</td><td class="new-col yes">✓ <span data-i18n="vs.y8">200+ 项修复，Issue 有回应</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -349,7 +690,7 @@
   <div class="watermark" aria-hidden="true">GET IT</div>
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <span class="kicker"><i class="idx">04</i><span data-i18n="dl.kicker">Download · 获取</span></span>
+      <span class="kicker"><i class="idx">05</i><span data-i18n="dl.kicker">Download · 获取</span></span>
       <h2 class="sec-title" data-i18n-html="dl.title">两个包，<span class="grad-text">同一个程序</span>。</h2>
       <p class="sec-desc" data-i18n-html="dl.desc">前往 GitHub 获取最新稳定版。下载量每 5 分钟检查更新。</p>
     </div>
@@ -380,32 +721,50 @@
 <section id="changelog">
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <span class="kicker"><i class="idx">05</i><span data-i18n="cl.kicker">Changelog · 精选更新</span></span>
+      <span class="kicker"><i class="idx">06</i><span data-i18n="cl.kicker">Changelog · 精选更新</span></span>
       <h2 class="sec-title" data-i18n="cl.title">每个版本，都算数。</h2>
     </div>
+
+    <article class="cl-hero" data-reveal>
+      <div class="cl-hero-top">
+        <span class="cl-ver">v2.6.0</span>
+        <span class="cl-date">2026-10-29</span>
+        <span class="cl-badge" data-i18n="cl.major">大版本</span>
+      </div>
+      <h3 data-i18n="cl.h26">复活以来最大的一次界面重写 —— 引擎没换，外壳重造。</h3>
+      <ul>
+        <li data-i18n="cl.a1">工作台整层重制：深浅统一配色、字号与间距，工具栏突出「添加链接」并新增定时入口，侧栏分组独立计数，主列表补标题 / 包数量 / 空结果提示</li>
+        <li data-i18n="cl.a2">添加流程合并为同一个窗口的两步，不再叠加预检弹窗；返回保留链接、设置、搜索、目录展开与勾选，链接未变直接复用预检</li>
+        <li data-i18n="cl.a3">大批量：虚拟列表 + 防抖筛选 + 增量选中统计，后台构建显示处理数量、可随时取消；导入期间新复制的链接先暂存到下一批</li>
+        <li data-i18n="cl.a4">Ctrl+F 任务搜索（包名 / 文件名 / 相对路径）与定时下载（每日时段 / 一次性、跨午夜、到点暂停、重启沿用）正式落地</li>
+        <li data-i18n="cl.a5">启动路径重写：首屏不再同步采集性能计数器与 WMI，冷启动从 5–7 秒降到 0.15–0.2 秒；图标随 DPI 对齐、详情栏可收起、深色列表底色补齐，10 个语言包同步新增文案</li>
+      </ul>
+      <div class="cl-tags"><span>WORKBENCH</span><span>BATCH ADD</span><span>SEARCH</span><span>SCHEDULE</span><span>STARTUP</span></div>
+    </article>
+
     <div class="cl-grid">
       <div class="cl-card" data-reveal>
-        <span class="v">v2.5.8</span><span class="d">2026-10-22</span>
+        <span class="v">v2.5.9</span><span class="d">2026-10-28</span>
         <ul>
-          <li data-i18n="cl.a1">慢速下载不再被「停滞看门狗」误杀 —— 进度在走就绝不中断</li>
-          <li data-i18n="cl.a2">RAR 分卷修复：旧式 .r00/.r01 命名 + 带密码分卷终于解得出</li>
-          <li data-i18n="cl.a3">深色模式菜单栏换肤；改完配置静默丢失根治</li>
+          <li data-i18n="cl.b1">同名文件同时下载不再互相写坏；解压不再覆盖同名原文件</li>
+          <li data-i18n="cl.b2">解压 / 校验中断后重启，先校验再复用已下完成品</li>
+          <li data-i18n="cl.b3">在线观看短 Range 请求返回正确字节</li>
         </ul>
       </div>
       <div class="cl-card" data-reveal style="--d:.08s">
-        <span class="v">v2.5.7</span><span class="d">2026-10-14</span>
+        <span class="v">v2.5.8</span><span class="d">2026-10-22</span>
         <ul>
-          <li data-i18n="cl.b1">稳定性专项：36 项审计修复（崩溃 / 静默丢数据 / 死锁）</li>
-          <li data-i18n="cl.b2">共享文件夹网络错误给人话提示（Issue #6）</li>
-          <li data-i18n="cl.b3">文件夹分享包显示 MEGA 上的真名</li>
+          <li data-i18n="cl.c1">慢速下载不再被「停滞看门狗」误杀 —— 进度在走就绝不中断</li>
+          <li data-i18n="cl.c2">RAR 分卷修复：旧式 .r00/.r01 命名 + 带密码分卷终于解得出</li>
+          <li data-i18n="cl.c3">深色模式菜单栏换肤；改完配置静默丢失根治</li>
         </ul>
       </div>
       <div class="cl-card" data-reveal style="--d:.16s">
-        <span class="v">v2.5.6</span><span class="d">2026-10-06</span>
+        <span class="v">v2.5.7</span><span class="d">2026-10-14</span>
         <ul>
-          <li data-i18n="cl.c1">配额突破模式回归：不熔断、按自愈周期硬重试</li>
-          <li data-i18n="cl.c2">散装多文件自动建「新建包」目录</li>
-          <li data-i18n="cl.c3">真名回写、删盘收空目录</li>
+          <li data-i18n="cl.d1">稳定性专项：36 项审计修复（崩溃 / 静默丢数据 / 死锁）</li>
+          <li data-i18n="cl.d2">共享文件夹网络错误给人话提示（Issue #6）</li>
+          <li data-i18n="cl.d3">文件夹分享包显示 MEGA 上的真名</li>
         </ul>
       </div>
     </div>
@@ -417,7 +776,7 @@
 <section id="faq">
   <div class="wrap">
     <div class="sec-head center" data-reveal>
-      <span class="kicker"><i class="idx">06</i><span data-i18n="faq.kicker">FAQ · 疑问</span></span>
+      <span class="kicker"><i class="idx">07</i><span data-i18n="faq.kicker">FAQ · 疑问</span></span>
       <h2 class="sec-title" data-i18n="faq.title">常见问题。</h2>
     </div>
     <div class="faq-list" id="faqList">
@@ -430,20 +789,24 @@
         <div class="faq-a"><div><p data-i18n-html="faq.a2">MEGA 对免费账户和 IP 有下载配额限制。程序会<b>自动暂停并倒计时恢复</b>；等不及的话，可在设置中开启「配额突破模式」持续重试。</p></div></div>
       </div>
       <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">03</span><span data-i18n="faq.q3">下载速度有限制吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a3">软件本身不限速，多线程可跑满你的带宽。也支持全局 / 单任务限速，想省流量就设个上限。</p></div></div>
+        <button class="faq-q" type="button"><span class="n">03</span><span data-i18n="faq.q3">2.6 升级要重新配置、重建队列吗？</span><span class="pm">+</span></button>
+        <div class="faq-a"><div><p data-i18n-html="faq.a3">不用。配置与队列仍存在 <b>%LOCALAPPDATA%\MegaDownloader\</b>，升级只是替换程序文件，旧队列、断点和语言设置都会沿用。</p></div></div>
       </div>
       <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">04</span><span data-i18n="faq.q4">配置和下载队列存在哪？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n-html="faq.a4">在 <b>%LOCALAPPDATA%\MegaDownloader\</b>。程序目录可以随意搬动或删除，配置不受影响；重装系统前备份这个目录即可。</p></div></div>
+        <button class="faq-q" type="button"><span class="n">04</span><span data-i18n="faq.q4">定时下载需要程序一直开着吗？</span><span class="pm">+</span></button>
+        <div class="faq-a"><div><p data-i18n="faq.a4">是 —— 2.6 不提供系统唤醒或后台服务，程序需要保持运行。时段支持跨午夜、到点暂停并重启沿用；手动暂停的任务不会被自动恢复，配额等待也不会被绕过。</p></div></div>
       </div>
       <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">05</span><span data-i18n="faq.q5">旧格式链接还能下吗？需要管理员权限吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a5">旧版 #! 链接、mega:// 加密链接、ELC 容器全部支持。程序免安装、免管理员权限，绿色运行。</p></div></div>
+        <button class="faq-q" type="button"><span class="n">05</span><span data-i18n="faq.q5">下载速度有限制吗？</span><span class="pm">+</span></button>
+        <div class="faq-a"><div><p data-i18n="faq.a5">软件本身不限速，多线程可跑满你的带宽。也支持全局 / 单任务限速，想省流量就设个上限。</p></div></div>
       </div>
       <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">06</span><span data-i18n="faq.q6">有 Mac / Linux 版吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a6">没有 —— 基于 WinForms，仅限 Windows。但可以开启内置 Web 界面，用手机或其他设备的浏览器远程管理下载。</p></div></div>
+        <button class="faq-q" type="button"><span class="n">06</span><span data-i18n="faq.q6">旧格式链接还能下吗？需要管理员权限吗？</span><span class="pm">+</span></button>
+        <div class="faq-a"><div><p data-i18n="faq.a6">旧版 #! 链接、mega:// 加密链接、ELC 容器全部支持。程序免安装、免管理员权限，绿色运行。</p></div></div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" type="button"><span class="n">07</span><span data-i18n="faq.q7">有 Mac / Linux 版吗？</span><span class="pm">+</span></button>
+        <div class="faq-a"><div><p data-i18n="faq.a7">没有 —— 基于 WinForms，仅限 Windows。但可以开启内置 Web 界面，用手机或其他设备的浏览器远程管理下载。</p></div></div>
       </div>
     </div>
   </div>
@@ -456,7 +819,7 @@
   <div class="wrap">
     <span class="kicker" style="justify-content:center" data-i18n="cta.kicker">Ready? · 就绪</span>
     <h2 data-reveal><span data-i18n-html="cta.h">把经典，<span class="grad-text">下回来</span>。</span></h2>
-    <p data-i18n="cta.sub">这个工具没有官网推广预算 —— 你的 Star，就是它被更多人看到的方式。</p>
+    <p data-i18n="cta.sub">2.6 是复活以来最大的一次界面重写 —— 这个项目没有推广预算，你的 Star 就是它被更多人看到的方式。</p>
     <div class="hero-ctas" style="justify-content:center" data-reveal>
       <a class="btn btn-primary" href="https://github.com/a1175815821/MegaDownloader-Revival/releases/latest" target="_blank" rel="noopener">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m6.5 10.5 5.5 5.5 5.5-5.5"/><path d="M5 20h14"/></svg>
@@ -481,7 +844,7 @@
           <span class="logo-badge"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10"/><path d="m7 10 5 5 5-5"/><path d="M5 19h14"/></svg></span>
           <span>MegaDownloader<small>REVIVAL <span data-ver></span></small></span>
         </a>
-        <p data-i18n="foot.tag">让经典 MEGA 下载器在今天满血复活。免安装、多线程、持续修复 —— 由社区驱动，为社区而生。</p>
+        <p data-i18n="foot.tag">让经典 MEGA 下载器在今天满血复活。2.6 重造了整张工作台，引擎与承诺不变：免安装、多线程、持续修复。</p>
       </div>
       <div class="foot-col">
         <h4 data-i18n="foot.h1">项目</h4>
