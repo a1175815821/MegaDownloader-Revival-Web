@@ -59,9 +59,9 @@ var I18N={
 en:{
  'nav.story':'The Revival','nav.workbench':'Workbench','nav.features':'Capabilities','nav.vs':'vs v1.8','nav.download':'Download','nav.changelog':'Changelog','nav.faq':'FAQ','nav.star':'Star',
  'hero.badge':'Stable releases on GitHub · actively maintained',
- 'hero.flag':'2.6 workbench rebuild',
- 'hero.h1a':'The classic MEGA downloader','hero.h1b':'2.6 — a rebuilt workbench.',
- 'hero.sub':'Not a patch: the whole UI layer was torn down and rebuilt — <b>two-step batch add</b>, file-tree selection, <b>Ctrl+F task search</b>, scheduled downloads. Multi-threaded speed, resume and quota recovery are all still here, still a <b>single portable exe</b>.',
+ 'hero.flag':'2.6.1 · everyday refinements',
+ 'hero.h1a':'The classic MEGA downloader','hero.h1b':'2.6.1 — a smoother workbench.',
+ 'hero.sub':'A clearer workbench, <b>faster settings</b> and a language option that <b>follows Windows</b>. Two-step batch add, file-tree selection, Ctrl+F search and scheduling, with multi-threaded transfers, resume and quota recovery. Still a <b>single portable exe</b>.',
  'hero.cta1':'Free download','hero.cta2':'GitHub Star',
  'hero.note':'✓ Free &amp; open source&nbsp;&nbsp;✓ No admin rights&nbsp;&nbsp;✓ <em>No ads, no bundleware, no tracking</em>',
  'stats.stars':'GitHub Stars','stats.dls':'Total downloads','stats.boot':'cold start','stats.fixes':'fixes & hardening','stats.langs':'UI languages',
@@ -76,9 +76,15 @@ en:{
  'story.t3h':'The outage','story.t3p':'MEGA changed its link formats (<b>mega.nz/file, /folder</b>). The old build couldn\u2019t recognize new links and its core features died. Users went hunting for alternatives.',
  'story.t4h':'The revival','story.t4p':'v1.8 was decompiled, then fixed and refactored continuously: <b>200+ fixes and hardening</b>, semantic-versioned releases, every Issue answered.',
  'story.t5h':'The rebuild','story.t5p':'The interface was torn down and rebuilt: <b>a new workbench, two-step batch add, file-tree selection, task search, scheduled downloads</b>. Same engine, new shell — the biggest update since the revival.',
- 'wb.kicker':'Workbench · 2.6',
+ 'wb.kicker':'Workbench · 2.6.1',
  'wb.title':'Not a reskin.<br>It is a <span class="grad-text">rebuilt workbench</span>.',
- 'wb.desc':'A 2018 Win7-grey shell cannot carry a 2026 queue. 2.6 rebuilds the entire UI layer — palette, type scale, spacing, icons, list, details panel — and it is still native WinForms. No framework swap, no web wrapper.',
+ 'wb.desc':'2.6 rebuilt the native WinForms workbench. 2.6.1 refines the details you use every day: consistent type and spacing, a six-column task list, details that adapt to the window width, and menus that appear on first open.',
+ 'update.uiTag':'Interface','update.uiTitle':'A clearer queue, easier controls',
+ 'update.uiDesc':'Progress and percentage share one column. Details sit beside wide lists and below narrow ones. Stop keeps its caption, Schedule gains a clock icon, and menus appear without resizing.',
+ 'update.settingsTag':'Settings','update.settingsTitle':'Less waiting on first open',
+ 'update.settingsDesc':'Less repeated layout work; account controls load on demand. Isolated first-open timing: about 8.2 s → 1.1 s, varying by machine. Settings resizes, scrolls and jumps to search matches.',
+ 'update.langTag':'Language','update.langTitle':'Follow the Windows display language',
+ 'update.langDesc':'New configurations match the system language, including regional and Chinese script variants, with English as fallback. Manual choices stay. Change Settings → General → Language, save, then restart.',
  'wb.t1t':'One window, two steps','wb.t1d':'Paste links → pick files. No more input → preview → confirm dialogs stacked on each other.',
  'wb.t2t':'File tree · tri-state','wb.t2d':'Expand the shared-folder hierarchy, tick whole folders, half-selected states, invert a filter. Duplicates and dead links are skipped.',
  'wb.t3t':'Ctrl+F task search','wb.t3d':'Package names, filenames and relative paths at once; searched in the background, Esc clears it.',
@@ -97,9 +103,10 @@ en:{
  'wb.recent':'Recently used','wb.nextRun':'Next start','wb.today':'today',
  'wb.pauseAtEnd':'Pause when the window ends','wb.midnight':'Crosses midnight','wb.persist':'Kept after restart',
  'wb.schNote':'The app must stay running; a quota wait is never bypassed by the schedule, and manually paused tasks are never resumed behind your back.',
- 'wb.shot1':'Workbench','wb.shot2':'Two-step add · file tree','wb.shot3':'Settings · schedule',
+ 'wb.shot1':'Workbench','wb.shot2':'File pre-flight · folder selection','wb.shot3':'Settings · automatic language',
+ 'wb.shotsNote':'2.6.1 native windows · demonstration data in Simplified Chinese · click an image for full size; the interactive demo is above.',
  'boot.k':'cold start','boot.h':'From 5–7 seconds to <span class="grad-text">0.15–0.2 s</span>.',
- 'boot.p':'2.6 moves the first-paint performance counters and WMI sampling to after the window is shown, so startup no longer waits on the OS. Double-click to usable is effectively instant.',
+ 'boot.p':'2.6 defers performance-counter and WMI sampling until after first paint. In a test setup, cold start fell from 5–7 s to 0.15–0.2 s. Actual times depend on hardware and environment.',
  'boot.c1':'measured locally','boot.c2':'no warm-up','boot.c3':'sampling after first paint','boot.faster':'about',
  'vs.rb':'Cold start','vs.nob':'✕ 5–7 s before the window appears','vs.yb':'0.15–0.2 s, effectively instant',
  'd.1h':'Adding links','d.1o':'Input → preview dialog → confirm dialog; going back loses your ticks','d.1n':'Two steps in one window; back keeps everything, unchanged links reuse the preview',
@@ -131,7 +138,7 @@ en:{
  'vs.r4':'Scheduled downloads','vs.no4':'✕ babysit it yourself','vs.y4':'daily window / one-off appointment',
  'vs.r5':'Large batch import','vs.no5':'✕ confirm each item, UI goes white','vs.y5':'virtual list + background build, cancellable',
  'vs.r6':'When MEGA quota runs out','vs.no6':'✕ hangs, errors out','vs.y6':'auto-pause + countdown resume',
- 'vs.r7':'UI themes','vs.no7':'system grey only','vs.y7':'2.6 workbench, dark / light follows system',
+ 'vs.r7':'UI themes','vs.no7':'system grey only','vs.y7':'2.6.1 workbench, dark / light follows system',
  'vs.r8':'Maintenance','vs.no8':'✕ abandoned','vs.y8':'200+ fixes, Issues answered',
  'dl.kicker':'Download','dl.title':'Two packages,<span class="grad-text">one program</span>.','dl.desc':'Get the latest stable release from GitHub. Download counts are checked every 5 minutes.',
  'dl.a1':'Portable <small data-asset-size="zip">.ZIP</small>','dl.a2':'Extract and run. No installer or admin rights needed.',
@@ -140,6 +147,12 @@ en:{
  'dl.onedrop':'single-file launch','dl.noinstall':'no install','dl.btn2':'Download single-file',
  'dl.cfg':'Settings &amp; queue live in <b>%LOCALAPPDATA%\\MegaDownloader\\</b> — upgrading is just replacing the exe','dl.req':'Windows 7 SP1+ · .NET Framework 4.8 (built into Win10 1903+)',
  'cl.kicker':'Release highlights','cl.title':'Every release counts.',
+ 'cl.latest':'this update','cl.h261':'A clearer workbench, faster settings, system language.',
+ 'cl.e1':'Consistent light/dark surfaces, typography, spacing and line icons; six default columns combine progress and percentage, with details beside or below the list as space allows',
+ 'cl.e2':'Fixes first-open menus, missing Stop text and Settings alignment; removes repeated settings layout work, loads account controls on demand, and scrolls to search matches',
+ 'cl.e3':'New automatic language option matches the Windows display language, regional variants and Chinese scripts, then falls back to English; manual choices stay, changes apply after saving and restarting',
+ 'cl.e4':'Fixes saving and closing without visiting the account tab, hidden windows appearing unexpectedly and stale progress text; refreshes native screenshots and documentation in five languages',
+ 'cl.release261':'Read the full 2.6.1 release notes',
  'cl.major':'major release','cl.h26':'The biggest UI rewrite since the revival — same engine, new shell.',
  'cl.a1':'Whole workbench rebuilt: unified dark / light palette, type scale and spacing; the toolbar promotes “Add links” and gains a schedule entry; sidebar groups get their own counts; the list gains a title, package count and empty state',
  'cl.a2':'Adding is now two steps in one window — no stacked preview dialog; going back keeps links, settings, search, expansion and ticks, and an unchanged link reuses the cached preview',
@@ -159,24 +172,25 @@ en:{
  'faq.kicker':'FAQ','faq.title':'Frequently asked.',
  'faq.q1':'My antivirus flags it.','faq.a1':'If your antivirus flags a download, check its warning and verify the source before running it. You can inspect the <a href="https://github.com/a1175815821/MegaDownloader-Revival/actions/workflows/build.yml" target="_blank" rel="noopener">build workflow</a>, try the ZIP package, or build from source yourself. A different package does not guarantee that a warning will disappear.',
  'faq.q2':'It says quota exceeded.','faq.a2':'MEGA limits free accounts and IPs. The app <b>auto-pauses and resumes after a countdown</b>; if you can\u2019t wait, enable “quota breakthrough mode” in Settings.',
- 'faq.q3':'Do I need to reconfigure or rebuild my queue for 2.6?','faq.a3':'No. Settings and the queue still live in <b>%LOCALAPPDATA%\\MegaDownloader\\</b> — upgrading replaces the program files only, and your queue, resume points and language survive.',
+ 'faq.q3':'Do I need to rebuild my settings or queue for 2.6.1?','faq.a3':'No. Replace the EXE for the single-file edition, or extract the ZIP and replace the program files. Settings and the queue stay in <b>%LOCALAPPDATA%\\MegaDownloader\\</b>; resume points and manual language choices are kept. The first upgrade migrates to six columns; optional columns remain in the column menu.',
  'faq.q4':'Does the schedule need the app running?','faq.a4':'Yes — 2.6 offers no wake timers or background service, so the app must stay open. The window crosses midnight, pauses at the end and survives a restart; manually paused tasks are not resumed, and a quota wait is not bypassed.',
  'faq.q5':'Is download speed limited?','faq.a5':'Not by the app — multi-threading will max out your bandwidth. Global or per-task speed caps are there when you want them.',
  'faq.q6':'Do old links still work? Admin rights?','faq.a6':'Legacy #! links, mega:// encrypted links and ELC containers are all supported. It\u2019s portable and needs no admin rights.',
  'faq.q7':'Mac / Linux version?','faq.a7':'No — it\u2019s WinForms, Windows only. Enable the built-in web interface to manage downloads from any device\u2019s browser.',
+ 'faq.q8':'How do I follow the system language?','faq.a8':'Choose the system language option in Settings → General → Language, save, then restart. New configurations use the Windows display language automatically; existing manual choices stay. There are still 10 built-in UI languages, with English as fallback. Japanese and Korean READMEs do not imply corresponding built-in UI packs.',
  'cta.kicker':'Ready?','cta.h':'Download the classic.<br><span class="grad-text">Again.</span>',
- 'cta.sub':'2.6 is the biggest interface rewrite since the revival — this project has no marketing budget, so a Star is how it reaches more people.',
+ 'cta.sub':'From the 2.6 workbench rebuild to the 2.6.1 refinements, fixes and improvements keep coming. A Star helps more people find the project.',
  'cta.btn1':'Get the latest','cta.btn2':'Give a Star',
  'cta.note':'Found a bug? File an Issue — many recent fixes started as user reports.',
- 'foot.tag':'The classic MEGA downloader, back at full power. 2.6 rebuilt the whole workbench; the promise is unchanged — portable, multi-threaded, continuously fixed.',
+ 'foot.tag':'The classic MEGA downloader, back at full power. 2.6.1 keeps refining the workbench: portable, multi-threaded, continuously fixed.',
  'foot.h1':'Project','foot.l1':'GitHub repo','foot.l2':'Download latest','foot.l3':'Report an issue',
  'foot.h2':'Site','foot.l4':'Site source','foot.l5':'Production site','foot.l6':'FAQ',
  'foot.legal1':'Unofficial project, not affiliated with MEGA Ltd. Derived from decompilation of third-party published software, solely to fix compatibility and restore usability.',
- 'ticker':['v2.6 workbench ✓','two-step batch add ✓','file tree · tri-state ✓','Ctrl+F search ✓','scheduled downloads ✓','virtual list · no stalls ✓','mega.nz/file ✓','mega.nz/folder ✓','legacy #! links ✓','mega://enc2 ✓','ELC containers ✓','RAR / 7Z / ZIP auto-extract ✓','stream while downloading ✓','10 UI languages ✓','MIT open source ✓']
+ 'ticker':['v2.6.1 workbench ✓','system language ✓','faster settings ✓','two-step batch add ✓','file tree · tri-state ✓','Ctrl+F search ✓','scheduled downloads ✓','virtual list · no stalls ✓','mega.nz/file ✓','mega.nz/folder ✓','legacy #! links ✓','mega://enc2 ✓','ELC containers ✓','RAR / 7Z / ZIP auto-extract ✓','stream while downloading ✓','10 UI languages ✓','MIT open source ✓']
 },
 zh:{
  'quota.done':'已恢复，继续下载','quota.wait':'配额恢复倒计时',
- 'ticker':['v2.6 工作台 ✓','两步批量添加 ✓','文件树三态勾选 ✓','Ctrl+F 搜索 ✓','定时下载 ✓','虚拟列表不卡顿 ✓','mega.nz/file ✓','mega.nz/folder ✓','旧版 #! 链接 ✓','mega://enc2 ✓','ELC 容器 ✓','RAR / 7Z / ZIP 自动解压 ✓','边下边播 ✓','10 种界面语言 ✓','MIT 开源 ✓']
+ 'ticker':['v2.6.1 工作台 ✓','语言跟随系统 ✓','设置更快打开 ✓','两步批量添加 ✓','文件树三态勾选 ✓','Ctrl+F 搜索 ✓','定时下载 ✓','虚拟列表不卡顿 ✓','mega.nz/file ✓','mega.nz/folder ✓','旧版 #! 链接 ✓','mega://enc2 ✓','ELC 容器 ✓','RAR / 7Z / ZIP 自动解压 ✓','边下边播 ✓','10 种界面语言 ✓','MIT 开源 ✓']
 }};
 
 var langNow='zh';
@@ -185,6 +199,7 @@ var langBtn=$('#langBtn');
 /* 保存内联中文原件:zh 是页面默认文案,en 才走字典 */
 $$('[data-i18n],[data-i18n-html]').forEach(function(el){el.setAttribute('data-orig',el.innerHTML)});
 $$('[data-i18n-ph]').forEach(function(el){el.setAttribute('data-orig-ph',el.getAttribute('placeholder')||'')});
+$$('[data-i18n-alt]').forEach(function(el){el.setAttribute('data-orig-alt',el.getAttribute('alt')||'')});
 function t(k){return (I18N[langNow]&&I18N[langNow][k])||I18N.en[k]||''}
 function applyLang(l){
   langNow=l; document.documentElement.lang=l==='en'?'en':'zh-CN';
@@ -202,8 +217,12 @@ function applyLang(l){
     var v=l==='zh'?el.getAttribute('data-orig-ph'):t(el.getAttribute('data-i18n-ph'));
     if(v)el.setAttribute('placeholder',v);
   });
+  $$('[data-i18n-alt]').forEach(function(el){
+    var v=l==='zh'?el.getAttribute('data-orig-alt'):t(el.getAttribute('data-i18n-alt'));
+    if(v)el.setAttribute('alt',v);
+  });
   buildTicker();
-  document.title=l==='en'?'MegaDownloader Revival 2.6 — a rebuilt workbench for the classic MEGA downloader':'MegaDownloader Revival 2.6 — 经典 MEGA 下载器，重造工作台';
+  document.title=l==='en'?'MegaDownloader Revival 2.6.1 — a smoother MEGA download workbench':'MegaDownloader Revival 2.6.1 — 更顺手的 MEGA 下载工作台';
   scramble($('.hero h1 .grad-text'));
   syncMockTheme();
   syncQuotaLabel();
@@ -849,9 +868,14 @@ function syncShots(){
   shotStates.forEach(function(s){
     var src=s.loaded[theme]?s.urls[theme]:(s.loaded[1-theme]?s.urls[1-theme]:null);
     s.fig.hidden=!src;
-    if(src){if(s.img.getAttribute('src')!==src)s.img.setAttribute('src',src);shown++}
+    if(src){
+      if(s.img.getAttribute('src')!==src)s.img.setAttribute('src',src);
+      var link=$('a',s.fig);if(link)link.setAttribute('href',src);
+      shown++;
+    }
   });
   var host=$('[data-shots]');if(host)host.hidden=shown===0;
+  var note=$('[data-shots-note]');if(note)note.hidden=shown===0;
 }
 (function(){
   var host=$('[data-shots]'),figs=$$('.shot',host||document);

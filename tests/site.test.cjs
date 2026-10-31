@@ -37,7 +37,9 @@ before(async () => {
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   origin = `http://127.0.0.1:${server.address().port}`;
-  browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}) });
+  browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH
+    ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH }
+    : process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}) });
 });
 
 after(async () => {
@@ -63,6 +65,7 @@ async function setup(options = {}) {
     viewport: options.mobile ? { width: 390, height: 844 } : { width: 1440, height: 1100 },
     colorScheme: 'dark'
   });
+  context.setDefaultTimeout(10000);
   await context.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
   await context.route('https://fonts.gstatic.com/**', route => route.abort());
   if (options.shots) {
@@ -307,7 +310,7 @@ test('the demo countdown advances in seconds', async () => {
 });
 
 test('the 2.6 workbench demo switches modes and keeps selection maths consistent', async () => {
-  const { context, page } = await setup();
+  const { context, page } = await setup({ shots: [] });
   try {
     await synced(page);
     assert.equal(await page.locator('.wb-view[data-view="add"]').isVisible(), true);
@@ -366,7 +369,7 @@ test('file tree supports keyboard selection, mixed state and full-path filtering
 });
 
 test('screenshots follow the site theme and fall back when one image is missing', async () => {
-  const { context, page } = await setup({ shots: ['workbench-dark.png', 'workbench-light.png', 'addlink-dark.png'] });
+  const { context, page } = await setup({ shots: ['workbench-dark.png', 'workbench-light.png', 'preflight.png'] });
   try {
     await page.waitForFunction(() => document.querySelectorAll('.shot:not([hidden])').length === 2);
     const images = page.locator('.shot:not([hidden]) img');
@@ -374,8 +377,33 @@ test('screenshots follow the site theme and fall back when one image is missing'
     assert.match(await images.nth(0).getAttribute('src'), /workbench-dark\.png$/);
     await page.locator('#themeBtn').click();
     await page.waitForFunction(() => document.querySelector('.shot img').getAttribute('src').endsWith('workbench-light.png'));
-    assert.match(await images.nth(1).getAttribute('src'), /addlink-dark\.png$/);
+    assert.match(await images.nth(1).getAttribute('src'), /preflight\.png$/);
     assert.equal(await page.locator('.shot[hidden]').count(), 1);
+  } finally { await context.close(); }
+});
+
+test('bundled native screenshots load in both themes with full-size links and translated descriptions', async () => {
+  const { context, page } = await setup();
+  try {
+    await page.locator('[data-shots]').waitFor({ state: 'visible' });
+    await page.locator('[data-shots]').scrollIntoViewIfNeeded();
+    for (const theme of ['dark', 'light']) {
+      if (theme === 'light') await page.locator('#themeBtn').click();
+      await page.waitForFunction(theme => [...document.querySelectorAll('.shot img')].every(img =>
+        img.complete && img.naturalWidth > 0 &&
+        (img.src.endsWith('preflight.png') || img.src.endsWith(`-${theme}.png`))), theme);
+      const captures = await page.locator('.shot').evaluateAll(figures => figures.map(fig => {
+        const img = fig.querySelector('img');
+        return { hidden: fig.hidden, width: img.naturalWidth, linked: fig.querySelector('a').href === img.src };
+      }));
+      assert.equal(captures.length, 3);
+      assert.ok(captures.every(capture => !capture.hidden && capture.width > 800 && capture.linked));
+    }
+    const originalAlt = await page.locator('.shot img').first().getAttribute('alt');
+    await page.locator('#langBtn').click();
+    assert.equal(await page.locator('.shot img').first().getAttribute('alt'), 'Workbench');
+    await page.locator('#langBtn').click();
+    assert.equal(await page.locator('.shot img').first().getAttribute('alt'), originalAlt);
   } finally { await context.close(); }
 });
 
