@@ -32,8 +32,8 @@ async function main() {
         figcaption{text-align:right;font-size:11px;color:#8f9bb0;margin-top:12px}
         footer{position:absolute;left:56px;right:56px;bottom:46px;display:flex;justify-content:space-between;font:11px "Segoe UI",sans-serif;letter-spacing:1px;color:#7c8ba5}
       </style>
-      <div class="frame"></div><header><span class="logo"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></span>MegaDownloader Revival<span class="version">V2.6.1</span></header>
-      <main><section><h1>经典 MEGA 下载工作台</h1><h2>2.6.1，更顺手。</h2><p><b>更清晰的工作台 · 更快打开的设置</b><br>语言跟随 Windows，细节持续打磨。<br>两步批量添加、搜索与定时下载。</p><div class="chips"><span>Windows 7 SP1+</span><span>单文件免安装</span><span>10 种界面语言</span><span>MIT 开源</span></div></section><figure><img src="data:image/png;base64,${capture.toString('base64')}" width="1196" height="759" alt="2.6.1 原生工作台"><figcaption>2.6.1 原生界面 · 简体中文示例数据</figcaption></figure></main>
+      <div class="frame"></div><header><span class="logo"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></span>MegaDownloader Revival<span class="version">V2.6.2</span></header>
+      <main><section><h1>经典 MEGA 下载工作台</h1><h2>2.6.2，下载更稳。</h2><p><b>下载保护 · 队列后台恢复</b><br>文件占用自动恢复，新增俄语界面。<br>两步批量添加、搜索与定时下载。</p><div class="chips"><span>Windows 7 SP1+</span><span>单文件免安装</span><span>11 种界面语言</span><span>MIT 开源</span></div></section><figure><img src="data:image/png;base64,${capture.toString('base64')}" width="1196" height="759" alt="2.6.2 原生工作台"><figcaption>2.6.2 原生界面 · 简体中文示例数据</figcaption></figure></main>
       <footer><span>MULTI-THREADED · RESUMABLE · QUOTA RECOVERY</span><span>github.com/a1175815821/MegaDownloader-Revival</span></footer>
     </html>`, { waitUntil: 'load' });
     await page.evaluate(() => document.fonts.ready);

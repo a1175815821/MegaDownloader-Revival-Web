@@ -4,7 +4,7 @@
 
 ## English
 
-The official landing page for MegaDownloader Revival — updated for the 2.6.1 workbench refinements, faster settings and automatic system language selection. Static files, no build step.
+The official landing page for MegaDownloader Revival — updated for 2.6.2 with safer downloads, automatic file-lock recovery, background queue restoration and Russian support. Static files, no build step.
 
 Cloudflare deployment is configured in `wrangler.jsonc`. `.assetsignore` lists the public website files, excluding development dependencies, tests, and local working data from uploads.
 
@@ -42,9 +42,9 @@ Successful values are saved per field. Failed or rate-limited requests keep the 
 
 The panel is decorative only: nothing is downloaded, stored, or sent anywhere. All text is bilingual and the whole section degrades to a static layout with `prefers-reduced-motion`.
 
-### 2.6.1 release content and native screenshots
+### 2.6.2 release content and native screenshots
 
-Curated copy follows the main repository's [v2.6.1 release](https://github.com/a1175815821/MegaDownloader-Revival/releases/tag/v2.6.1) and changelog at commit `24d3622f115cdf2dd5f2cee0f5f440191b650a06` (2026-10-31). The page covers the six-column workbench, first-open menu/settings fixes, automatic Windows display-language matching, and upgrade behavior. The 2.6 interactive demo remains an illustration of the original workbench features.
+Curated copy follows the main repository's [v2.6.2 release](https://github.com/a1175815821/MegaDownloader-Revival/releases/tag/v2.6.2) and changelog at commit `cf09ad35a848bc8f18c35fbfb7c0877ec60cacc5` (2026-11-05). The page covers safe deletion and resume, recovery after temporary file locks, background queue loading, 11 UI languages and upgrade behavior. The 2.6 interactive demo remains an illustration of the original workbench features.
 
 The bundled images come unchanged from that commit's `docs/screenshots/` directory; Git blob hashes were checked during import. These are native WinForms windows with demonstration data in Simplified Chinese, not live downloads or user accounts.
 
@@ -54,7 +54,7 @@ The bundled images come unchanged from that commit's `docs/screenshots/` directo
 | `preflight.png` | `preflight.png` (light theme only) |
 | `settings-dark.png` / `settings-light.png` | `settings-dark.png` / `settings-general.png` |
 
-The gallery follows the site theme, falls back to the available image, hides missing slots, and links to each full-size image. Source images retain their original dimensions. When refreshing a release, update the curated bilingual copy, imported captures, share card and sitemap together; download versions and counts continue to come from the API.
+The gallery follows the site theme, falls back to the available image, hides missing slots, and links to each full-size image. Source images retain their original dimensions. Release-versioned asset URLs refresh existing browser caches. When refreshing a release, update the curated bilingual copy, imported captures, share card and sitemap together; download versions and counts continue to come from the API.
 
 Regenerate the 1200×630 share card with `npm run generate:og` after updating `scripts/generate-og.cjs`. It renders local HTML and the bundled workbench capture using the existing Playwright dependency; it needs no network access or production build step.
 
@@ -68,7 +68,7 @@ npx playwright install chromium
 npm test
 ```
 
-To use an installed Chrome instead, set `PLAYWRIGHT_CHANNEL=chrome` before running the tests, or set `PLAYWRIGHT_EXECUTABLE_PATH` to its full executable path. Both options also work for share-card generation. The tests mock GitHub responses and cover cache reloads, failed requests, pagination, zero counts, refresh timers, language changes, themes, the workbench demo interactions, native screenshots and unavailable browser APIs. Set `LIVE_GITHUB=1` to also run the optional live API smoke check. Layout screenshots are saved under `test-results/`.
+To use an installed Chrome instead, set `PLAYWRIGHT_CHANNEL=chrome` before running the tests, or set `PLAYWRIGHT_EXECUTABLE_PATH` to its full executable path. Both options also work for share-card generation. The tests mock GitHub responses and cover cache reloads, failed requests, pagination, zero counts, refresh timers, language changes, themes, the workbench demo interactions, native screenshots, mobile navigation, keyboard tabs, offscreen/hidden-page animation suspension and unavailable browser APIs. Set `LIVE_GITHUB=1` to also run the optional live API smoke check. Layout screenshots are saved under `test-results/`.
 
 ### Repo layout
 
@@ -77,7 +77,7 @@ To use an installed Chrome instead, set `PLAYWRIGHT_CHANNEL=chrome` before runni
 | `index.html` | markup only — structure and copy |
 | `assets/css/style.css` | all styles (design system, components, workbench demo, motion) |
 | `assets/js/main.js` | all logic (i18n, theme, GitHub sync, canvas FX, live demo, workbench tour, screenshot probes) |
-| `assets/img/` | bundled 2.6.1 native screenshots — see the source mapping above |
+| `assets/img/` | bundled 2.6.2 native screenshots — see the source mapping above |
 | `og.png` | 1200×630 share card used by the `og:image` / `twitter:image` tags |
 | `scripts/generate-og.cjs` | local HTML renderer for the share card (not uploaded) |
 | `_headers` | security & cache headers (CSP allows Google Fonts + api.github.com, images are same-origin) |
@@ -85,12 +85,14 @@ To use an installed Chrome instead, set `PLAYWRIGHT_CHANNEL=chrome` before runni
 
 ### Site highlights
 
-- Dark/light themes (system-following + manual), zh/en bilingual (browser detection + toggle)
+- Dark/light themes (system-following + manual), zh/en bilingual (browser detection + toggle), mobile section navigation and keyboard-operable workbench tabs
 - Live GitHub sync: stars / total downloads (5-minute checks), latest stable version / package metadata (6-hour cache), last-successful-data fallback
 - Interactive 2.6 workbench recreation: two-step add, tri-state file tree, live task search, schedule panel
-- Cold-start comparison: 5–7 s → 0.15–0.2 s, with an animated bar pair and a five-metric hero strip
+- Scoped performance comparison: median queue recovery and UI preparation 3.69 s → 1.33 s, using the same isolated 679-task queue and five alternating runs per build. This is not full process cold start or network throughput; the page links to the upstream measurement report.
 - Pure-canvas FX: particle network with download beams, live demo download window (3D tilt, throughput graph, quota countdown), decrypt-style headline
-- 2.6.1 release highlights and native screenshot gallery, `prefers-reduced-motion` fully respected, mobile sticky download bar, JSON-LD structured data
+- 2.6.2 release highlights and native screenshot gallery, `prefers-reduced-motion` fully respected, mobile sticky download bar, JSON-LD structured data
+
+Decorative canvas and demo updates stop outside the viewport or while the page is hidden; active canvas loops are capped at 30 FPS, pointer glow stops after settling, and scroll work is batched per frame.
 
 ### License
 
@@ -98,7 +100,7 @@ To use an installed Chrome instead, set `PLAYWRIGHT_CHANNEL=chrome` before runni
 
 ## 中文
 
-MegaDownloader Revival 的官网落地页 —— 已同步 2.6.1 的工作台整理、设置首开优化与语言跟随系统。纯静态文件，无构建步骤。
+MegaDownloader Revival 的官网落地页 —— 已同步 2.6.2 的下载保护、文件占用自动恢复、后台队列加载与俄语界面。纯静态文件，无构建步骤。
 
 Cloudflare 部署配置见 `wrangler.jsonc`。`.assetsignore` 指定公开站点文件，开发依赖、测试和本地工作数据不会上传。
 
@@ -136,9 +138,9 @@ python -m http.server 8471
 
 演示不下载、不存储、不上传任何内容。文案中英双语，`prefers-reduced-motion` 下退化为静态布局。
 
-### 2.6.1 版本内容与原生截图
+### 2.6.2 版本内容与原生截图
 
-精选内容依据主仓库 [v2.6.1 发布说明](https://github.com/a1175815821/MegaDownloader-Revival/releases/tag/v2.6.1) 及提交 `24d3622f115cdf2dd5f2cee0f5f440191b650a06` 的变更日志（2026-10-31），覆盖六列工作台、菜单与设置首开修复、Windows 显示语言匹配和升级说明。原有 2.6 交互演示继续展示工作台基础功能。
+精选内容依据主仓库 [v2.6.2 发布说明](https://github.com/a1175815821/MegaDownloader-Revival/releases/tag/v2.6.2) 及提交 `cf09ad35a848bc8f18c35fbfb7c0877ec60cacc5` 的变更日志（2026-11-05），覆盖删除与续传保护、文件占用自动恢复、后台队列加载、11 种界面语言及升级说明。原有 2.6 交互演示继续展示工作台基础功能。
 
 站内图片原样取自主仓库该提交的 `docs/screenshots/`，导入时已核对 Git blob 哈希。截图使用原生 WinForms 窗口及简体中文示例数据，不涉及真实下载或用户账号。
 
@@ -148,7 +150,7 @@ python -m http.server 8471
 | `preflight.png` | `preflight.png`（仅浅色） |
 | `settings-dark.png` / `settings-light.png` | `settings-dark.png` / `settings-general.png` |
 
-图库跟随网站主题，缺图时使用可用的另一张或隐藏该位置，可点击查看原图；图片保留原始尺寸。下次同步版本时一起更新中英文精选文案、截图、分享卡与站点地图；下载版本及统计继续从 API 获取。
+图库跟随网站主题，缺图时使用可用的另一张或隐藏该位置，可点击查看原图；图片保留原始尺寸，通过版本化资源地址刷新浏览器缓存。下次同步版本时一起更新中英文精选文案、截图、分享卡与站点地图；下载版本及统计继续从 API 获取。
 
 更新 `scripts/generate-og.cjs` 后，运行 `npm run generate:og` 重新生成 1200×630 分享卡。脚本通过已有 Playwright 依赖渲染本地 HTML 和工作台截图，不需要联网，生产网站仍无需构建。
 
@@ -162,7 +164,7 @@ npx playwright install chromium
 npm test
 ```
 
-也可以设置环境变量 `PLAYWRIGHT_CHANNEL=chrome`，或用 `PLAYWRIGHT_EXECUTABLE_PATH` 指定已安装浏览器的完整路径；两种方式同样适用于分享卡生成。测试模拟 GitHub 响应，覆盖缓存刷新、请求失败、分页、零计数、定时同步、语言和主题切换、工作台演示交互、原生截图，以及浏览器 API 不可用的降级情况。设置 `LIVE_GITHUB=1` 可额外运行真实接口检查。布局截图保存在 `test-results/`。
+也可以设置环境变量 `PLAYWRIGHT_CHANNEL=chrome`，或用 `PLAYWRIGHT_EXECUTABLE_PATH` 指定已安装浏览器的完整路径；两种方式同样适用于分享卡生成。测试模拟 GitHub 响应，覆盖缓存刷新、请求失败、分页、零计数、定时同步、语言和主题切换、工作台演示交互、原生截图、手机导航、键盘导览、离屏和后台页面暂停动效，以及浏览器 API 不可用的降级情况。设置 `LIVE_GITHUB=1` 可额外运行真实接口检查。布局截图保存在 `test-results/`。
 
 ### 仓库结构
 
@@ -171,7 +173,7 @@ npm test
 | `index.html` | 纯标记（结构 + 文案） |
 | `assets/css/style.css` | 全部样式（设计系统 / 组件 / 工作台演示 / 动效） |
 | `assets/js/main.js` | 全部逻辑（双语 / 主题 / GitHub 同步 / Canvas 特效 / 仿真演示 / 工作台导览 / 截图探测） |
-| `assets/img/` | 已包含 2.6.1 原生截图，来源映射见上表 |
+| `assets/img/` | 已包含 2.6.2 原生截图，来源映射见上表 |
 | `og.png` | 1200×630 分享卡，供 `og:image` / `twitter:image` 引用 |
 | `scripts/generate-og.cjs` | 分享卡的本地 HTML 渲染脚本（不上传） |
 | `_headers` | 安全与缓存响应头（CSP 放行 Google Fonts 与 api.github.com，图片同源） |
@@ -179,12 +181,14 @@ npm test
 
 ### 站点亮点
 
-- 深/浅双主题（跟随系统 + 手动切换）、中英双语（浏览器检测 + 手动切换）
+- 深/浅双主题（跟随系统 + 手动切换）、中英双语（浏览器检测 + 手动切换）、手机章节导航与键盘工作台导览
 - GitHub 同步：Stars / 累计下载每 5 分钟检查，最新稳定版本与包信息缓存 6 小时，失败保留上次成功数据
 - 2.6 工作台交互仿真：两步添加、文件树三态勾选、实时任务搜索、定时下载面板
-- 冷启动对照：5–7 秒 → 0.15–0.2 秒，双条动画对比，首屏五个指标
+- 性能对照：同一份 679 项任务的隔离阶段基准，交替各 5 轮，队列恢复与界面准备的中位耗时 3.69 秒 → 1.33 秒；页面附主仓库测量报告，完整冷启动及真实下载速度需另行测量
 - 纯 Canvas 特效：粒子网络 + 下载光束流星、3D 倾斜仿真下载窗口（吞吐曲线 / 配额倒计时）、解密式标题动画
-- 2.6.1 精选更新与原生截图图库；完整支持 `prefers-reduced-motion`；移动端常驻下载条；JSON-LD 结构化数据
+- 2.6.2 精选更新与原生截图图库；完整支持 `prefers-reduced-motion`；移动端常驻下载条；JSON-LD 结构化数据
+
+Canvas 与演示离开视野或页面隐藏时暂停刷新；持续绘制最高 30 FPS，光标光晕到位后停止，滚动计算按帧合并。
 
 ### License
 

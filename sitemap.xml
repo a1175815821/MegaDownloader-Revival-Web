@@ -3,12 +3,12 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://megadownloader-revival-web.a1175815821.workers.dev/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://megadownloader-revival-web.a1175815821.workers.dev/og.png</image:loc>
-      <image:title>MegaDownloader Revival 2.6.1 — 更顺手的 MEGA 下载工作台</image:title>
+      <image:title>MegaDownloader Revival 2.6.2 — 更稳妥的 MEGA 下载工作台</image:title>
     </image:image>
   </url>
 </urlset>

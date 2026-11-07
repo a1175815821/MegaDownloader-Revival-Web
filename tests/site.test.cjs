@@ -70,7 +70,7 @@ async function setup(options = {}) {
   await context.route('https://fonts.gstatic.com/**', route => route.abort());
   if (options.shots) {
     const png = await fs.readFile(path.join(ROOT, 'og.png'));
-    await context.route('**/assets/img/*.png', route => {
+    await context.route('**/assets/img/*.png*', route => {
       const name = new URL(route.request().url()).pathname.split('/').pop();
       return options.shots.includes(name)
         ? route.fulfill({ contentType: 'image/png', body: png })
@@ -374,10 +374,10 @@ test('screenshots follow the site theme and fall back when one image is missing'
     await page.waitForFunction(() => document.querySelectorAll('.shot:not([hidden])').length === 2);
     const images = page.locator('.shot:not([hidden]) img');
     await page.waitForFunction(() => [...document.querySelectorAll('.shot:not([hidden]) img')].every(img => img.complete && img.naturalWidth > 0));
-    assert.match(await images.nth(0).getAttribute('src'), /workbench-dark\.png$/);
+    assert.equal(new URL(await images.nth(0).getAttribute('src'), origin).pathname, '/assets/img/workbench-dark.png');
     await page.locator('#themeBtn').click();
-    await page.waitForFunction(() => document.querySelector('.shot img').getAttribute('src').endsWith('workbench-light.png'));
-    assert.match(await images.nth(1).getAttribute('src'), /preflight\.png$/);
+    await page.waitForFunction(() => new URL(document.querySelector('.shot img').src).pathname.endsWith('workbench-light.png'));
+    assert.equal(new URL(await images.nth(1).getAttribute('src'), origin).pathname, '/assets/img/preflight.png');
     assert.equal(await page.locator('.shot[hidden]').count(), 1);
   } finally { await context.close(); }
 });
@@ -391,7 +391,7 @@ test('bundled native screenshots load in both themes with full-size links and tr
       if (theme === 'light') await page.locator('#themeBtn').click();
       await page.waitForFunction(theme => [...document.querySelectorAll('.shot img')].every(img =>
         img.complete && img.naturalWidth > 0 &&
-        (img.src.endsWith('preflight.png') || img.src.endsWith(`-${theme}.png`))), theme);
+        (new URL(img.src).pathname.endsWith('preflight.png') || new URL(img.src).pathname.endsWith(`-${theme}.png`))), theme);
       const captures = await page.locator('.shot').evaluateAll(figures => figures.map(fig => {
         const img = fig.querySelector('img');
         return { hidden: fig.hidden, width: img.naturalWidth, linked: fig.querySelector('a').href === img.src };
@@ -421,6 +421,7 @@ test('internal anchors, IDs and translated markup stay valid', async () => {
     assert.deepEqual(issues, { duplicateIDs: [], missingAnchors: [] });
     await page.locator('#langBtn').click();
     assert.equal(await page.locator('[data-i18n]').evaluateAll(elements => elements.some(el => /<\/?(?:b|small|em|span|br)[\s>]/.test(el.textContent))), false);
+    assert.deepEqual(await page.locator('[data-i18n], [data-i18n-html]').evaluateAll(elements => elements.filter(el => /[\u3400-\u9fff]/.test(el.textContent)).map(el => el.dataset.i18n || el.dataset.i18nHtml)), [], 'English copy must not fall back to Chinese');
   } finally { await context.close(); }
 });
 
@@ -441,3 +442,89 @@ for (const [name, options] of [
     } finally { await context.close(); }
   });
 }
+
+test('mobile navigation supports both languages, keyboard dismissal and section links', async () => {
+  const { context, page } = await setup({ mobile: true });
+  try {
+    await page.setViewportSize({ width: 320, height: 844 });
+    const menu = page.locator('#menuBtn');
+    for (const lang of ['zh-CN', 'en']) {
+      if (lang === 'en') await page.locator('#langBtn').click();
+      assert.equal(await menu.isVisible(), true);
+      assert.equal(await page.locator('#navLinks').isVisible(), false);
+      await menu.click();
+      assert.equal(await menu.getAttribute('aria-expanded'), 'true');
+      assert.equal(await page.locator('#navLinks a:visible').count(), 7);
+      const bounds = await page.locator('#navLinks').boundingBox();
+      assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= 320);
+      assert.match(await menu.getAttribute('aria-label'), lang === 'en' ? /Close/ : /关闭/);
+      await page.keyboard.press('Escape');
+      assert.equal(await menu.getAttribute('aria-expanded'), 'false');
+      assert.equal(await menu.evaluate(el => document.activeElement === el), true);
+      await menu.click();
+      await page.locator('#navLinks a[href="#download"]').click();
+      assert.equal(await menu.getAttribute('aria-expanded'), 'false');
+      await page.waitForFunction(() => location.hash === '#download');
+    }
+    await menu.click();
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.waitForFunction(() => document.querySelector('#menuBtn').getAttribute('aria-expanded') === 'false');
+    assert.equal(await menu.isVisible(), false);
+    assert.equal(await page.locator('#navLinks').isVisible(), true);
+  } finally { await context.close(); }
+});
+
+test('workbench tabs support arrow keys, Home and End with one tab stop', async () => {
+  const { context, page } = await setup();
+  try {
+    const tabs = page.locator('.wb-tab');
+    await tabs.first().focus();
+    await page.keyboard.press('ArrowRight');
+    assert.equal(await page.locator('#wb-tab-tree').getAttribute('aria-selected'), 'true');
+    assert.equal(await page.locator('.wb-view[data-view="pick"]').isVisible(), true);
+    assert.equal(await page.locator('.wb-tab[tabindex="0"]').count(), 1);
+    assert.equal(await page.locator('#wbDemo').getAttribute('aria-labelledby'), 'wb-tab-tree');
+    await page.keyboard.press('End');
+    assert.equal(await page.locator('#wb-tab-schedule').getAttribute('aria-selected'), 'true');
+    assert.equal(await page.locator('.wb-view[data-view="sched"]').isVisible(), true);
+    await page.keyboard.press('Home');
+    assert.equal(await page.locator('#wb-tab-flow').getAttribute('aria-selected'), 'true');
+    await page.keyboard.press('ArrowLeft');
+    assert.equal(await page.locator('#wb-tab-schedule').getAttribute('aria-selected'), 'true');
+  } finally { await context.close(); }
+});
+
+test('animated demo pauses offscreen and in hidden pages, then resumes', async () => {
+  const { context, page } = await setup({ motion: true, clock: true });
+  try {
+    await synced(page);
+    await page.locator('.mock').scrollIntoViewIfNeeded();
+    await page.clock.runFor(1200);
+    const row = page.locator('[data-bar]').first();
+    const before = await row.getAttribute('style');
+    await page.clock.runFor(1200);
+    assert.notEqual(await row.getAttribute('style'), before);
+    await page.locator('#download').scrollIntoViewIfNeeded();
+    await page.clock.runFor(250);
+    const paused = await row.getAttribute('style');
+    await page.clock.runFor(1500);
+    assert.equal(await row.getAttribute('style'), paused);
+    await page.locator('.mock').scrollIntoViewIfNeeded();
+    await page.clock.runFor(500);
+    assert.notEqual(await row.getAttribute('style'), paused);
+    await page.evaluate(() => {
+      Object.defineProperty(document, 'hidden', { configurable: true, value: true });
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    const hidden = await row.getAttribute('style');
+    await page.clock.runFor(1500);
+    assert.equal(await row.getAttribute('style'), hidden);
+    assert.equal(await page.locator('html').evaluate(el => el.hasAttribute('data-page-hidden')), true);
+    await page.evaluate(() => {
+      delete document.hidden;
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await page.clock.runFor(500);
+    assert.notEqual(await row.getAttribute('style'), hidden);
+  } finally { await context.close(); }
+});

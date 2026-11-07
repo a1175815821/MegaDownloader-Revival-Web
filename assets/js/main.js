@@ -1,5 +1,5 @@
 /* ============================================================
-   MegaDownloader Revival — 概念版官网脚本
+   MegaDownloader Revival — 官网脚本
    模块:开场幕布 / 主题 / 双语 / 进场与滚动 / GitHub 同步 /
         粒子网络 + 下载光束 / 仿真窗口(进度·曲线·配额·3D 倾斜)/
         解密文字 / 磁吸按钮 / 光标光晕 / 时间线点亮 / 水印视差
@@ -57,14 +57,29 @@ if(mqLight.addEventListener){
 /* ========== 双语 ========== */
 var I18N={
 en:{
+ 'nav.skip':"Skip to main content",
+ 'stats.note':"*Isolated stage benchmark with 679 tasks · <a href=\"#performance\">See measurement details →</a>",
+ 'boot.after':"After",
+ 'boot.before':"Before",
+ 'boot.source':"Measurement scope & full results",
+ 'cl.previous':"previous update",
+ 'cl.h262':"Safer downloads, responsive startup, Russian support.",
+ 'cl.f1':"The window appears before background queue restoration and file-lock retries. Saving and scheduling wait until loading finishes; closing cancels pending work.",
+ 'cl.f2':"Settings, queues and the media library recover automatically after temporary locks, merging edits made while waiting and protecting existing data and startup preferences.",
+ 'cl.f3':"Deletion protects unrelated same-name files. Expired URLs refresh while preserving valid progress; fixes cover preallocated disk space, per-task throttling and download / 7z cancellation and restart.",
+ 'cl.f4':"Batched MetaMAC checks, valid ciphertext reuse, shorter save locks and merged list refreshes reduce repeated work while keeping the original scheduling cadence.",
+ 'cl.f5':"Russian brings the total to 11 UI languages. Regional fractional limits, native screenshots and English / Chinese / Russian docs are updated. The main project passed 924 assertions in each of Debug and Release.",
+ 'cl.release262':"Read the full 2.6.2 release notes",
+ 'faq.q9':"What if a file is locked or my queue is still restoring?",
+ 'faq.a9':"Wait for the lock to be released; the app retries automatically. Settings, queues and the media library remain protected until recovery completes, and saving and scheduling wait for readiness. If you edited Settings, keep your inputs and save again after recovery as prompted.",
  'nav.story':'The Revival','nav.workbench':'Workbench','nav.features':'Capabilities','nav.vs':'vs v1.8','nav.download':'Download','nav.changelog':'Changelog','nav.faq':'FAQ','nav.star':'Star',
  'hero.badge':'Stable releases on GitHub · actively maintained',
- 'hero.flag':'2.6.1 · everyday refinements',
- 'hero.h1a':'The classic MEGA downloader','hero.h1b':'2.6.1 — a smoother workbench.',
- 'hero.sub':'A clearer workbench, <b>faster settings</b> and a language option that <b>follows Windows</b>. Two-step batch add, file-tree selection, Ctrl+F search and scheduling, with multi-threaded transfers, resume and quota recovery. Still a <b>single portable exe</b>.',
+ 'hero.flag':"2.6.2 · safer downloads & recovery",
+ 'hero.h1a':'The classic MEGA downloader','hero.h1b':"2.6.2. Safer downloads.",
+ 'hero.sub':"The window opens while your <b>queue restores in the background</b>. Recover automatically after file locks, protect existing files, and resume reliably. Now with <b>Russian support</b>. Batch add, search and scheduling in the same <b>single portable exe</b>.",
  'hero.cta1':'Free download','hero.cta2':'GitHub Star',
  'hero.note':'✓ Free &amp; open source&nbsp;&nbsp;✓ No admin rights&nbsp;&nbsp;✓ <em>No ads, no bundleware, no tracking</em>',
- 'stats.stars':'GitHub Stars','stats.dls':'Total downloads','stats.boot':'cold start','stats.fixes':'fixes & hardening','stats.langs':'UI languages',
+ 'stats.stars':'GitHub Stars','stats.dls':'Total downloads','stats.recovery':"less queue preparation time*",'stats.fixes':'fixes & hardening','stats.langs':'UI languages',
  'mobile.note':'Win 7 SP1+ · portable · MIT',
  'mock.theme':'dark theme','mock.speed':'total throughput',
  'mock.tab1':'All','mock.tab2':'Active','mock.tab3':'Done','mock.tab4':'Failed','mock.running':'running',
@@ -76,15 +91,15 @@ en:{
  'story.t3h':'The outage','story.t3p':'MEGA changed its link formats (<b>mega.nz/file, /folder</b>). The old build couldn\u2019t recognize new links and its core features died. Users went hunting for alternatives.',
  'story.t4h':'The revival','story.t4p':'v1.8 was decompiled, then fixed and refactored continuously: <b>200+ fixes and hardening</b>, semantic-versioned releases, every Issue answered.',
  'story.t5h':'The rebuild','story.t5p':'The interface was torn down and rebuilt: <b>a new workbench, two-step batch add, file-tree selection, task search, scheduled downloads</b>. Same engine, new shell — the biggest update since the revival.',
- 'wb.kicker':'Workbench · 2.6.1',
- 'wb.title':'Not a reskin.<br>It is a <span class="grad-text">rebuilt workbench</span>.',
- 'wb.desc':'2.6 rebuilt the native WinForms workbench. 2.6.1 refines the details you use every day: consistent type and spacing, a six-column task list, details that adapt to the window width, and menus that appear on first open.',
- 'update.uiTag':'Interface','update.uiTitle':'A clearer queue, easier controls',
- 'update.uiDesc':'Progress and percentage share one column. Details sit beside wide lists and below narrow ones. Stop keeps its caption, Schedule gains a clock icon, and menus appear without resizing.',
- 'update.settingsTag':'Settings','update.settingsTitle':'Less waiting on first open',
- 'update.settingsDesc':'Less repeated layout work; account controls load on demand. Isolated first-open timing: about 8.2 s → 1.1 s, varying by machine. Settings resizes, scrolls and jumps to search matches.',
- 'update.langTag':'Language','update.langTitle':'Follow the Windows display language',
- 'update.langDesc':'New configurations match the system language, including regional and Chinese script variants, with English as fallback. Manual choices stay. Change Settings → General → Language, save, then restart.',
+ 'wb.kicker':"Workbench · 2.6.2",
+ 'wb.title':"A familiar workbench.<br><span class=\"grad-text\">More reliable at every step.</span>",
+ 'wb.desc':"2.6 rebuilt the workbench; 2.6.1 refined its interface and settings. 2.6.2 improves downloading, recovery and startup. Explore this release, then try batch add, the file tree, search and scheduling.",
+ 'update.safetyTag':"Download safety",'update.safetyTitle':"Protect files. Keep valid progress.",
+ 'update.safetyDesc':"Deletion checks output ownership to protect unrelated same-name files. Expired URLs refresh without losing valid resume data, and preallocated files need only the additional disk space.",
+ 'update.recoveryTag':"Data recovery",'update.recoveryTitle':"Recover automatically after file locks",
+ 'update.recoveryDesc':"Settings, queues and the media library stay protected while locked. Recovery retries automatically and merges edits made while waiting. Saving and scheduling wait until the recovered state is ready.",
+ 'update.langTag':"11 UI languages",'update.langTitle':"Russian joins the built-in languages",
+ 'update.langDesc':"Russian now participates in automatic Windows language matching. Simplified and Traditional Chinese remain available. Manual choices stay, with English as fallback. Change Settings → General → Language, save and restart.",
  'wb.t1t':'One window, two steps','wb.t1d':'Paste links → pick files. No more input → preview → confirm dialogs stacked on each other.',
  'wb.t2t':'File tree · tri-state','wb.t2d':'Expand the shared-folder hierarchy, tick whole folders, half-selected states, invert a filter. Duplicates and dead links are skipped.',
  'wb.t3t':'Ctrl+F task search','wb.t3d':'Package names, filenames and relative paths at once; searched in the background, Esc clears it.',
@@ -104,11 +119,11 @@ en:{
  'wb.pauseAtEnd':'Pause when the window ends','wb.midnight':'Crosses midnight','wb.persist':'Kept after restart',
  'wb.schNote':'The app must stay running; a quota wait is never bypassed by the schedule, and manually paused tasks are never resumed behind your back.',
  'wb.shot1':'Workbench','wb.shot2':'File pre-flight · folder selection','wb.shot3':'Settings · automatic language',
- 'wb.shotsNote':'2.6.1 native windows · demonstration data in Simplified Chinese · click an image for full size; the interactive demo is above.',
- 'boot.k':'cold start','boot.h':'From 5–7 seconds to <span class="grad-text">0.15–0.2 s</span>.',
- 'boot.p':'2.6 defers performance-counter and WMI sampling until after first paint. In a test setup, cold start fell from 5–7 s to 0.15–0.2 s. Actual times depend on hardware and environment.',
- 'boot.c1':'measured locally','boot.c2':'no warm-up','boot.c3':'sampling after first paint','boot.faster':'about',
- 'vs.rb':'Cold start','vs.nob':'✕ 5–7 s before the window appears','vs.yb':'0.15–0.2 s, effectively instant',
+ 'wb.shotsNote':"2.6.2 native windows · demonstration data in Simplified Chinese · click an image for full size; the interactive demo is above.",
+ 'boot.k':"Queue recovery & UI preparation",'boot.h':"The same 679-task queue.<br><span class=\"grad-text\">3.69 s → 1.33 s.</span>",
+ 'boot.p':"In an isolated benchmark, alternating five runs per build, median queue recovery and UI preparation took about 64% less time. The window appears before background restoration. Full process cold start and real download throughput require separate measurement. Results vary by device.",
+ 'boot.c1':"679 tasks",'boot.c2':"5 alternating runs · median",'boot.c3':"isolated stage benchmark",'boot.faster':"less time",
+ 'vs.rb':"Startup experience",'vs.nob':"✕ synchronous work blocks the window",'vs.yb':"window first, queue restoration in the background",
  'd.1h':'Adding links','d.1o':'Input → preview dialog → confirm dialog; going back loses your ticks','d.1n':'Two steps in one window; back keeps everything, unchanged links reuse the preview',
  'd.2h':'Importing 500 files','d.2o':'A control per row, every tick scans the whole table, the UI goes white','d.2n':'Virtual list + incremental counts + background build, cancellable halfway',
  'd.3h':'Everyday use','d.3o':'Find a task by eyeballing the list; night downloads mean staying up','d.3n':'Ctrl+F jumps straight there; the schedule starts itself',
@@ -125,11 +140,11 @@ en:{
  'feat.f7h':'Stream while downloading','feat.f7p':'Integrated VLC playback — start watching before the download finishes.',
  'feat.f8h':'Web remote control','feat.f8p':'Built-in HTTP server: push tasks and watch progress from your phone, with LAN access support.',
  'feat.f8chip':'CSRF + PBKDF2 hardened',
- 'feat.f9h':'Resume · self-healing','feat.f9p':'Pause, resume, survive restarts. Failed tasks retry automatically; permanently dead ones are excluded.',
+ 'feat.f9h':'Resume · self-healing','feat.f9p':"Pause, resume and recover after restart. Expired URLs refresh while retaining valid progress; temporary file locks recover automatically. Failed tasks retry, excluding permanently unavailable ones.",
  'feat.f9a':'resumable state persisted',
  'feat.f10h':'Dark / light themes','feat.f10p':'Follows the system in real time, or set manually. <b>Try the 🌙 toggle in the top-right</b> — the app does exactly this.',
  'feat.f11h':'…and a whole toolbox','feat.f11p':'Steganography, ELC containers, auto-decompression — each one polished until it just works.',
- 'feat.f11a':'🖼️ image/video steganography','feat.f11b':'🔐 ELC containers','feat.f11c':'🗜️ RAR/7Z/ZIP auto-extract','feat.f11d':'🌐 10 UI languages',
+ 'feat.f11a':'🖼️ image/video steganography','feat.f11b':'🔐 ELC containers','feat.f11c':'🗜️ RAR/7Z/ZIP auto-extract','feat.f11d':"🌐 11 UI languages",
  'vs.kicker':'2018 → 2026','vs.title':'Compared to the old days,<br><span class="grad-text">it\u2019s stronger.</span>',
  'vs.old':'Original v1.8 (abandoned 2018)',
  'vs.r1':'New mega.nz/file · /folder links','vs.no1':'✕ not recognized','vs.y1':'fully supported',
@@ -138,14 +153,14 @@ en:{
  'vs.r4':'Scheduled downloads','vs.no4':'✕ babysit it yourself','vs.y4':'daily window / one-off appointment',
  'vs.r5':'Large batch import','vs.no5':'✕ confirm each item, UI goes white','vs.y5':'virtual list + background build, cancellable',
  'vs.r6':'When MEGA quota runs out','vs.no6':'✕ hangs, errors out','vs.y6':'auto-pause + countdown resume',
- 'vs.r7':'UI themes','vs.no7':'system grey only','vs.y7':'2.6.1 workbench, dark / light follows system',
+ 'vs.r7':'UI themes','vs.no7':'system grey only','vs.y7':"native workbench, dark / light follows system",
  'vs.r8':'Maintenance','vs.no8':'✕ abandoned','vs.y8':'200+ fixes, Issues answered',
  'dl.kicker':'Download','dl.title':'Two packages,<span class="grad-text">one program</span>.','dl.desc':'Get the latest stable release from GitHub. Download counts are checked every 5 minutes.',
  'dl.a1':'Portable <small data-asset-size="zip">.ZIP</small>','dl.a2':'Extract and run. No installer or admin rights needed.',
  'dl.avsafe':'extract and run','dl.noadmin':'no admin needed','dl.btn':'Download portable',
  'dl.b1':'Single file <small data-asset-size="exe">.EXE</small>','dl.b2':'Download and double-click — dependencies are embedded. The effortless option.',
  'dl.onedrop':'single-file launch','dl.noinstall':'no install','dl.btn2':'Download single-file',
- 'dl.cfg':'Settings &amp; queue live in <b>%LOCALAPPDATA%\\MegaDownloader\\</b> — upgrading is just replacing the exe','dl.req':'Windows 7 SP1+ · .NET Framework 4.8 (built into Win10 1903+)',
+ 'dl.cfg':"Close the app, then replace the EXE or the ZIP's application files. Settings and queue stay in <b>%LOCALAPPDATA%\\MegaDownloader\\</b>",'dl.req':'Windows 7 SP1+ · .NET Framework 4.8 (built into Win10 1903+)',
  'cl.kicker':'Release highlights','cl.title':'Every release counts.',
  'cl.latest':'this update','cl.h261':'A clearer workbench, faster settings, system language.',
  'cl.e1':'Consistent light/dark surfaces, typography, spacing and line icons; six default columns combine progress and percentage, with details beside or below the list as space allows',
@@ -158,7 +173,7 @@ en:{
  'cl.a2':'Adding is now two steps in one window — no stacked preview dialog; going back keeps links, settings, search, expansion and ticks, and an unchanged link reuses the cached preview',
  'cl.a3':'Large batches: virtual list + debounced filtering + incremental counts, background build with a live processed counter and cancel; links copied mid-import are held for the next batch',
  'cl.a4':'Ctrl+F task search (package / filename / relative path) and scheduled downloads (daily window or one-off, crosses midnight, pauses at the end, survives restarts) land',
- 'cl.a5':'Startup path rewritten: no synchronous performance counters or WMI on first paint, so cold start drops from 5–7 s to 0.15–0.2 s; icons align per-DPI, the details pane collapses, dark list backgrounds are complete, and all 10 language packs gained the new strings',
+ 'cl.a5':"Performance-counter and WMI sampling moved off first paint; icons align per DPI, the details pane collapses, dark list backgrounds are complete, and the 10 language packs available then gained the new strings",
  'cl.b1':'Same-name downloads no longer corrupt each other; extraction no longer overwrites same-named originals',
  'cl.b2':'After an interrupted extraction or verification, the finished file is verified and reused',
  'cl.b3':'Short byte-range requests for streaming return the correct bytes',
@@ -172,25 +187,25 @@ en:{
  'faq.kicker':'FAQ','faq.title':'Frequently asked.',
  'faq.q1':'My antivirus flags it.','faq.a1':'If your antivirus flags a download, check its warning and verify the source before running it. You can inspect the <a href="https://github.com/a1175815821/MegaDownloader-Revival/actions/workflows/build.yml" target="_blank" rel="noopener">build workflow</a>, try the ZIP package, or build from source yourself. A different package does not guarantee that a warning will disappear.',
  'faq.q2':'It says quota exceeded.','faq.a2':'MEGA limits free accounts and IPs. The app <b>auto-pauses and resumes after a countdown</b>; if you can\u2019t wait, enable “quota breakthrough mode” in Settings.',
- 'faq.q3':'Do I need to rebuild my settings or queue for 2.6.1?','faq.a3':'No. Replace the EXE for the single-file edition, or extract the ZIP and replace the program files. Settings and the queue stay in <b>%LOCALAPPDATA%\\MegaDownloader\\</b>; resume points and manual language choices are kept. The first upgrade migrates to six columns; optional columns remain in the column menu.',
+ 'faq.q3':"Do I need to rebuild my settings or queue for 2.6.2?",'faq.a3':"No. Close the application, then replace the EXE for the single-file edition or replace the application files from the ZIP. Settings and the queue remain in <b>%LOCALAPPDATA%\\MegaDownloader\\</b>; resume data and manual language choices are preserved.",
  'faq.q4':'Does the schedule need the app running?','faq.a4':'Yes — 2.6 offers no wake timers or background service, so the app must stay open. The window crosses midnight, pauses at the end and survives a restart; manually paused tasks are not resumed, and a quota wait is not bypassed.',
  'faq.q5':'Is download speed limited?','faq.a5':'Not by the app — multi-threading will max out your bandwidth. Global or per-task speed caps are there when you want them.',
  'faq.q6':'Do old links still work? Admin rights?','faq.a6':'Legacy #! links, mega:// encrypted links and ELC containers are all supported. It\u2019s portable and needs no admin rights.',
  'faq.q7':'Mac / Linux version?','faq.a7':'No — it\u2019s WinForms, Windows only. Enable the built-in web interface to manage downloads from any device\u2019s browser.',
- 'faq.q8':'How do I follow the system language?','faq.a8':'Choose the system language option in Settings → General → Language, save, then restart. New configurations use the Windows display language automatically; existing manual choices stay. There are still 10 built-in UI languages, with English as fallback. Japanese and Korean READMEs do not imply corresponding built-in UI packs.',
+ 'faq.q8':'How do I follow the system language?','faq.a8':"Choose the system language option in Settings → General → Language, save and restart. New configurations match the Windows display language; manual choices stay. 2.6.2 adds Russian for 11 built-in languages, including Simplified and Traditional Chinese, with English as fallback.",
  'cta.kicker':'Ready?','cta.h':'Download the classic.<br><span class="grad-text">Again.</span>',
- 'cta.sub':'From the 2.6 workbench rebuild to the 2.6.1 refinements, fixes and improvements keep coming. A Star helps more people find the project.',
+ 'cta.sub':"From the rebuilt workbench to safer downloads and background recovery, improvements keep coming. A Star helps more people find the project.",
  'cta.btn1':'Get the latest','cta.btn2':'Give a Star',
  'cta.note':'Found a bug? File an Issue — many recent fixes started as user reports.',
- 'foot.tag':'The classic MEGA downloader, back at full power. 2.6.1 keeps refining the workbench: portable, multi-threaded, continuously fixed.',
+ 'foot.tag':"The classic MEGA downloader, ready for today. 2.6.2: safer downloads, background recovery, 11 languages and active maintenance.",
  'foot.h1':'Project','foot.l1':'GitHub repo','foot.l2':'Download latest','foot.l3':'Report an issue',
  'foot.h2':'Site','foot.l4':'Site source','foot.l5':'Production site','foot.l6':'FAQ',
  'foot.legal1':'Unofficial project, not affiliated with MEGA Ltd. Derived from decompilation of third-party published software, solely to fix compatibility and restore usability.',
- 'ticker':['v2.6.1 workbench ✓','system language ✓','faster settings ✓','two-step batch add ✓','file tree · tri-state ✓','Ctrl+F search ✓','scheduled downloads ✓','virtual list · no stalls ✓','mega.nz/file ✓','mega.nz/folder ✓','legacy #! links ✓','mega://enc2 ✓','ELC containers ✓','RAR / 7Z / ZIP auto-extract ✓','stream while downloading ✓','10 UI languages ✓','MIT open source ✓']
+ 'ticker':['v2.6.2 workbench ✓','background queue recovery ✓','safer deletion & resume ✓','two-step batch add ✓','file tree · tri-state ✓','Ctrl+F search ✓','scheduled downloads ✓','virtual list · no stalls ✓','mega.nz/file ✓','mega.nz/folder ✓','legacy #! links ✓','mega://enc2 ✓','ELC containers ✓','RAR / 7Z / ZIP auto-extract ✓','stream while downloading ✓','11 UI languages · Russian ✓','MIT open source ✓']
 },
 zh:{
  'quota.done':'已恢复，继续下载','quota.wait':'配额恢复倒计时',
- 'ticker':['v2.6.1 工作台 ✓','语言跟随系统 ✓','设置更快打开 ✓','两步批量添加 ✓','文件树三态勾选 ✓','Ctrl+F 搜索 ✓','定时下载 ✓','虚拟列表不卡顿 ✓','mega.nz/file ✓','mega.nz/folder ✓','旧版 #! 链接 ✓','mega://enc2 ✓','ELC 容器 ✓','RAR / 7Z / ZIP 自动解压 ✓','边下边播 ✓','10 种界面语言 ✓','MIT 开源 ✓']
+ 'ticker':['v2.6.2 工作台 ✓','后台恢复队列 ✓','删除与续传保护 ✓','两步批量添加 ✓','文件树三态勾选 ✓','Ctrl+F 搜索 ✓','定时下载 ✓','虚拟列表不卡顿 ✓','mega.nz/file ✓','mega.nz/folder ✓','旧版 #! 链接 ✓','mega://enc2 ✓','ELC 容器 ✓','RAR / 7Z / ZIP 自动解压 ✓','边下边播 ✓','11 种界面语言 · 新增俄语 ✓','MIT 开源 ✓']
 }};
 
 var langNow='zh';
@@ -222,7 +237,8 @@ function applyLang(l){
     if(v)el.setAttribute('alt',v);
   });
   buildTicker();
-  document.title=l==='en'?'MegaDownloader Revival 2.6.1 — a smoother MEGA download workbench':'MegaDownloader Revival 2.6.1 — 更顺手的 MEGA 下载工作台';
+  syncMenuLabel();
+  document.title=l==='en'?'MegaDownloader Revival 2.6.2 — safer downloads, responsive startup':'MegaDownloader Revival 2.6.2 — 更稳妥的 MEGA 下载工作台';
   scramble($('.hero h1 .grad-text'));
   syncMockTheme();
   syncQuotaLabel();
@@ -230,6 +246,27 @@ function applyLang(l){
   wbSyncPanelTitle();
 }
 langBtn.addEventListener('click',function(){applyLang(langNow==='en'?'zh':'en')});
+
+/* ========== 手机章节导航 ========== */
+var menuBtn=$('#menuBtn'),navLinks=$('#navLinks'),navMobile=matchMedia('(max-width: 860px)');
+function syncMenuLabel(){
+  if(!menuBtn)return;
+  var open=menuBtn.getAttribute('aria-expanded')==='true';
+  menuBtn.setAttribute('aria-label',langNow==='en'?(open?'Close navigation':'Open navigation'):(open?'关闭导航':'打开导航'));
+}
+function setNavOpen(open,focus){
+  if(!menuBtn||!navLinks)return;
+  menuBtn.setAttribute('aria-expanded',String(open));navLinks.classList.toggle('is-open',open);syncMenuLabel();
+  if(focus)(open?$('a',navLinks):menuBtn).focus();
+}
+if(menuBtn&&navLinks){
+  menuBtn.hidden=false;
+  menuBtn.addEventListener('click',function(){setNavOpen(menuBtn.getAttribute('aria-expanded')!=='true',true)});
+  navLinks.addEventListener('click',function(e){if(e.target.closest('a'))setNavOpen(false,false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menuBtn.getAttribute('aria-expanded')==='true'){e.preventDefault();setNavOpen(false,true)}});
+  document.addEventListener('click',function(e){if(!e.target.closest('#nav'))setNavOpen(false,false)});
+  if(navMobile.addEventListener)navMobile.addEventListener('change',function(){setNavOpen(false,false)});
+}
 
 /* 跑马灯 */
 function buildTicker(){
@@ -262,29 +299,31 @@ function scramble(el,forceText){
 }
 
 /* ========== 滚动:进度条 / 导航 / 时间线 / 水印视差 ========== */
-var nav=$('#nav'),progress=$('#progress');
+var nav=$('#nav'),progress=$('#progress'),timeline=$('.timeline'),timelineItems=$$('.tl-item'),watermarks=$$('.watermark');
 function onScroll(){
   var y=scrollY;
   nav.classList.toggle('scrolled',y>14);
   var h=document.documentElement.scrollHeight-innerHeight;
   progress.style.width=(h>0?(y/h*100):0)+'%';
-  var tl=$('.timeline');
+  var tl=timeline;
   if(tl){
     var r=tl.getBoundingClientRect();
     var p=Math.min(1,Math.max(0,(innerHeight*0.8-r.top)/r.height));
     tl.style.setProperty('--tlp',p.toFixed(3));
-    $$('.tl-item',tl).forEach(function(it){
+    timelineItems.forEach(function(it){
       it.classList.toggle('lit',it.getBoundingClientRect().top<innerHeight*0.75);
     });
   }
-  $$('.watermark').forEach(function(w){
+  if(!reduceMotion)watermarks.forEach(function(w){
     var wr=w.getBoundingClientRect();
     var off=(wr.top+wr.height/2-innerHeight/2)*-0.09;
     w.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)';
   });
 }
-addEventListener('scroll',onScroll,{passive:true});
-addEventListener('resize',onScroll,{passive:true});
+var scrollFrame=null;
+function queueScroll(){if(scrollFrame!==null)return;scrollFrame=requestAnimationFrame(function(){scrollFrame=null;onScroll()})}
+addEventListener('scroll',queueScroll,{passive:true});
+addEventListener('resize',queueScroll,{passive:true});
 
 /* ========== 进场动画(IO 不可用时整页直接可见) ========== */
 try{
@@ -322,9 +361,9 @@ var counted=false;
 function showCounts(){
   if(counted)return;counted=true;
   ['stars','dls'].forEach(function(k){if(validCount(LIVE[k]))countUp($('[data-count="'+k+'"]'),LIVE[k])});
-  countUp($('[data-count="boot"]'),0.2);
+  countUp($('[data-count="recovery"]'),64);
   countUp($('[data-count="fixes"]'),200);
-  countUp($('[data-count="langs"]'),10);
+  countUp($('[data-count="langs"]'),11);
 }
 var statsEl=$('.stats');
 if(statsEl&&typeof IntersectionObserver==='function'){
@@ -474,6 +513,29 @@ addEventListener('focus',sync);
 addEventListener('online',sync);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)sync()});
 
+/* Animate only visible elements, at most 30 frames per second. */
+function animateVisible(target,paint){
+  if(!target)return;
+  var visible=typeof IntersectionObserver!=='function',frame=null,last=0;
+  function running(){return visible&&!document.hidden}
+  function loop(ts){
+    frame=null;if(!running())return;
+    if(!last||ts-last>=1000/30){last=ts;paint(ts)}
+    frame=requestAnimationFrame(loop);
+  }
+  function sync(){
+    if(running()){if(frame===null){last=0;frame=requestAnimationFrame(loop)}}
+    else if(frame!==null){cancelAnimationFrame(frame);frame=null}
+  }
+  if(typeof IntersectionObserver==='function'){
+    var observer=new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;sync()});
+    observer.observe(target);
+  }
+  document.addEventListener('visibilitychange',sync);sync();
+}
+function syncPageVisibility(){document.documentElement.toggleAttribute('data-page-hidden',document.hidden)}
+document.addEventListener('visibilitychange',syncPageVisibility);syncPageVisibility();
+
 /* ========== 粒子网络 + 下载光束 ========== */
 var cv=$('#net'),ctx=cv?cv.getContext('2d'):null;
 if(ctx){
@@ -538,19 +600,22 @@ sizeNet();addEventListener('resize',sizeNet);
 addEventListener('pointermove',function(e){mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});
 addEventListener('pointerleave',function(){mouse.x=-9e3;mouse.y=-9e3});
 if(reduceMotion){drawNet()}else{
-  (function loop(){if(!document.hidden)drawNet();requestAnimationFrame(loop)})();
+  animateVisible(cv,drawNet);
 }
 }
 
-/* ========== 光标光晕(与粒子网络同一 rAF 节奏) ========== */
+/* ========== 光标光晕(指针移动时启动，到位后停止) ========== */
 var glowEl=$('#glow'),gx=innerWidth/2,gy=innerHeight/2,gtx=gx,gty=gy,glowOn=false;
 if(glowEl&&finePointer&&!reduceMotion){
-  addEventListener('pointermove',function(e){gtx=e.clientX;gty=e.clientY;if(!glowOn){glowOn=true;glowEl.classList.add('on')}},{passive:true});
-  (function glowLoop(){
+  var glowFrame=null;
+  function paintGlow(){
+    glowFrame=null;if(document.hidden)return;
     gx+=(gtx-gx)*.11;gy+=(gty-gy)*.11;
     glowEl.style.transform='translate('+gx.toFixed(1)+'px,'+gy.toFixed(1)+'px) translate(-50%,-50%)';
-    requestAnimationFrame(glowLoop);
-  })();
+    if(Math.abs(gtx-gx)+Math.abs(gty-gy)>.2)glowFrame=requestAnimationFrame(paintGlow);
+  }
+  addEventListener('pointermove',function(e){gtx=e.clientX;gty=e.clientY;if(!glowOn){glowOn=true;glowEl.classList.add('on')}if(glowFrame===null&&!document.hidden)glowFrame=requestAnimationFrame(paintGlow)},{passive:true});
+  document.addEventListener('visibilitychange',function(){if(document.hidden&&glowFrame!==null){cancelAnimationFrame(glowFrame);glowFrame=null}});
 }
 
 /* ========== 仿真窗口:进度 / 速度 / 配额 / 3D 倾斜 ========== */
@@ -620,20 +685,10 @@ function miniGraph(){
   }
   addEventListener('resize',function(){fit();if(reduceMotion)draw()});
   if(reduceMotion){draw()}else{
-    var visible=false,raf=null;
-    function loop(){if(!visible){raf=null;return}draw();raf=requestAnimationFrame(loop)}
-    if(typeof IntersectionObserver!=='function'){draw();return}
-    var vio=new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        visible=e.isIntersecting;
-        if(visible&&raf===null)raf=requestAnimationFrame(loop);
-      });
-    },{threshold:.12});
-    vio.observe(c);
+    animateVisible(c,draw);
   }
 }
 function tick(ts){
-  if(document.hidden){tick.last=ts;requestAnimationFrame(tick);return}
   var dt=Math.min((ts-(tick.last||ts))/1000,.05);tick.last=ts;
   var total=0;
   rows.forEach(function(r){
@@ -666,9 +721,8 @@ function tick(ts){
     }
     if(qTime)qTime.textContent=qMode==='wait'?fmtQ(Math.max(qSec,0)):'';
   }
-  requestAnimationFrame(tick);
 }
-if(!reduceMotion){requestAnimationFrame(tick)}else{
+if(!reduceMotion){animateVisible($(".mock-col"),tick)}else{
   rows.forEach(function(r){if(r.bar)r.bar.style.width='66%';if(r.pct)r.pct.textContent='66%';if(r.spd)r.spd.textContent=r.base.toFixed(1)+' MB/s'});
   if(qTime)qTime.textContent=fmtQ(179);drawSpark();
 }
@@ -736,7 +790,8 @@ function wbSetMode(mode){
   wbWin.setAttribute('data-mode',mode);
   $$('.wb-tab').forEach(function(b){
     var on=b.getAttribute('data-wb-mode')===mode;
-    b.classList.toggle('is-on',on);b.setAttribute('aria-selected',on?'true':'false');
+    b.classList.toggle('is-on',on);b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;
+    if(on)wbWin.setAttribute('aria-labelledby',b.id);
   });
   if(mode==='flow')wbShowView('add');
   else if(mode==='tree')wbShowView('pick');
@@ -747,8 +802,16 @@ function wbSetMode(mode){
   }
   if(mode==='list')wbPanelTitle&&(wbPanelTitle.textContent='');
 }
-$$('.wb-tab').forEach(function(b){
+var wbTabs=$$('.wb-tab');
+wbTabs.forEach(function(b,index){
+  b.id='wb-tab-'+b.getAttribute('data-wb-mode');b.setAttribute('aria-controls','wbDemo');b.tabIndex=index===0?0:-1;
   b.addEventListener('click',function(){wbSetMode(b.getAttribute('data-wb-mode'))});
+  b.addEventListener('keydown',function(e){
+    var next;if(e.key==='ArrowRight'||e.key==='ArrowDown')next=(index+1)%wbTabs.length;
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp')next=(index+wbTabs.length-1)%wbTabs.length;
+    else if(e.key==='Home')next=0;else if(e.key==='End')next=wbTabs.length-1;else return;
+    e.preventDefault();wbSetMode(wbTabs[next].getAttribute('data-wb-mode'));wbTabs[next].focus();
+  });
 });
 $('#wbNext')&&$('#wbNext').addEventListener('click',function(){wbShowView('pick')});
 $('#wbPanelClose')&&$('#wbPanelClose').addEventListener('click',function(){wbSetMode('list')});
