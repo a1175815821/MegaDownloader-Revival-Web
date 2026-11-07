@@ -26,11 +26,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2.6.2">
+<link rel="stylesheet" href="assets/css/style.css?v=2.6.2-3">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"MegaDownloader Revival","alternateName":"MegaDownloader","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 7 SP1 or later","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"downloadUrl":"https://github.com/a1175815821/MegaDownloader-Revival/releases/latest","codeRepository":"https://github.com/a1175815821/MegaDownloader-Revival","license":"https://opensource.org/licenses/MIT","inLanguage":["zh-CN","en"],"description":"经典 MEGA 下载器复活版 2.6.2：后台恢复队列，文件占用自动恢复，完善删除与续传保护，新增俄语，共 11 种界面语言。两步批量添加、文件树勾选、Ctrl+F 搜索、定时下载、多线程与断点续传，单文件免安装，MIT 开源。"}
 </script>
-<script src="assets/js/main.js?v=2.6.2" defer></script>
+<script src="assets/js/main.js?v=2.6.2-3" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#mainContent" data-i18n="nav.skip">跳至主要内容</a>
@@ -128,8 +128,10 @@
         <div class="stat"><b data-count="fixes" data-suffix="+">200</b><span data-i18n="stats.fixes">项修复加固</span></div>
         <div class="stat"><b data-count="langs" data-suffix="">11</b><span data-i18n="stats.langs">界面语言</span></div>
       </div>
-      <p class="stats-note" data-i18n-html="stats.note">*679 项任务的隔离阶段基准 · <a href="#performance">查看测量说明 →</a></p>
-       <p class="stats-status" id="syncStatus" role="status" aria-live="polite">正在获取 GitHub 数据…</p>
+      <div class="stats-foot">
+        <p class="stats-note" data-i18n-html="stats.note">*679 项任务的隔离阶段基准 · <a href="#performance">查看测量说明 →</a></p>
+        <p class="stats-status" id="syncStatus" role="status" aria-live="polite">正在获取 GitHub 数据…</p>
+      </div>
     </div>
 
     <!-- 仿真下载窗口 -->
@@ -220,36 +222,38 @@
 <section class="story" id="story">
   <div class="watermark" aria-hidden="true">2018</div>
   <div class="wrap">
-    <div class="sec-head" data-reveal>
-      <span class="kicker"><i class="idx">01</i><span data-i18n="story.kicker">The Revival · 复活记</span></span>
-      <h2 class="sec-title" data-i18n-html="story.title">它停在了 2018。<br>我们把它<span class="grad-text">带了回来</span>。</h2>
-      <p class="sec-desc" data-i18n="story.desc">不是复刻，不是套壳 —— 反编译原版 v1.8 拿回源码，在上千小时的修复与重构中，把当年的经典一点点焊回今天的 MEGA。</p>
-    </div>
-    <div class="timeline">
-      <div class="tl-item" data-reveal>
-        <span class="tl-year">2016 — 2018</span>
-        <h3 data-i18n="story.t1h">传奇</h3>
-        <p data-i18n-html="story.t1p">西班牙开发者 <b>Andres Soliño</b> 写的 MegaDownloader，以轻量、稳定、多线程闻名，是最受欢迎的 MEGA 第三方下载器。</p>
+    <div class="story-layout">
+      <div class="sec-head">
+        <span class="kicker"><i class="idx">01</i><span data-i18n="story.kicker">The Revival · 复活记</span></span>
+        <h2 class="sec-title" data-i18n-html="story.title">它停在了 2018。<br>我们把它<span class="grad-text">带了回来</span>。</h2>
+        <p class="sec-desc" data-i18n="story.desc">不是复刻，不是套壳 —— 反编译原版 v1.8 拿回源码，在上千小时的修复与重构中，把当年的经典一点点焊回今天的 MEGA。</p>
       </div>
-      <div class="tl-item" data-reveal>
-        <span class="tl-year">2018</span>
-        <h3 data-i18n="story.t2h">停更</h3>
-        <p data-i18n="story.t2p">原项目发布 v1.8 后停止维护，代码闭源，作者再无音讯。</p>
-      </div>
-      <div class="tl-item" data-reveal>
-        <span class="tl-year">2019 — 2025</span>
-        <h3 data-i18n="story.t3h">失效</h3>
-        <p data-i18n-html="story.t3p">MEGA 更换链接格式（<b>mega.nz/file、/folder</b>），旧版认不出新链接，核心功能失效。全网的用户开始寻找替代品。</p>
-      </div>
-      <div class="tl-item" data-reveal>
-        <span class="tl-year">2026 — v2.5</span>
-        <h3 data-i18n="story.t4h">复活</h3>
-        <p data-i18n-html="story.t4p">反编译 v1.8 拿回源码，持续修复重构：<b>200+ 项修复与加固</b>，语义化版本持续发布，每个 Issue 都有回应。</p>
-      </div>
-      <div class="tl-item hot" data-reveal>
-        <span class="tl-year">2026 — v2.6</span>
-        <h3 data-i18n="story.t5h">重造</h3>
-        <p data-i18n-html="story.t5p">界面整层推翻重写：<b>全新工作台、两步批量添加、文件树勾选、任务搜索、定时下载</b>。引擎没换，外壳重造 —— 这是复活以来最大的一次更新。</p>
+      <div class="timeline">
+        <div class="tl-item" data-reveal>
+          <span class="tl-year">2016 — 2018</span>
+          <h3 data-i18n="story.t1h">传奇</h3>
+          <p data-i18n-html="story.t1p">西班牙开发者 <b>Andres Soliño</b> 写的 MegaDownloader，以轻量、稳定、多线程闻名，是最受欢迎的 MEGA 第三方下载器。</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <span class="tl-year">2018</span>
+          <h3 data-i18n="story.t2h">停更</h3>
+          <p data-i18n="story.t2p">原项目发布 v1.8 后停止维护，代码闭源，作者再无音讯。</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <span class="tl-year">2019 — 2025</span>
+          <h3 data-i18n="story.t3h">失效</h3>
+          <p data-i18n-html="story.t3p">MEGA 更换链接格式（<b>mega.nz/file、/folder</b>），旧版认不出新链接，核心功能失效。全网的用户开始寻找替代品。</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <span class="tl-year">2026 — v2.5</span>
+          <h3 data-i18n="story.t4h">复活</h3>
+          <p data-i18n-html="story.t4p">反编译 v1.8 拿回源码，持续修复重构：<b>200+ 项修复与加固</b>，语义化版本持续发布，每个 Issue 都有回应。</p>
+        </div>
+        <div class="tl-item hot" data-reveal>
+          <span class="tl-year">2026 — v2.6</span>
+          <h3 data-i18n="story.t5h">重造</h3>
+          <p data-i18n-html="story.t5p">界面整层推翻重写：<b>全新工作台、两步批量添加、文件树勾选、任务搜索、定时下载</b>。引擎没换，外壳重造 —— 这是复活以来最大的一次更新。</p>
+        </div>
       </div>
     </div>
   </div>
@@ -839,47 +843,46 @@
 <!-- ================= FAQ ================= -->
 <section id="faq">
   <div class="wrap">
-    <div class="sec-head center" data-reveal>
-      <span class="kicker"><i class="idx">07</i><span data-i18n="faq.kicker">FAQ · 疑问</span></span>
-      <h2 class="sec-title" data-i18n="faq.title">常见问题。</h2>
-    </div>
-    <div class="faq-list" id="faqList">
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">01</span><span data-i18n="faq.q1">杀毒软件报毒？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n-html="faq.a1">如果杀毒软件发出警告，请先查看提示并确认下载来源。你可以查看公开的 <a href="https://github.com/a1175815821/MegaDownloader-Revival/actions/workflows/build.yml" target="_blank" rel="noopener">构建流程</a>、尝试 ZIP 包，或从源码自行构建。更换包格式不保证警告消失。</p></div></div>
+    <div class="faq-layout">
+      <div class="sec-head" data-reveal>
+        <span class="kicker"><i class="idx">07</i><span data-i18n="faq.kicker">FAQ · 疑问</span></span>
+        <h2 class="sec-title" data-i18n="faq.title">常见问题。</h2>
+        <p class="sec-desc" data-i18n="faq.desc">下载、升级、配额与语言设置的常见疑问。点开右侧条目查看解答。</p>
+        <a class="faq-help" href="https://github.com/a1175815821/MegaDownloader-Revival/issues" target="_blank" rel="noopener" data-i18n="faq.help">没找到答案？去提 Issue ↗</a>
       </div>
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">02</span><span data-i18n="faq.q2">提示配额不足 / quota exceeded？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n-html="faq.a2">MEGA 对免费账户和 IP 有下载配额限制。程序会<b>自动暂停并倒计时恢复</b>；等不及的话，可在设置中开启「配额突破模式」持续重试。</p></div></div>
-      </div>
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">03</span><span data-i18n="faq.q3">升级到 2.6.2 要重新配置、重建队列吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n-html="faq.a3">不需要。先关闭程序，单文件版替换 EXE，ZIP 版解压并替换程序文件。配置与队列仍在 <b>%LOCALAPPDATA%\MegaDownloader\</b>，断点、下载数据和已有手动语言选择保留。</p></div></div>
-      </div>
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">04</span><span data-i18n="faq.q4">定时下载需要程序一直开着吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a4">是 —— 2.6 不提供系统唤醒或后台服务，程序需要保持运行。时段支持跨午夜、到点暂停并重启沿用；手动暂停的任务不会被自动恢复，配额等待也不会被绕过。</p></div></div>
-      </div>
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">05</span><span data-i18n="faq.q5">下载速度有限制吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a5">软件本身不限速，多线程可跑满你的带宽。也支持全局 / 单任务限速，想省流量就设个上限。</p></div></div>
-      </div>
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">06</span><span data-i18n="faq.q6">旧格式链接还能下吗？需要管理员权限吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a6">旧版 #! 链接、mega:// 加密链接、ELC 容器全部支持。程序免安装、免管理员权限，绿色运行。</p></div></div>
-      </div>
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">07</span><span data-i18n="faq.q7">有 Mac / Linux 版吗？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a7">没有 —— 基于 WinForms，仅限 Windows。但可以开启内置 Web 界面，用手机或其他设备的浏览器远程管理下载。</p></div></div>
-      </div>
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">08</span><span data-i18n="faq.q8">怎么让界面语言跟随系统？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a8">在设置 → 一般 → 语言中选择「跟随系统」，保存后重启。新配置默认匹配 Windows 显示语言，已有手动选择保留。2.6.2 新增俄语，共 11 种内置语言，包含简体与繁体中文；没有匹配时使用英文。</p></div></div>
-      </div>
-
-      <div class="faq-item" data-reveal>
-        <button class="faq-q" type="button"><span class="n">09</span><span data-i18n="faq.q9">提示文件被占用或队列正在恢复，该怎么做？</span><span class="pm">+</span></button>
-        <div class="faq-a"><div><p data-i18n="faq.a9">等待占用解除，程序会自动重试。恢复完成前，原有配置、队列和媒体库保持写保护，保存与调度等待就绪。若你在设置中修改了内容，先保留输入，恢复后按提示再次保存。</p></div></div>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">01</span><span data-i18n="faq.q2">提示配额不足 / quota exceeded？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n-html="faq.a2">MEGA 对免费账户和 IP 有下载配额限制。程序会<b>自动暂停并倒计时恢复</b>；等不及的话，可在设置中开启「配额突破模式」持续重试。</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">02</span><span data-i18n="faq.q3">升级到 2.6.2 要重新配置、重建队列吗？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n-html="faq.a3">不需要。先关闭程序，单文件版替换 EXE，ZIP 版解压并替换程序文件。配置与队列仍在 <b>%LOCALAPPDATA%\MegaDownloader\</b>，断点、下载数据和已有手动语言选择保留。</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">03</span><span data-i18n="faq.q4">定时下载需要程序一直开着吗？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n="faq.a4">是 —— 2.6 不提供系统唤醒或后台服务，程序需要保持运行。时段支持跨午夜、到点暂停并重启沿用；手动暂停的任务不会被自动恢复，配额等待也不会被绕过。</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">04</span><span data-i18n="faq.q5">下载速度有限制吗？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n="faq.a5">软件本身不限速，多线程可跑满你的带宽。也支持全局 / 单任务限速，想省流量就设个上限。</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">05</span><span data-i18n="faq.q6">旧格式链接还能下吗？需要管理员权限吗？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n="faq.a6">旧版 #! 链接、mega:// 加密链接、ELC 容器全部支持。程序免安装、免管理员权限，绿色运行。</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">06</span><span data-i18n="faq.q7">有 Mac / Linux 版吗？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n="faq.a7">没有 —— 基于 WinForms，仅限 Windows。但可以开启内置 Web 界面，用手机或其他设备的浏览器远程管理下载。</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">07</span><span data-i18n="faq.q8">怎么让界面语言跟随系统？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n="faq.a8">在设置 → 一般 → 语言中选择「跟随系统」，保存后重启。新配置默认匹配 Windows 显示语言，已有手动选择保留。2.6.2 新增俄语，共 11 种内置语言，包含简体与繁体中文；没有匹配时使用英文。</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal>
+          <button class="faq-q" type="button"><span class="n">08</span><span data-i18n="faq.q9">提示文件被占用或队列正在恢复，该怎么做？</span><span class="pm">+</span></button>
+          <div class="faq-a"><div><p data-i18n="faq.a9">等待占用解除，程序会自动重试。恢复完成前，原有配置、队列和媒体库保持写保护，保存与调度等待就绪。若你在设置中修改了内容，先保留输入，恢复后按提示再次保存。</p></div></div>
+        </div>
       </div>
     </div>
   </div>

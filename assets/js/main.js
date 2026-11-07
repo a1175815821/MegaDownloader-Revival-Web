@@ -2,7 +2,7 @@
    MegaDownloader Revival — 官网脚本
    模块:开场幕布 / 主题 / 双语 / 进场与滚动 / GitHub 同步 /
         粒子网络 + 下载光束 / 仿真窗口(进度·曲线·配额·3D 倾斜)/
-        解密文字 / 磁吸按钮 / 光标光晕 / 时间线点亮 / 水印视差
+        解密文字 / 磁吸按钮 / 光标光晕 / 时间线点亮 / 当前章节高亮
    ============================================================ */
 (function(){
 "use strict";
@@ -185,7 +185,9 @@ en:{
  'cl.d3':'Folder packages show their real MEGA names',
  'cl.more':'All releases & full changelog',
  'faq.kicker':'FAQ','faq.title':'Frequently asked.',
- 'faq.q1':'My antivirus flags it.','faq.a1':'If your antivirus flags a download, check its warning and verify the source before running it. You can inspect the <a href="https://github.com/a1175815821/MegaDownloader-Revival/actions/workflows/build.yml" target="_blank" rel="noopener">build workflow</a>, try the ZIP package, or build from source yourself. A different package does not guarantee that a warning will disappear.',
+ 'faq.desc':'Common questions about downloads, upgrades, quotas and languages. Expand an answer on the right.',
+ 'faq.help':'Still stuck? Open an Issue ↗',
+ /* 首条「杀毒软件提示」已移除；其余 key 沿用 q2..q9，避免影响既有翻译映射。 */
  'faq.q2':'It says quota exceeded.','faq.a2':'MEGA limits free accounts and IPs. The app <b>auto-pauses and resumes after a countdown</b>; if you can\u2019t wait, enable “quota breakthrough mode” in Settings.',
  'faq.q3':"Do I need to rebuild my settings or queue for 2.6.2?",'faq.a3':"No. Close the application, then replace the EXE for the single-file edition or replace the application files from the ZIP. Settings and the queue remain in <b>%LOCALAPPDATA%\\MegaDownloader\\</b>; resume data and manual language choices are preserved.",
  'faq.q4':'Does the schedule need the app running?','faq.a4':'Yes — 2.6 offers no wake timers or background service, so the app must stay open. The window crosses midnight, pauses at the end and survives a restart; manually paused tasks are not resumed, and a quota wait is not bypassed.',
@@ -298,27 +300,36 @@ function scramble(el,forceText){
   })();
 }
 
-/* ========== 滚动:进度条 / 导航 / 时间线 / 水印视差 ========== */
-var nav=$('#nav'),progress=$('#progress'),timeline=$('.timeline'),timelineItems=$$('.tl-item'),watermarks=$$('.watermark');
+/* ========== 滚动:进度条 / 导航 / 当前章节 / 时间线 ========== */
+var nav=$('#nav'),progress=$('#progress'),timeline=$('.timeline'),timelineItems=$$('.tl-item');
+var navAnchors=$$('.nav-links a[href^="#"]');
+var navSections=navAnchors.map(function(a){return $(a.getAttribute('href'))}).filter(Boolean);
 function onScroll(){
   var y=scrollY;
   nav.classList.toggle('scrolled',y>14);
   var h=document.documentElement.scrollHeight-innerHeight;
   progress.style.width=(h>0?(y/h*100):0)+'%';
+  /* 当前章节高亮：以视口上三分之一为判定线 */
+  var line=y+innerHeight*.32,cur='';
+  navSections.forEach(function(s){if(s.getBoundingClientRect().top+scrollY<=line)cur=s.id});
+  navAnchors.forEach(function(a){a.classList.toggle('is-current',a.getAttribute('href')==='#'+cur)});
   var tl=timeline;
   if(tl){
-    var r=tl.getBoundingClientRect();
-    var p=Math.min(1,Math.max(0,(innerHeight*0.8-r.top)/r.height));
-    tl.style.setProperty('--tlp',p.toFixed(3));
-    timelineItems.forEach(function(it){
-      it.classList.toggle('lit',it.getBoundingClientRect().top<innerHeight*0.75);
-    });
+    if(reduceMotion){
+      /* 减少动效：整条线和所有节点直接呈完整状态 */
+      timelineItems.forEach(function(it){it.classList.add('lit')});
+      tl.style.setProperty('--tlp','1');
+    }else{
+      /* 进度线画到最后一个已点亮的节点，线与节点同步生长 */
+      var last=0,litCount=0,h=tl.offsetHeight||1;
+      timelineItems.forEach(function(it){
+        var lit=it.getBoundingClientRect().top<innerHeight*0.75;
+        it.classList.toggle('lit',lit);
+        if(lit){litCount++;last=Math.max(last,it.offsetTop+14)}
+      });
+      tl.style.setProperty('--tlp',(litCount===timelineItems.length?1:Math.min(1,last/h)).toFixed(3));
+    }
   }
-  if(!reduceMotion)watermarks.forEach(function(w){
-    var wr=w.getBoundingClientRect();
-    var off=(wr.top+wr.height/2-innerHeight/2)*-0.09;
-    w.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)';
-  });
 }
 var scrollFrame=null;
 function queueScroll(){if(scrollFrame!==null)return;scrollFrame=requestAnimationFrame(function(){scrollFrame=null;onScroll()})}
@@ -750,14 +761,15 @@ if(finePointer&&!reduceMotion){
     b.addEventListener('pointermove',function(e){
       var r=b.getBoundingClientRect();
       var dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
-      b.style.transform='translate('+(dx*.14).toFixed(1)+'px,'+(dy*.22).toFixed(1)+'px)';
+      b.style.setProperty('--bx',(dx*.14).toFixed(1)+'px');
+      b.style.setProperty('--by',(dy*.22).toFixed(1)+'px');
     },{passive:true});
-    b.addEventListener('pointerleave',function(){b.style.transform=''});
+    b.addEventListener('pointerleave',function(){b.style.removeProperty('--bx');b.style.removeProperty('--by')});
   });
 }
 
 /* ========== Bento 聚光灯 ========== */
-$$('.cell').forEach(function(c){
+if(finePointer)$$('.cell').forEach(function(c){
   c.addEventListener('pointermove',function(e){
     var b=c.getBoundingClientRect();
     c.style.setProperty('--mx',(e.clientX-b.left)+'px');
